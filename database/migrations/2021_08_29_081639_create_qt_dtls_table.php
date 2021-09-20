@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateQtDtlsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('qt_items', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
+            $table->id();
+			$table->bigInteger('qoute_id')->unsigned();
+			$table->string('item_name');
+			$table->bigInteger('package_id')->unsigned();
+			$table->integer('qty');
+			$table->decimal('price',8,2);
+			$table->integer('moq');
+			$table->text('note');
+            $table->timestamps();
+			$table->foreign('qoute_id')
+                ->references('id')
+                ->on('qoutes')
+                ->onDelete('cascade');
+        });
+    }
+
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('qt_items');
+    }
+}

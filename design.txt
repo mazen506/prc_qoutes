@@ -1,0 +1,35 @@
+Qoutes (id,user_id,name,date,note,curr_vr_id)
+QtDtls (id,qoute_id,item_name,package,qty,price,moq,note)
+QtPics (serial,m_id,image)
+QoutesVrs (id,qt_id,name,note,date)
+QtDtlsVrs (serial,product_id,product_name,qty,package,price,note)
+QtPicsVrs (serial,m_id,image)
+
+
+Process:
+AddForm (master details,Validation, Ajax, Bootstrap, server installation)
+Finishing other forms and functions.
+
+
+
+
+Temp :
+- make images storage as a datafield
+- delete image from database string and files
+- display images when clicking on the records
+- authentication
+- share on media 
+- host the app 
+- make the finishings the app
+
+
+NoSQL databases like MongoDB
+
+Laravel
+Testing
+Node (Next Framework)
+React ()
+-----------------
+Additions:
+AWS tutorial
+NoSql (MongoDB)

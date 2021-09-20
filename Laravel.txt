@@ -1,0 +1,21 @@
+Commands:
+php artisan new:model 
+composer new [ProjectName]
+php artisan update
+php artisan install 
+composer global require laravel/installer
+composer install
+php artisan migrate:install
+php artisan migrate:rollback
+php artisan migrate
+
+
+route::group
+route::resource
+api (versioning)
+middleware
+redirect.route vs redirect
+
+
+Issues to be studies:
+Storage::delete not working 
