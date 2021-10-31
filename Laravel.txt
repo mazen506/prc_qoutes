@@ -10,6 +10,10 @@ php artisan migrate:rollback
 php artisan migrate
 
 
+Create Storage Link:
+php artisan storage:link
+when not able to access public files delete the storage link in the public folder and recreated with the storage:link command
+
 route::group
 route::resource
 api (versioning)

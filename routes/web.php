@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QouteController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -16,14 +18,26 @@ use App\Http\Controllers\QouteController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::to('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['verified'])->name('dashboard');
 
-Route::get('/qoutes', [QouteController::class, 'index'])->middleware(['verified']);
+Route::get('/settings', function () {
+    return Redirect::to('/qoutes');
+})->middleware(['auth'])->name('settings');
+
+Route::get('/profile', [ProfileController::class, 'index'])->middleware(['auth'])->name('profile');
+Route::put('/profile/update', [ProfileController::class, 'update'])->middleware(['auth'])->name('profile.update');
+Route::put('/profile/setLogo', [ProfileController::class, 'setLogo'])->name('setLogo');
+
+Route::resource('qoutes', QouteController::class)->middleware(['auth']);
+
+Route::post('/qoutes/addImage', [QouteController::class, 'addImage'])->name('addImage');
+Route::post('/qoutes/delImage', [QouteController::class, 'delImage'])->name('delImage');
+Route::get('/qoute/{qoute}', [QouteController::class, 'show']);
+
+Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
+
 
 
 require __DIR__.'/auth.php';

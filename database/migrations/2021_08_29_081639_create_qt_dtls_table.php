@@ -18,8 +18,9 @@ class CreateQtDtlsTable extends Migration
             $table->id();
 			$table->bigInteger('qoute_id')->unsigned();
 			$table->string('item_name');
-			$table->bigInteger('package_id')->unsigned();
-			$table->integer('qty');
+			$table->bigInteger('unit_id')->unsigned();
+			$table->integer('package_qty');
+            $table->bigInteger('package_unit_id')->unsigned();
 			$table->decimal('price',8,2);
 			$table->integer('moq');
 			$table->text('note');

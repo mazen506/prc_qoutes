@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Qoute;
 use App\Models\QtItem;
-use App\Models\Package;
+use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\App;
 
 
 class QouteController extends Controller
@@ -24,7 +27,6 @@ class QouteController extends Controller
         $qoutes = Qoute::with('items')->get();
 
         return view('qoutes', compact('qoutes'));
-
     }
 
     /**
@@ -35,8 +37,8 @@ class QouteController extends Controller
     public function create()
     {
 		    //abort_if(Gate::denies('order_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-		    $packages = Package::all();
-        return view('qoute_new',compact('packages'));
+		    $units = Unit::all();
+        return view('qoute_new',compact('units'));
     }
 
     /**
@@ -50,35 +52,35 @@ class QouteController extends Controller
        // Get the new images
        // Save them into images folder
 
-       $images=array();
-/*       $request->validate([
-        'item_images' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-       ]);*/
+       $images = array();
+       try {
+       $validator = $request->validate([
+         //'item_name' => 'required'
+        'item_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' // Only allow .jpg, .bmp and .png file types.
+       ]);
 
-  /*     if($files=$request->file('item_images')){
+          if ($files=$request->file('item_images')){
             foreach($files as $file){
-              
                 $name = $file->hashName();
                 $file->store('item_images','public');
                 $images[]= ['image_name' => $name ];
-            }*/
+            }
         
-
-
 
         // Testing
-        $images[] = ['image_name' => '1LqEA14E05s89pjoxwUzbMq6UHoHT8YNLAOzLYbT.jpg'];
-        $images[] = ['image_name' => '9NWuLQT3hdlpQM6nLkDAn3DmMrZQXMZPrzfEY0CV.jpg'];
-        $images[] = ['image_name' => 'wPgwRx9c5aDMMdKTm8DXw5TiFrHC6QYKQ5WKKhwA.jpg'];
+        //$images[] = ['image_name' => '1LqEA14E05s89pjoxwUzbMq6UHoHT8YNLAOzLYbT.jpg'];
+        //$images[] = ['image_name' => 'cAnXNHc7bDwODjW14RpnU4YhzKE6Mc1OImurTzHw.jpg'];
+        //$images[] = ['image_name' => 'ma1ONseX6p2GY1vmXd48rfz7wNwzDrYolr3XsoWJ.jpg'];
 
         
-        return response()->json($images);
-   // }
-    //else 
-     //  return response()->json(null);
-
-        //$values = $request->data;
-        //return response()->json($values);
+              return response()->json($images);
+            }
+      }
+      catch (\Illuminate\Validation\ValidationException $e)
+      {
+        $errors = $e->errors();
+        return response()->json($errors);
+      }
     }
 
     public function delImage(Request $request){
@@ -98,45 +100,55 @@ class QouteController extends Controller
     public function store(Request $request)
     {
 		
-		
-	$request->validate([
-		'name' => 'required|unique:qoutes|max:255',
-		'note' => 'required',
-	 ]);
+  	  $request->validate([
+	    	'name' => 'required|unique:qoutes|max:255',
+	    ]);
 	 
-     DB::beginTransaction();
+      DB::beginTransaction();
 
-	  try {
-		$qoute = Qoute::create([
-				'name' => $request->name,
-				'note' => $request->note,
-				'user_id' => 1,
-				'curr_vr_id' => 0
-			]);
+	    try {
+		    $qoute = Qoute::create([
+				  'name' => $request->name,
+				  'note' => $request->note ? $request->note : '',
+				  'user_id' => 1,
+				  'curr_vr_id' => 0,
+          'locale'  => app()->getLocale()
+			  ]);
 		
-			$item_names = $request->input('item_names', []);
-			$quantities = $request->input('quantities', []);
+      $item_images_str = $request->input('item_images_str', []);
+      $item_names = $request->input('item_names', []);
+      $item_units = $request->input('item_units', []);
+      $item_package_qtys = $request->input('item_package_qtys', []);
+      $item_package_units = $request->input('item_package_units', []);
+      $item_prices = $request->input('item_prices', []);
+      $item_moqs = $request->input('item_moqs', []);
+      $item_notes = $request->input('item_notes', []);
 			$items = [];
 			for ($item_number=0; $item_number < count($item_names); $item_number++) {
 				if ($item_names[$item_number] != '') {
-						$items[] =  new Item(['qoute_id' => $qoute->id,
-									'item_name' => $item_names[$item_number], 
-									'package_id' => 1, 								
-									'qty' => $quantities[$item_number],
-									'moq' => 0,
-									'note' => '']);
+						$items[] =  new QtItem([
+                   'item_name' => $item_names[$item_number],
+                   'unit_id' => $item_units[$item_number],
+                   'package_qty' => $item_package_qtys[$item_number],
+                   'package_unit_id' => $item_package_units[$item_number],
+                   'price' => $item_prices[$item_number],
+                   'moq' => $item_moqs[$item_number],
+                   'note' => $item_notes[$item_number],
+                   'images' => $item_images_str[$item_number],
+                ]);
 				}
 			}
 		
 			//dd($items);
 			$qoute->items()->saveMany($items);
 			DB::commit();
-			return redirect('/qoutes');
+			return redirect()->route('qoutes.edit', $qoute->id );
+
 		}
 		catch (\Exception $e)
 		{
-			DB::rollback();
-			throw $e;
+			  DB::rollback();
+			  throw $e;
 		}
     }
 
@@ -148,10 +160,17 @@ class QouteController extends Controller
      */
     public function show(int $qoute)
     {
-		$qoute = Qoute::find($qoute);
-        return view('qoute_display',[
-			'qoute' => $qoute
-		]);
+		    $qoute = Qoute::with('items')->find($qoute);
+        $units = Unit::all();
+        $vendor = User::find($qoute->user_id);
+        if (($qoute->locale) && ($qoute->locale != app()->getLocale()))
+        {  App::setLocale($qoute->locale);
+            return response(view('qoute_display', compact('qoute','units','vendor')))
+            ->withCookie(cookie()->forever('applocale', $qoute->locale));
+
+        }
+        else
+            return view('qoute_display', compact('qoute','units','vendor'));
     }
 
     /**
@@ -162,12 +181,11 @@ class QouteController extends Controller
      */
     public function edit(int $qoute)
     {
-    $packages = Package::all();
+    $units = Unit::all();
 		$qoute = Qoute::with("items")->find($qoute);
         return view('qoute_manu',[
-			'qoute' => $qoute,
-      'items' => $qoute->items,
-      'packages' => $packages
+			  'qoute' => $qoute,
+        'units' => $units
 		]);
     }
 
@@ -180,12 +198,76 @@ class QouteController extends Controller
      */
     public function update(Request $request, Qoute $qoute)
     {
-        $qoute->update([
-			'name' => $request->name,
-			'note' => $request->note
-		]);
-		return redirect('qoute/' . $qoute->id);
-		
+        DB::beginTransaction();
+        try {
+
+          $qoute->update(['name' => $request->name, 
+                          'note'=> $request->note, 
+                          'updated_at'=> date('Y-m-d H:i:s'), 
+                          'locale' => app()->getLocale()]
+                        );
+
+          $item_ids = $request->input('item_ids', []);
+          $is_edited_flags = $request->input('is_edited_flags', []);
+          $item_names = $request->input('item_names', []);
+          $item_images_str = $request->input('item_images_str', []);
+          $item_units = $request->input('item_units', []);
+          $item_package_qtys = $request->input('item_package_qtys', []);
+          $item_package_units = $request->input('item_package_units', []);
+          $item_prices = $request->input('item_prices', []);
+          $item_moqs = $request->input('item_moqs', []);
+          $item_notes = $request->input('item_notes', []);
+
+
+          // Delete removed items
+          if (count($item_ids)){
+            QtItem::where('qoute_id',$qoute->id)
+            ->whereNotIn('id', $item_ids)
+            ->delete();
+          }
+
+          $items=[];
+          for ($index=0; $index < count($item_names); $index++) {
+                // Update existing
+                if (isset($item_ids[$index]) && ($item_ids[$index] != '0'))
+                {
+                  if ($is_edited_flags[$index] == 1)
+                  {   $item = QtItem::where('id', $item_ids[$index])->first();
+                      $item->item_name = $item_names[$index];
+                      $item->unit_id = $item_units[$index];
+                      $item->package_qty = $item_package_qtys[$index];
+                      $item->package_unit_id = $item_package_units[$index];
+                      $item->price = $item_prices[$index];
+                      $item->moq = $item_moqs[$index];
+                      $item->note = $item_notes[$index];
+                      $item->images = $item_images_str[$index];
+                      array_push($items, $item);
+                  }
+                    
+                } else //New Item 
+                {
+                    $item = new QtItem(
+                      ['item_name' => $item_names[$index],
+                        'unit_id' => $item_units[$index],
+                        'package_qty' => $item_package_qtys[$index],
+                        'package_unit_id' => $item_package_units[$index],
+                        'price' => $item_prices[$index],
+                        'moq' => $item_moqs[$index],
+                        'note' => $item_notes[$index],
+                        'images' => $item_images_str[$index]
+                      ]);
+                      array_push($items,$item);
+                }
+          }
+            $qoute->items()->saveMany($items);
+            DB::commit();
+            return response()->json(['items' => $qoute->items]);
+        }
+        catch (\Exception $e)
+		    {
+    			  DB::rollback();
+			      return response()-json(['error' => $e->getMessage()], 500);
+		    }
     }
 
     /**
@@ -197,6 +279,6 @@ class QouteController extends Controller
     public function destroy(Qoute $qoute)
     {
          $qoute->delete();
-		 return redirect('/qoutes');
+		    return redirect('/qoutes');
     }
 }

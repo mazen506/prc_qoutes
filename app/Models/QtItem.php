@@ -10,8 +10,9 @@ class QtItem extends Model
     use HasFactory;
 	protected $fillable = ['qoute_id',
 						   'item_name',
-						   'package_id',
-						   'qty',
+						   'unit_id',
+						   'package_qty',
+						   'package_unit_id',
 						   'price',
 						   'moq',		
 						   'note',		
@@ -22,11 +23,8 @@ class QtItem extends Model
         return $this->belongsTo(Qoute::class);
     }
 	
-	public function package()
+	public function unit()
     {
-        return $this->hasOne(Package::class);
+        return $this->hasOne(Unit::class);
     }
-
 }
-
-

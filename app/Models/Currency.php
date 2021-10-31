@@ -5,13 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Package extends Model
+class Currency extends Model
 {
     use HasFactory;
-	
-	public function item()
-    {
-        return $this->hasMany(Item::class);
-    }
 }
-

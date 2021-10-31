@@ -5,5 +5,17 @@
 
     <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         {{ $slot }}
+
+        
     </div>
+
+    <div class='lang-switch' aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{{ route('lang.switch', 'ar') }}">  العربية </a>
+            | 
+            <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">  English </a>
+    </div>
+
+    
+    
+    
 </div>

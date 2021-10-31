@@ -14,9 +14,13 @@ class AddPackagesidToQtdtlsTable extends Migration
     public function up()
     {
         Schema::table('qt_items', function (Blueprint $table) {
-            	$table->foreign('package_id')
+            	$table->foreign('unit_id')
                 ->references('id')
-                ->on('packages')
+                ->on('units')
+                ->onDelete('cascade');
+                $table->foreign('package_unit_id')
+                ->references('id')
+                ->on('units')
                 ->onDelete('cascade');
         });
     }

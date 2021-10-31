@@ -10,7 +10,7 @@ class Qoute extends Model
 {
 	
 	use HasFactory;
-	protected $fillable = ['name','note','user_id','curr_vr_id'];
+	protected $fillable = ['name','note','user_id','curr_vr_id','locale'];
 		
 	public function items()
     {

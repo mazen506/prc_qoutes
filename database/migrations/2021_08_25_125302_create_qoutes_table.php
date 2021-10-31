@@ -18,7 +18,7 @@ class CreateQoutesTable extends Migration
             $table->id();
 			$table->bigInteger("user_id")->unsigned();
 			$table->string("name",128)->unique();
-			$table->text("note");
+			$table->text("note")->nullable();
 			$table->bigInteger("curr_vr_id");
             $table->timestamps();
 			$table->foreign('user_id')

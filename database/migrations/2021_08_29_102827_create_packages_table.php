@@ -13,7 +13,7 @@ class CreatePackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
 			$table->engine = 'InnoDB';
             $table->id();
 			$table->string('name',128)->unique();
@@ -28,6 +28,6 @@ class CreatePackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('units');
     }
 }

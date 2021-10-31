@@ -12,6 +12,11 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @if(App::getLocale() == 'en')
+            <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        @else
+            <link rel="stylesheet" href="{{ asset('css/custom_rtl.css') }}">
+        @endif
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>

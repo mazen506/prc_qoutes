@@ -71,6 +71,7 @@ return [
         'fields'         => [
             'id'                => 'رقم المنتج',
             'id_helper'         => '',
+            'unit'                => 'الوحدة',            
             'image'                => 'الصور',
             'image_helper'         => '',
             'name'              => 'الإسم',
