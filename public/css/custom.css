@@ -196,7 +196,7 @@ th.col-item-name {
 
 /* --- Qoutes Manuplation form --- */
 
-    .toast {
+.toast {
         top: auto !important;
         left: auto !important;
         bottom: 1%;
