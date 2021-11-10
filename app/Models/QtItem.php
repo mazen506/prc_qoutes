@@ -14,9 +14,9 @@ class QtItem extends Model
 						   'package_qty',
 						   'package_unit_id',
 						   'price',
-						   'moq',		
-						   'note',		
-						   'images'				   
+						   'moq',
+						   'note',
+						   'images'
 						   ];
 	public function qoute()
     {

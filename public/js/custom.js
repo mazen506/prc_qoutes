@@ -70,7 +70,9 @@ $(document).on('click','.btn-del-image',function(e){
 
 
 function copyToClipBoard(txt) {
-    navigator.clipboard.writeText(txt);
+    navigator.clipboard.writeText(txt).then(
+        v => alert("Success"),
+        e => alert("Fail\n" + e));
     $('.toast').toast('show');
 }
 

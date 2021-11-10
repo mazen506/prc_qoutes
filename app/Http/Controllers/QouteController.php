@@ -6,11 +6,14 @@ use App\Models\Qoute;
 use App\Models\QtItem;
 use App\Models\Unit;
 use App\Models\User;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class QouteController extends Controller
@@ -110,7 +113,7 @@ class QouteController extends Controller
 		    $qoute = Qoute::create([
 				  'name' => $request->name,
 				  'note' => $request->note ? $request->note : '',
-				  'user_id' => 1,
+				  'user_id' => Auth::user()->id,
 				  'curr_vr_id' => 0,
           'locale'  => app()->getLocale()
 			  ]);
@@ -163,6 +166,7 @@ class QouteController extends Controller
 		    $qoute = Qoute::with('items')->find($qoute);
         $units = Unit::all();
         $vendor = User::find($qoute->user_id);
+        $currency = Currency::find($vendor->currency_id)->code_ar;
         if (($qoute->locale) && ($qoute->locale != app()->getLocale()))
         {  App::setLocale($qoute->locale);
             return response(view('qoute_display', compact('qoute','units','vendor')))
@@ -170,7 +174,7 @@ class QouteController extends Controller
 
         }
         else
-            return view('qoute_display', compact('qoute','units','vendor'));
+            return view('qoute_display', compact('qoute','units','vendor','currency'));
     }
 
     /**

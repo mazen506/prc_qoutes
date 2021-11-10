@@ -78,7 +78,7 @@
                                         {{ $item->package_qty . ' ' . $units->find($item->package_unit_id)->name }}
                                     </td>
                                     <td class='col-item-small'>
-                                        {{ $item->price }}
+                                        {{ $item->price+0 . ' ' . $currency }}
                                     </td>
                                     <td class='col-item-small'>
                                         {{ $item->moq }}
