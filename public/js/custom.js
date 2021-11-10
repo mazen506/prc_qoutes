@@ -71,9 +71,9 @@ $(document).on('click','.btn-del-image',function(e){
 
 function copyToClipBoard(txt) {
     navigator.clipboard.writeText(txt).then(
-        v => alert("Success"),
+        v => alert(trans('global.qoute_link_copied')),
         e => alert("Fail\n" + e));
-    $('.toast').toast('show');
+    //$('.toast').toast('show');
 }
 
 /************************ Upload logo image  ***********************/

@@ -29,6 +29,7 @@ return [
     'save_success' => 'تم حفظ التعديلات بنجاح!',
     'qoute_must_have_one_item'  => 'العرض يجب أن يحتوي على منتج واحد على الأقل!!',
     'confirmation_box'                      => 'تأكيد',
+    'qoute_link_copied' =>'تم نسخ رابط العرض',
     'allRightsReserved'                    => 'All rights reserved.',
     'areYouSure'                           => 'Are you sure?',
     'clickHereToVerify'                    => 'Click here to verify',

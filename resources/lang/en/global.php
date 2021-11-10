@@ -24,6 +24,7 @@ return [
     'contact_us'    => 'Contact Us',
     'qoutes_list'                                  => 'Qoutes List',
     'qoutes'        => 'Qoutes',
+    'qoute_link_copied' =>'Qoute link copied to Clipboard!',
     'new_qoute'                                  => 'New Qoute',    
     'image_added_success'                   => 'Image added successfully!',
     'image_del_success'                   => 'Image deleted successfully!',
