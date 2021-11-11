@@ -92,7 +92,8 @@
                     'item_moq': "required",
                     'item_price': "required",
                     'item_note': "required",
-                    'item_images[]': {required : '#item_images_str:blank'}
+                    'item_images[]': {
+                        required : '#item_images_str:blank'}
                 },
                 messages: {
                     'item_name': "{{ __('validation.required', ['attribute' => __('global.item_name') ]) }}",
