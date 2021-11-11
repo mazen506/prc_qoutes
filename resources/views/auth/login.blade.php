@@ -43,12 +43,8 @@
 
               
 
-            <div class="login-panel items-center space-between mt-4">
-                <div>   
-                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                            {{ __('auth.new_user')}}
-                     </a>
-                </div>  
+            <div class="login-panel flex space-between mt-4">
+
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('auth.forgot_your_password') }}
