@@ -14,8 +14,8 @@ class AddUsersLogoCurrency extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-        $table->string("logo");
-        $table->bigInteger("currency_id")->unsigned();
+        $table->string("logo")->nullable();
+        $table->bigInteger("currency_id")->unsigned()->default(1);
         $table->foreign('currency_id')
         ->references('id')
         ->on('currencies');

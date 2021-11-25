@@ -63,8 +63,8 @@ class ProfileController extends Controller
                'currency_id' => 'required',
                'file-profile-logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Only allow .jpg, .bmp and .png file types.
                'phone' => 'required',
-               'description'   => 'required',
-               'address' => 'required'
+               'description_' .  app()->getlocale() => 'required',
+               'address_' . app()->getlocale() => 'required'
               ]);
 
               $new_logo;
@@ -80,8 +80,8 @@ class ProfileController extends Controller
             $user['title_' . app()->getLocale()] = $request->input('title_' . app()->getLocale());
             $user->currency_id = $request->input('currency_id');
             $user->phone = $request->input('phone');
-            $user->description = $request->input('description');
-            $user->address = $request->input('address');
+            $user['description_' . app()->getLocale()] = $request->input('description_' . app()->getLocale());
+            $user['address_' . app()->getLocale()] = $request->input('address_' . app()->getLocale());
 
             if (!empty($new_logo))
                 $user->logo = $new_logo;

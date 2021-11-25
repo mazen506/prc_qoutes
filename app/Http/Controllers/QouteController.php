@@ -166,10 +166,10 @@ class QouteController extends Controller
 		    $qoute = Qoute::with('items')->find($qoute);
         $units = Unit::all();
         $vendor = User::find($qoute->user_id);
-        $currency = Currency::find($vendor->currency_id)->code_ar;
+        $currency = Currency::find($vendor->currency_id)['code_' . app()->getLocale()];
         if (($qoute->locale) && ($qoute->locale != app()->getLocale()))
         {  App::setLocale($qoute->locale);
-            return response(view('qoute_display', compact('qoute','units','vendor')))
+            return response(view('qoute_display', compact('qoute','units','vendor','currency')))
             ->withCookie(cookie()->forever('applocale', $qoute->locale));
 
         }

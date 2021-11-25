@@ -27,8 +27,8 @@
                     </div>
 
                     <div class='form-group col-md-10'>
-                        <label for="address">{{ __('global.address') }}</label>
-                        <input name="address" type='text' class='form-control' value="{{ old('address', $user->address) }}">
+                        <label for="address_{{ app()->getLocale() }}">{{ __('global.address') }}</label>
+                        <input name="address_{{ app()->getLocale() }}" type='text' class='form-control' value="{{ old('address_'. app()->getLocale(),  $user['address_' . app()->getLocale()]) }}">
                     </div>
 
                 
@@ -61,8 +61,8 @@
                 </div>
 
                 <div class='form-group col-md-10'>
-                    <label for="description">{{ __('global.description') }}</label>
-                    <textarea name="description" class='form-control'>{{ old('description',  $user->description) }}</textarea>
+                <label for="description_{{ app()->getLocale() }}">{{ __('global.description') }}</label>
+                        <textarea name="description_{{ app()->getLocale() }}" class='form-control'> {{ old('description_'. app()->getLocale(),  $user['description_' . app()->getLocale()]) }} </textarea>
                 </div>
 
                 <div class='form-group col-md-10'>

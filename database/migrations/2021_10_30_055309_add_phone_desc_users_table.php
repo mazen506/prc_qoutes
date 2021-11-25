@@ -15,7 +15,8 @@ class AddPhoneDescUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string("phone");
-            $table->text("description");
+            $table->text("description_en");
+            $table->text("description_ar");
            });
     }
 
