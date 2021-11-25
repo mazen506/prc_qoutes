@@ -106,7 +106,7 @@
 
 									<div class="footer-about-me-text clr">
                                         <div class="footer-about-me-text clr" style="direction: ltr;">
-                                            {{ $vendor->description }}
+                                            {{ $vendor['description_' . app()->getLocale() ] }}
                                         </div>
                                     </div>
 				                </div>
@@ -121,7 +121,7 @@
                                     <div class="footer-info-wrap">
                                         <span class="footer-contact-title">{{ __('global.address')}}: </span>
                                         <span class="footer-contact-text">
-                                            {{ $vendor->address }}
+                                            {{ $vendor['address_' . app()->getLocale() ] }}
                                         </span>
                                     </div>
                                 </li>
