@@ -9,6 +9,7 @@ return [
     'item_name'                           	   => 'Item Name',
     'qoute_name'                           	   => 'Qoute Name',    
     'item_images'                           	   => 'Item Images',
+    'images'    => 'Images',
     'package'                           	   => 'Package',
     'unit'                           	   => 'Unit',
     'moq'                                       => 'Minimum Qty',

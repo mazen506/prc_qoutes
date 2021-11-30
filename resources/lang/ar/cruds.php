@@ -74,6 +74,8 @@ return [
             'unit'                => 'الوحدة',            
             'image'                => 'الصور',
             'image_helper'         => '',
+            'images'    => 'الصور',
+            'item_name' => 'إسم المنتج',
             'name'              => 'الإسم',
             'name_helper'       => '',
             'package'              => 'الوحدة',

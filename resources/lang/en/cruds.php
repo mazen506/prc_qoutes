@@ -71,6 +71,8 @@ return [
         'fields'         => [
             'id'                => 'Item No.',
             'id_helper'         => '',
+            'images'    => 'Images',
+            'item_name' => 'Item Name',
             'unit'                => 'Unit',            
             'image'                => 'Images',
             'image_helper'         => '',

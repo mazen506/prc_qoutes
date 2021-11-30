@@ -46,8 +46,8 @@
                             <thead>
                                 <tr>
                                     <th class='col-item-serial'></th>
-                                    <th class='col-item-image'></th>
-                                    <th class='col-item-name'>{{ trans('cruds.item.fields.name') }}</th>
+                                    <th class='col-item-image align-center'>{{ trans('cruds.item.fields.images') }}</th>
+                                    <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
