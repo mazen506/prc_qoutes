@@ -27,7 +27,7 @@ body, html {
 }
 
 .cust-table td {
-    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
 }
 
 .cust-menu {
