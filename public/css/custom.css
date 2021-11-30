@@ -17,6 +17,14 @@ body, html {
     vertical-align: middle;
 }
 
+.align-center {
+    text-align:center;
+}
+
+.cust-table td {
+    border-left: 1px solid lightgrey;
+}
+
 
 .cust-table {
     white-space: nowrap;

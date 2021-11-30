@@ -48,10 +48,10 @@
                                     <th class='col-item-serial'></th>
                                     <th class='col-item-image'></th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.name') }}</th>
-                                    <th>{{ trans('cruds.item.fields.unit') }}</th>
-                                    <th>{{ trans('cruds.item.fields.qty') }}</th>
-                                    <th>{{ trans('cruds.item.fields.price') }}</th>
-                                    <th>{{ trans('cruds.item.fields.moq') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.moq') }}</th>
                                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                                 </tr>
                             </thead>
@@ -71,16 +71,16 @@
                                     <td class='col-item-name'>
                                         {{ $item->item_name }}
                                     </td>
-                                    <td class=col-item-small>
+                                    <td class='col-item-small align-center'>
                                         {{ $units->find($item->unit_id)->name }}
                                     </td>
-                                    <td class='col-item-small'>
+                                    <td class='col-item-small align-center'>
                                         {{ $item->package_qty . ' ' . $units->find($item->package_unit_id)->name }}
                                     </td>
-                                    <td class='col-item-small'>
+                                    <td class='col-item-small align-center'>
                                         {{ $item->price+0 . ' ' . $currency }}
                                     </td>
-                                    <td class='col-item-small'>
+                                    <td class='col-item-small align-center'>
                                         {{ $item->moq }}
                                     </td>	
                                     <td class='col-item-note'>

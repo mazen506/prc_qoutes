@@ -22,6 +22,14 @@ body, html {
 }
 
 
+.align-center {
+    text-align: center;
+}
+
+.cust-table td {
+    border-left: 1px solid lightgrey;
+}
+
 .cust-menu {
     margin-top:10px;
 }
