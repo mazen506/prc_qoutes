@@ -14,8 +14,8 @@ class AddUserTitles extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string("title_en");
-            $table->string("title_ar");
+            $table->string("title_en")->nullable();
+            $table->string("title_ar")->nullable();
            });
     }
 

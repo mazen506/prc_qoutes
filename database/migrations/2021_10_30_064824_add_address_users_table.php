@@ -14,8 +14,8 @@ class AddAddressUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string("address_en");
-            $table->string("address_ar");
+            $table->string("address_en")->nullable();
+            $table->string("address_ar")->nullable();
            });
     }
 
