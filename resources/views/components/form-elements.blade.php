@@ -49,10 +49,10 @@
                     <th class='col-item-serial'></th>
                     <th class='col-item-image'></th>
                     <th class='col-item-name'>{{ trans('cruds.item.fields.name') }}</th>
-                    <th>{{ trans('cruds.item.fields.unit') }}</th>
-                    <th>{{ trans('cruds.item.fields.qty') }}</th>
-                    <th>{{ trans('cruds.item.fields.price') }}</th>
-                    <th>{{ trans('cruds.item.fields.moq') }}</th>
+                    <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
+                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
+                    <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
+                    <th class='align-center'>{{ trans('cruds.item.fields.moq') }}</th>
                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                     <th class='col-item-btn'></th>
                 </tr>
@@ -71,32 +71,32 @@
                         <td class='col-item-name'>
                             <input type="text" name="item_names[]" class="form-control-plaintext"  readonly required>
                         </td>
-                        <td class='col-item-small'>
+                        <td class='col-item-small align-center'>
                             <input type="hidden" name="item_units[]">
                             <label name="item_units_names[]" class='form-control-plaintext'>
                         </td>
-                        <td class='col-item-small'>
+                        <td class='col-item-small align-center'>
                             <input type="hidden" name="item_package_qtys[]" class="form-control-plaintext"  readonly required>
                             <input type="hidden" name="item_package_units[]" class="form-control-plaintext"  readonly required>
                             <label name="item_package_units_names[]" class='form-control-plaintext'>
                         </td>
-                        <td class='col-item-small'>
-                            <input type="number" name="item_prices[]" class="form-control-plaintext"  readonly required>
+                        <td class='col-item-small align-center'>
+                            <input type="number" name="item_prices[]" class="form-control-plaintext align-center"  readonly required>
                         </td>
-                        <td class='col-item-small'>
-                            <input type="number" name="item_moqs[]" class="form-control-plaintext"  readonly required>
+                        <td class='col-item-small align-center'>
+                            <input type="number" name="item_moqs[]" class="form-control-plaintext align-center"  readonly required>
                         </td>	
                         <td class='col-item-note'>
                             <input type="text" name="item_notes[]" class="form-control-plaintext"  readonly required>
                         </td>		
-                        <td class='col-item-btn'><img src='/storage/images/delete_icon.png' class='icon-action-sm icon-del-item'></td>							
+                        <td class='col-item-btn align-center'><img src='/storage/images/delete_icon.png' class='icon-action-sm icon-del-item'></td>							
                     </tr>
                 @else
                 
                 @foreach (old('item_names', optional(optional($qoute)->items)->count() ? $qoute->items : ['']) as $item)
                         <tr id="item{{ $loop->index }}">
-                            <td class='col-item-serial'>{{ $loop->index+1 }}</td>
-                            <td class='col-item-image'>
+                            <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
+                            <td class='col-item-image align-center'>
                                 <input type=hidden name=item_ids[] value={{ (old('item_ids.' . $loop->index) ?? $item->id) ?? '' }}>
                                 <input type=hidden name="is_edited_flags[]" value=0>
                                 @if (!empty($item))
@@ -105,31 +105,31 @@
                                         $item_image = explode("|", $item_images)[0];
                                     @endphp
                                     <input type=hidden name='item_images_str[]' value={{$item_images}}>
-                                    <image class='item-image' src="/storage/item_images/{{$item_image}}"> 
+                                    <image class='item-image' src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$item_image}}"> 
                                 @endif
                             </td>
                             <td class='col-item-name'>
                                 <input type="text" name="item_names[]" class="form-control-plaintext lst-item-name" value="{{ old('item_names.' . $loop->index, optional($item)->item_name) }}" readonly required>
                             </td>
-                            <td class=col-item-small>
+                            <td class='col-item-small align-center'>
                                 <input type="hidden" name="item_units[]" value={{ old('item_units.' . $loop->index, optional($item)->unit_id) }}>
                                 <label name="item_units_names[]" class='form-control-plaintext'>{{ $units->find(old('item_units.' . $loop->index, optional($item)->unit_id))->name }}</label>
                             </td>
-                            <td class='col-item-small'>
+                            <td class='col-item-small align-center'>
                                 <input type="hidden" name="item_package_qtys[]" class="form-control-plaintext" value="{{ old('item_package_qtys.' . $loop->index, optional($item)->package_qty) }}" readonly required>
                                 <input type="hidden" name="item_package_units[]" class="form-control-plaintext" value="{{ old('item_package_units.' . $loop->index, optional($item)->package_unit_id)  }}" readonly required>
                                 <label name="item_package_units_names[]" class='form-control-plaintext'>{{ old('item_package_qtys.' . $loop->index, optional($item)->package_qty) . ' ' . $units->find(old('item_package_units.' . $loop->index, optional($item)->package_unit_id))->name }}</label>
                             </td>
-                            <td class='col-item-small'>
-                                <input type="number" name="item_prices[]" class="form-control-plaintext" value="{{ old('item_prices.' . $loop->index, optional($item)->price) }}" readonly required>
+                            <td class='col-item-small align-center'>
+                                <input type="number" name="item_prices[]" class="form-control-plaintext align-center" value="{{ old('item_prices.' . $loop->index, optional($item)->price) }}" readonly required>
                             </td>
-                            <td class='col-item-small'>
-                                <input type="number" name="item_moqs[]" class="form-control-plaintext" value="{{ old('item_moqs.' . $loop->index, optional($item)->moq) }}" readonly required>
+                            <td class='col-item-small align-center'>
+                                <input type="number" name="item_moqs[]" class="form-control-plaintext align-center" value="{{ old('item_moqs.' . $loop->index, optional($item)->moq) }}" readonly required>
                             </td>	
                             <td class='col-item-note'>
                                 <input type="text" name="item_notes[]" class="form-control-plaintext" value="{{ old('item_notes.' . $loop->index, optional($item)->note) }}" readonly required>
                             </td>		
-                            <td class='col-item-btn'><img src='/storage/images/delete_icon.png' class='icon-action-sm icon-del-item'></td>							
+                            <td class='col-item-btn align-center'><img src='/storage/images/delete_icon.png' class='icon-action-sm icon-del-item'></td>							
                         </tr>
                      @endforeach
                 @endif

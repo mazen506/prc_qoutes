@@ -64,17 +64,17 @@ class QouteController extends Controller
 
           if ($files=$request->file('item_images')){
             foreach($files as $file){
-                $name = $file->hashName();
-                $file->store('item_images','public');
-                $images[]= ['image_name' => $name ];
+                //$file->store('item_images','public');
+                $path = Storage::disk('s3')->put('images',$file);
+                $image = explode('/', $path)[1];
+                //$path = Storage::disk('s3')->url($path);
+                $images[]= ['image_name' => $image ];
             }
         
-
         // Testing
         //$images[] = ['image_name' => '1LqEA14E05s89pjoxwUzbMq6UHoHT8YNLAOzLYbT.jpg'];
         //$images[] = ['image_name' => 'cAnXNHc7bDwODjW14RpnU4YhzKE6Mc1OImurTzHw.jpg'];
         //$images[] = ['image_name' => 'ma1ONseX6p2GY1vmXd48rfz7wNwzDrYolr3XsoWJ.jpg'];
-
         
               return response()->json($images);
             }
@@ -90,7 +90,7 @@ class QouteController extends Controller
           // Delete from public folder
           if ($request->image_name) {
              try{
-                  Storage::delete('public/item_images/' . $request->image_name);
+                  Storage::disk('s3')->delete('images/' . $request->image_name);
                   //unlink(storage_path('app/public/item_images/' . $request->image_name));
                   return true;
              } catch (Throwable $e) {

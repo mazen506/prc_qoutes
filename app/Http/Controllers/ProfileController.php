@@ -31,8 +31,8 @@ class ProfileController extends Controller
                  $image_name = $file->hashName();
                  $file->store('item_images','public');
                  //Remove previous image
-                 if (Storage::exists('public/item_images/' . Auth::user()->logo))
-                    Storage::delete('public/item_images/' . Auth::user()->logo);
+                 if (Storage::disk('s3').exists('images/' . Auth::user()->logo))
+                    Storage::disk('s3').delete('images/' . Auth::user()->logo);
                  return response()->json(['image'=> $image_name]);
             }
             else
@@ -88,8 +88,8 @@ class ProfileController extends Controller
             $user->save();
 
             //Delete previous logo
-            if (!empty($new_logo) && Storage::exists('public/item_images/' . $previous_logo))
-                Storage::delete('public/item_images/' . $previous_logo);
+            if (!empty($new_logo) && Storage::disk('s3').exists('/images/' . $previous_logo))
+                Storage::disk('s3').delete('/images/' . $previous_logo);
             return response(200);
         }
         catch (\Illuminate\Validation\ValidationException $e)

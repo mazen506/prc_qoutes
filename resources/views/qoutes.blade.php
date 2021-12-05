@@ -33,18 +33,18 @@
 		<table cellpadding=0 cellspacing=0 border=1 class="table-responsive table-striped tbl-qoute-items cust-table">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">{{ __('global.serial')}}</th>
+					<th scope="col" class='align-center'>{{ __('global.serial')}}</th>
 					<th scope="col">{{ __('global.name') }}</th>
-					<th scope="col">{{ __('global.date') }}</th>
-					<th scope="col"></th>
+					<th scope="col" class='align-center'>{{ __('global.date') }}</th>
+					<th scope="col" class='align-center'></th>
 				</tr>
 			</thead>
 		@foreach ($qoutes as $qoute)
 				<tr>
-						<th scope="row">{{ $qoute->id }}</th>
+						<th scope="row" class='align-center'>{{ $qoute->id }}</th>
 						<td><a href=''>{{ $qoute->name }}</a></td>
-						<td>{{ $qoute->created_at->format('d.m.Y') }}</td>
-						<td>
+						<td class='align-center'>{{ $qoute->created_at->format('d.m.Y') }}</td>
+						<td class='align-center'>
 						
                            
 								<a onclick="copyToClipBoard('{{url("/qoute/" . $qoute->id )}}')" class='icon-action-sm'>
