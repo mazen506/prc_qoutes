@@ -12,8 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "lorisleiva/artisan-ui": "^0.3.0",
-        "symfony/polyfill-mbstring": "^1.23"
+        "lorisleiva/artisan-ui": "^0.3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
