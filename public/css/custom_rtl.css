@@ -28,6 +28,7 @@ body, html {
 
 .cust-table td {
     border-right: 1px solid lightgrey;
+    padding: 5px;
 }
 
 .cust-menu {

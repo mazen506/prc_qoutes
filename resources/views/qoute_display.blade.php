@@ -59,7 +59,7 @@
     
                             @foreach ($qoute->items as $item)
                                 <tr id="item{{ $loop->index }}">
-                                    <td class='col-item-serial'>{{ $loop->index+1 }}</td>
+                                    <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
                                     <td class='col-item-image align-center'>
                                         @php 
                                             $item_images = $item->images;

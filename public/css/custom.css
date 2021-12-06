@@ -17,6 +17,10 @@ body, html {
     vertical-align: middle;
 }
 
+.cust-table td {
+    padding: 5px;
+}
+
 .align-center {
     text-align:center;
 }

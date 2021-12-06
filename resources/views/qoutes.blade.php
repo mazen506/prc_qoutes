@@ -30,7 +30,7 @@
                     </div>
         </div>
 		<div>
-		<table cellpadding=0 cellspacing=0 border=1 class="table-responsive table-striped tbl-qoute-items cust-table">
+		<table cellpadding=5 cellspacing=0 border=1 class="table-responsive table-striped tbl-qoute-items cust-table">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col" class='align-center'>{{ __('global.serial')}}</th>
