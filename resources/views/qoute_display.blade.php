@@ -66,7 +66,7 @@
                                             $item_image = explode("|", $item_images)[0];
                                         @endphp
                                         <input type=hidden name='item_images_str' value={{$item_images}}>
-                                        <image class='item-image' src="https://mazmustaws.s3.us-east-2.amazonaws.com/images//{{$item_image}}"> 
+                                        <image class='item-image' src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$item_image}}"> 
                                     </td>
                                     <td class='col-item-name'>
                                         {{ $item->item_name }}
