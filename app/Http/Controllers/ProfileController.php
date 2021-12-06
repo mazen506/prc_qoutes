@@ -69,8 +69,8 @@ class ProfileController extends Controller
 
               $new_logo;
               if ($file=$request->file('file-profile-logo')){
-                $new_logo = $file->hashName();
-                $file->store('item_images','public');
+                $path = Storage::disk('s3')->put('images', $file);
+                $new_logo = explode('/', $path)[1];
               }
               else if (empty(Auth::user()->logo))
                 return response('No Logo!!',500);
@@ -88,7 +88,7 @@ class ProfileController extends Controller
             $user->save();
 
             //Delete previous logo
-            if (!empty($new_logo) && Storage::disk('s3').exists('/images/' . $previous_logo))
+            if (!empty($new_logo) && Storage::disk('s3')->exists('images/' . $previous_logo))
                 Storage::disk('s3').delete('/images/' . $previous_logo);
             return response(200);
         }
