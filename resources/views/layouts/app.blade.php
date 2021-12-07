@@ -71,7 +71,7 @@
 
             <footer>
                     <div class='footer-text'>
-                        Wesalix@2021
+                        Wesalix©2021
                     </div>
             </footer>
         </div>

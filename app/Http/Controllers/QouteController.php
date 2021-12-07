@@ -27,7 +27,7 @@ class QouteController extends Controller
     {
         //abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $qoutes = Qoute::with('items')->get();
+        $qoutes = Qoute::with('items')->where('user_id', Auth::user()->id)->get();
 
         return view('qoutes', compact('qoutes'));
     }
