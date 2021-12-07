@@ -233,6 +233,7 @@ function clearModal(item){
     $(item + ' :input[type=number]').val('');
     $(item + ' select').val('0');
     $(item + ' #image-viewer').empty();
+    $('.carousel-control-prev, .carousel-control-next').css('display','none');
     $('#itemDtlsModal .modal-body').scrollTop(0); 
 }
 

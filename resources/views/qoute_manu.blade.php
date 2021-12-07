@@ -167,9 +167,8 @@ $.ajax({
         if (isNew)
             initNewItem();
         else   
-        {    $('#itemDtlsModal').modal('hide');
-             showFlashMessage(trans('global.save_success'));
-        }
+            $('#itemDtlsModal').modal('hide');
+        showFlashMessage(trans('global.save_success'));
     },
     error: function (data) {
         showFlashMessage(trans('global.execution_error'));
