@@ -5,16 +5,12 @@
 
     RewriteEngine On
 
-    RewriteCond %{HTTPS} !on 
-    RewriteCond %{HTTP_HOST} =wesalix.com
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L,NE]
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-    RewriteCond %{HTTPS}::%{HTTP_HOST} ^off::(?:www\.)?(.+)$
-    RewriteRule ^ https://www.%1%{REQUEST_URI} [NE,L,R]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
