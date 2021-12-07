@@ -21,8 +21,10 @@
     # RewriteRule ^ index.php [L]
 
         #https
-        RewriteCond %{ENV:HTTPS} !on
-        RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#Force from http to https
+RewriteCond %{HTTPS} !on 
+RewriteCond %{HTTP_HOST} =www.wesalix.com
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L,NE]
 
 
 </IfModule>
