@@ -3,7 +3,7 @@
         Options -MultiViews -Indexes
     </IfModule>
 
-    RewriteEngine off
+    RewriteEngine on
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
