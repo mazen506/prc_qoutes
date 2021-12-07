@@ -114,7 +114,7 @@
         console.log('Load Item_no' + item_no);
 
         //Units into javascript variable 
-        units = {!! $units !!};
+        units = {!! $units->toJson() !!};
     });
 
 
