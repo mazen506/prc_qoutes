@@ -26,8 +26,20 @@
             {{ trans('cruds.qoute.fields.name_helper') }}
         </p>
     </div>
-
-    <div class="col-sm-6 {{ $errors->has('note') ? 'has-error' : '' }}">
+    <div class="col-sm-6 {{ $errors->has('currency') ? 'has-error' : '' }}">
+        <label for="currency">{{ trans('cruds.qoute.fields.name') }}*</label>
+        <select id="currency" name="currency" class="form-control">
+                            <option value="0">-- {{ __('global.currency') }} --</option>
+                            @foreach ($currencies as $currency)
+                                <option value="{{ $currency->id }}" @php if (($currency->id) == (optional($qoute)->currency_id ?: Auth::user()->currency_id)) echo 'selected'; @endphp>
+                                    {{ $currency['code_' . app()->getLocale()] }}
+                                </option>
+                            @endforeach
+        </select>	
+    </div>
+</div>    
+<div class='form-row'>
+   <div class="col {{ $errors->has('note') ? 'has-error' : '' }}">
         <label for="note">{{ trans('cruds.qoute.fields.note') }}</label>
         <input type="text" id="note" name="note" class="form-control" value="{{ old('note', optional($qoute)->name) }}">
         <p class="helper-block">

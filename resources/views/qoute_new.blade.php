@@ -19,7 +19,7 @@
                     if (!isset($qoute))
                          $qoute = null;
             @endphp                         
-            <x-form-elements :qoute=$qoute :units=$units />
+            <x-form-elements :qoute=$qoute :units=$units :currencies=$currencies />
 
             <div class='row'>
                 <input type='button' id='btn-add-item' class="btn btn-primary btn-lg" value="{{__('global.add_item')}}">
@@ -30,7 +30,7 @@
 
         <x-item-image-viewer />
 
-        <x-item-image-uploader :units=$units />
+        <x-item-image-uploader :units=$units  />
 
 
     </div>
@@ -78,10 +78,12 @@
 
     $("#frmQoute").validate({
                 rules: {
-                    'name': "required"
+                    'name': "required",
+                    'currency': {required:true, min:1}
                 },
                 messages: {
                     'name': "{{ __('validation.required', ['attribute' => __('global.name') ]) }}",
+                    'currency': "{{ __('validation.required', ['attribute' => __('global.currency') ]) }}",
                 }
             });
     $("#frmItemDtls").validate(validation);

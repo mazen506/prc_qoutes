@@ -13,10 +13,13 @@ class formElements extends Component
      */
     public $qoute;
     public $units;
-    public function __construct($qoute, $units)
+    public $currencies;
+    
+    public function __construct($qoute, $units, $currencies)
     {
             $this->qoute = $qoute;
             $this->units = $units;
+            $this->currencies = $currencies;
     }
 
     /**

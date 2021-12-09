@@ -170,10 +170,7 @@ th.col-item-name {
 .cust-header {
     font-size: 25px;
     background-color:#fff;
-    padding-top:20px;
-    padding-left:20px;
-    padding-right:20px;
-    padding-bottom: 0px;
+    padding:5px;
 }
 
 .cust-table tr {

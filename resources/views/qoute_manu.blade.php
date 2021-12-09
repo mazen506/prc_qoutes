@@ -16,7 +16,7 @@
             @csrf
             @method('PUT')
            
-            <x-form-elements :qoute=$qoute :units=$units />
+            <x-form-elements :qoute=$qoute :units=$units :currencies=$currencies />
 
             <div class='row-buttons'>
                 <button id='btn-add-item' class="btn btn-primary">

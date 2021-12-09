@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table-responsive table-striped tbl-qoute-items cust-table" id="items_table">
+                        <table class="table-striped tbl-qoute-items cust-table" id="items_table">
                             <thead>
                                 <tr>
                                     <th class='col-item-serial'></th>

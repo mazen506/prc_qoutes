@@ -41,7 +41,6 @@ class TranslationServiceProvider extends ServiceProvider
                 ];
             })->toJson(JSON_UNESCAPED_UNICODE);
         });
-    });
-
+      });
     }
 }

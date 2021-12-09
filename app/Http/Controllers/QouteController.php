@@ -41,7 +41,8 @@ class QouteController extends Controller
     {
 		    //abort_if(Gate::denies('order_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 		    $units = Unit::all();
-        return view('qoute_new',compact('units'));
+        $currencies = Currency::all();
+        return view('qoute_new',compact('units','currencies'));
     }
 
     /**
@@ -104,7 +105,8 @@ class QouteController extends Controller
     {
 		
   	  $request->validate([
-	    	'name' => 'required|unique:qoutes|max:255',
+	    	'name' => 'required',
+        'currency' => 'required',
 	    ]);
 	 
       DB::beginTransaction();
@@ -114,6 +116,7 @@ class QouteController extends Controller
 				  'name' => $request->name,
 				  'note' => $request->note ? $request->note : '',
 				  'user_id' => Auth::user()->id,
+          'currency_id' => $request->currency,
 				  'curr_vr_id' => 0,
           'locale'  => app()->getLocale()
 			  ]);
@@ -166,7 +169,7 @@ class QouteController extends Controller
 		    $qoute = Qoute::with('items')->find($qoute);
         $units = Unit::all();
         $vendor = User::find($qoute->user_id);
-        $currency = Currency::find($vendor->currency_id)['code_' . app()->getLocale()];
+        $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
         if (($qoute->locale) && ($qoute->locale != app()->getLocale()))
         {  App::setLocale($qoute->locale);
             return response(view('qoute_display', compact('qoute','units','vendor','currency')))
@@ -186,10 +189,12 @@ class QouteController extends Controller
     public function edit(int $qoute)
     {
     $units = Unit::all();
+    $currencies = Currency::all();
 		$qoute = Qoute::with("items")->find($qoute);
         return view('qoute_manu',[
 			  'qoute' => $qoute,
-        'units' => $units
+        'units' => $units,
+        'currencies' => $currencies
 		]);
     }
 
@@ -202,11 +207,17 @@ class QouteController extends Controller
      */
     public function update(Request $request, Qoute $qoute)
     {
+      $request->validate([
+	    	'name' => 'required',
+        'currency' => 'required',
+	    ]);
+
         DB::beginTransaction();
         try {
 
           $qoute->update(['name' => $request->name, 
                           'note'=> $request->note, 
+                          'currency_id' => $request->currency,
                           'updated_at'=> date('Y-m-d H:i:s'), 
                           'locale' => app()->getLocale()]
                         );

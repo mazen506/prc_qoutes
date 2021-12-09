@@ -1,6 +1,6 @@
 <x-app-layout>
 	<x-slot name="header">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="max-w-6xl mx-auto px-2 sm:px-9 lg:px-12">
 			<div class="flex justify-between h-16">
        			
 					<div class="flex-shrink-0 flex items-center">
@@ -15,7 +15,6 @@
 							<label>{{__('global.add')}}</label>
 						</a>
 					</div>	
-
 
 			</div>
 		</div>
