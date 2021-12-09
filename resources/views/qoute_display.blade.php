@@ -22,15 +22,15 @@
 
         <div class='form-row'>
             <div class="form-group col-md-6">
-                <label for="date" class="col-form-label">{{ __('global.date')}}</label>
+                <label for="date" class="col-form-label">{{ __('global.create_date')}}</label>
                 <div>
                     <input type="text" readonly class="form-control-plaintext" id="id" value="{{$qoute->created_at->format('d.m.Y')}}">
                 </div>
             </div>
             <div class="form-group col-md-6">
-                <label for="last_update_time" class="col-form-label">{{ __('global.last_update_time')}}</label>
+                <label for="note" class="col-form-label">{{ __('global.note')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control-plaintext" id="last_update_time" value="{{$qoute->updated_at->format('d.m.Y')}}">
+                    <input type="text" readonly class="form-control-plaintext" id="note" value="{{$qoute->note}}">
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table-striped tbl-qoute-items cust-table" id="items_table">
+                        <table class="table-responsive table-striped tbl-qoute-items cust-table" id="items_table">
                             <thead>
                                 <tr>
                                     <th class='col-item-serial'></th>
@@ -90,8 +90,12 @@
                          @endforeach
                         </tbody>
                     </table>
+            
                  </div>
+
+
                 </div>
+
                 <x-item-image-viewer />
 </div>
       

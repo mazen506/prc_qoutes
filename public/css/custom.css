@@ -75,7 +75,8 @@ th.col-item-name {
 }
 
 .row-buttons {
-    float:right;
+    text-align: right;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {

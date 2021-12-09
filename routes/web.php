@@ -35,6 +35,7 @@ Route::resource('qoutes', QouteController::class)->middleware(['auth']);
 Route::post('/qoutes/addImage', [QouteController::class, 'addImage'])->name('addImage');
 Route::post('/qoutes/delImage', [QouteController::class, 'delImage'])->name('delImage');
 Route::get('/qoute/{qoute}', [QouteController::class, 'show']);
+Route::get('/qoute/{qoute}/create-pdf', [QouteController::class, 'createPdf']);
 
 Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
 

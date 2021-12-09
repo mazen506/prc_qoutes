@@ -9,10 +9,12 @@ use App\Models\User;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
+use PDF;
+use Barryvdh\Snappy;
 
 
 
@@ -283,6 +285,15 @@ class QouteController extends Controller
     			  DB::rollback();
 			      return response()-json(['error' => $e->getMessage()], 500);
 		    }
+    }
+
+    public function createPdf(int $qoute){
+      $qoute = Qoute::with('items')->find($qoute);
+      $units = Unit::all();
+      $vendor = User::find($qoute->user_id);
+      $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
+      $pdf = PDF::loadView('qoute_display', compact('qoute','units','vendor','currency'));
+      return $pdf->download('qoute_' . $qoute . '.pdf');
     }
 
     /**

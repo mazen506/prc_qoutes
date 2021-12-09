@@ -42,6 +42,7 @@ return [
     'close'                               => 'Close',    
     'serial'                               => 'Serial',    
     'date'                                 => 'Date', 
+    'create_date'       => 'Created At',
     'new_record_confirmation'              => 'Saved successfully, Do you wish to add another item?',
     'qoute_link_copied' => 'Qoute link copied to Clipboard',
     'downloadFile'                         => 'Download file',

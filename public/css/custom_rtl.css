@@ -80,7 +80,8 @@ th.col-item-name {
 }
 
 .row-buttons {
-    float:left;
+    text-align: left;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {

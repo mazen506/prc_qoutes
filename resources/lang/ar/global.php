@@ -39,6 +39,7 @@ return [
     'close'                               => 'إغلاق',    
     'serial'                               => 'الرقم',    
     'date'                                 => 'التاريخ', 
+    'create_date'       => 'تاريخ الإنشاء',
     'qoute_id'  => 'رقم العرض',
     'last_update_time'   => 'وقت أخر تعديل',
     'contact_us'        =>  'إتصل بنا',

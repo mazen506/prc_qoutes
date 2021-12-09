@@ -57,7 +57,7 @@
 									style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="lst-del-btn icon-action-sm">
+                                        <button  class="lst-del-btn icon-action-sm">
     											<i class="fa fa-trash" ></i> 
 										</button>
                                 </form>
