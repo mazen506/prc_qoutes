@@ -107,6 +107,7 @@ return [
 			'name_helper'  => '',
             'note'        => 'ملاحظات',
             'note_helper' => '',
+            'currency'  => 'العملة',
             'items'              => 'الأصناف',
             'items_helper'       => '',
             'created_at'            => 'تاريخ الإنشاء',

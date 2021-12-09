@@ -27,7 +27,7 @@
         </p>
     </div>
     <div class="col-sm-6 {{ $errors->has('currency') ? 'has-error' : '' }}">
-        <label for="currency">{{ trans('cruds.qoute.fields.name') }}*</label>
+        <label for="currency">{{ trans('cruds.qoute.fields.currency') }}*</label>
         <select id="currency" name="currency" class="form-control">
                             <option value="0">-- {{ __('global.currency') }} --</option>
                             @foreach ($currencies as $currency)

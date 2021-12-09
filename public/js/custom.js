@@ -538,8 +538,11 @@ $('.lst-del-btn').click(function(e){
 var confirm_result = false;
 var confirm_init = true;
 function confirm(message, e){
+    if (!confirm_init) {
+        confirm_init = true;
+        return confirm_result;
+    }
     confirm_init = true;
-    if (confirm_init) return true;
     $('#dialog').text(message);
     $("#dialog").dialog({
             title: trans('global.confirmation_box'),

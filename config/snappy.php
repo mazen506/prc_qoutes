@@ -35,17 +35,21 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_PDF_BINARY', 'C:\Program Files\wkhtmltopdf\bin'),
+        'binary'  => env('WKHTML_PDF_BINARY', 'C:\snappy\wkhtmltopdf\bin\wkhtmltopdf.exe'),
         'timeout' => false,
-        'options' => [],
+        'options' => [
+            'enable-local-file-access'=> true
+        ],
         'env'     => [],
     ],
     
     'image' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', '\vendor\h4cc\wkhtmltoimage-amd64\bin'),
+        'binary'  => env('WKHTML_IMG_BINARY', 'C:\snappy\wkhtmltopdf\bin\wkhtmltoimage.exe'),
         'timeout' => false,
-        'options' => [],
+        'options' => [
+            'enable-local-file-access'=> true
+        ],
         'env'     => [],
     ],
 
