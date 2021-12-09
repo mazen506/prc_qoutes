@@ -167,8 +167,10 @@ $.ajax({
         if (isNew)
             initNewItem();
         else   
-            $('#itemDtlsModal').modal('hide');
-        showFlashMessage(trans('global.save_success'));
+        {      showFlashMessage(trans('global.save_success'));
+               $('#itemDtlsModal').modal('hide');
+        }
+        
     },
     error: function (data) {
         showFlashMessage(trans('global.execution_error'));
@@ -178,10 +180,16 @@ $.ajax({
 }
 
 function initNewItem(){
-    //if (confirm(trans('global.new_record_confirmation'), initNewItem))
-       clearModal('#itemDtlsModal');
-    //else if (!confirm_init)
-      //  $('#itemDtlsModal').modal('hide');
+    confirm(trans('global.new_record_confirmation'), initNewItem);
+    console.log('Inside Confirm Ready:' + confirm_ready + ':' + confirm_result);
+    if (confirm_ready)
+    {   console.log('Inside Confirm Ready:' + confirm_result);
+        if (confirm_result) 
+            clearModal('#itemDtlsModal');
+        else 
+            $('#itemDtlsModal').modal('hide');
+    }
+
 
 }
 

@@ -122,6 +122,7 @@ function copyToClipBoard(txt) {
 
     /**************** Upload Item Images ******************/ 
     $("#file_item_images").on('change', function(e) {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -235,6 +236,8 @@ function clearModal(item){
     $(item + ' #image-viewer').empty();
     $('.carousel-control-prev, .carousel-control-next').css('display','none');
     $('#itemDtlsModal .modal-body').scrollTop(0); 
+    $('#item_name').focus();
+    $('#file_item_images').val('');
 }
 
 $('#btn-save-qoute').click(function(e){
@@ -536,13 +539,15 @@ $('.lst-del-btn').click(function(e){
 /* ---- Confirmation Dialog --------*/
 
 var confirm_result = false;
+var confirm_ready = false;
 var confirm_init = true;
 function confirm(message, e){
     if (!confirm_init) {
         confirm_init = true;
+        confirm_ready=true;
         return confirm_result;
     }
-    confirm_init = true;
+    confirm_ready = false;
     $('#dialog').text(message);
     $("#dialog").dialog({
             title: trans('global.confirmation_box'),
