@@ -39,6 +39,4 @@ Route::get('/qoute/{qoute}/create-pdf', [QouteController::class, 'createPdf']);
 
 Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
 
-
-
 require __DIR__.'/auth.php';

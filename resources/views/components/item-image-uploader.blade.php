@@ -56,8 +56,8 @@
             <input type="number" id="item_price" name="item_price" class="form-control" value=50  required>						
         </div>
         <div class='form-group col-6'>
-            <label for=''>{{ trans('cruds.item.fields.moq') }}</label>
-            <input type="number" id="item_moq" name="item_moq" class="form-control" value="500" required>						
+            <label for=''>{{ trans('cruds.item.fields.cpm') }}</label>
+            <input type="number" id="item_cpm" name="item_cpm" class="form-control" value="500" required>						
         </div>
     </div>
     <div class='form-group'>

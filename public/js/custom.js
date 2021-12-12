@@ -441,7 +441,7 @@ function saveRecord(item){
     var item_package_unit = document.getElementsByName('item_package_units[]')[item];
     var item_package_unit_name = document.getElementsByName('item_package_units_names[]')[item];
     var item_price = document.getElementsByName('item_prices[]')[item];
-    var item_moq = document.getElementsByName('item_moqs[]')[item];
+    var item_cpm = document.getElementsByName('item_cpms[]')[item];
     var item_note = document.getElementsByName('item_notes[]')[item];
 
 
@@ -457,7 +457,7 @@ function saveRecord(item){
     item_package_unit.value = $("#item_package_unit").val();
     item_package_unit_name.innerHTML = $("#item_package_qty").val() + ' ' + $("#item_package_unit :selected").text().trim();
     item_price.value = $("#item_price").val();
-    item_moq.value = $("#item_moq").val();
+    item_cpm.value = $("#item_cpm").val();
     item_note.value = $("#item_note").val();
 
     //set item image
@@ -482,7 +482,7 @@ var item_unit = document.getElementsByName('item_units[]')[item];
 var item_package_qty = document.getElementsByName('item_package_qtys[]')[item];
 var item_package_unit = document.getElementsByName('item_package_units[]')[item];
 var item_price = document.getElementsByName('item_prices[]')[item];
-var item_moq = document.getElementsByName('item_moqs[]')[item];
+var item_cpm = document.getElementsByName('item_cpms[]')[item];
 var item_note = document.getElementsByName('item_notes[]')[item];
 
 
@@ -492,7 +492,7 @@ $('#item_unit').val(item_unit.value);
 $('#item_package_qty').val(item_package_qty.value);
 $('#item_package_unit').val(item_package_unit.value);
 $('#item_price').val(item_price.value);
-$('#item_moq').val(item_moq.value);
+$('#item_cpm').val(item_cpm.value);
 $('#item_note').val(item_note.value);
 $('#item_images_str').val(item_images_str.value);
 

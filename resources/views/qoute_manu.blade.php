@@ -89,7 +89,7 @@
                     'item_unit': {required: true,min:1},
                     'item_package_qty': "required",
                     'item_package_unit': {required:true, min:1},
-                    'item_moq': "required",
+                    'item_cpm': "required",
                     'item_price': "required",
                     'item_note': "required",
                     'item_images[]': {
@@ -100,7 +100,7 @@
                     'item_unit': "{{ __('validation.required', ['attribute' => __('global.unit') ]) }}",
                     'item_package_qty': "{{ __('validation.required', ['attribute' => __('global.quantity') ]) }}",
                     'item_package_unit': "{{ __('validation.required', ['attribute' => __('global.unit') ]) }}",
-                    'item_moq': "{{ __('validation.required', ['attribute' => __('global.moq') ]) }}",
+                    'item_cpm': "{{ __('validation.required', ['attribute' => __('global.cpm') ]) }}",
                     'item_price': "{{ __('validation.required', ['attribute' => __('global.price') ]) }}",
                     'item_note': "{{ __('validation.required', ['attribute' => __('global.note') ]) }}",
                     'item_images[]': "{{ __('validation.required', ['attribute' => __('global.item_images') ]) }}",
@@ -213,7 +213,7 @@ function listItems(data){
             var item_package_unit = document.getElementsByName('item_package_units[]')[index];
             var item_package_unit_name = document.getElementsByName('item_package_units_names[]')[index];
             var item_price = document.getElementsByName('item_prices[]')[index];
-            var item_moq = document.getElementsByName('item_moqs[]')[index];
+            var item_cpm = document.getElementsByName('item_cpms[]')[index];
             var item_note = document.getElementsByName('item_notes[]')[index];
 
             item_id.value = item.id;
@@ -225,7 +225,7 @@ function listItems(data){
             item_package_unit.value = item.package_unit_id;
             item_package_unit_name.innerHTML = item.package_qty + ' ' + getUnitName(item.package_unit_id);
             item_price.value = item.price;
-            item_moq.value = item.moq;
+            item_cpm.value = item.cpm;
             item_note.value = item.note;
             var item_image = item.images.split('|')[0];
             $('#item' + index).find('td:nth-child(2)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);

@@ -52,7 +52,7 @@
                     'item_unit': {required: true,min:1},
                     'item_package_qty': "required",
                     'item_package_unit': {required:true, min:1},
-                    'item_moq': "required",
+                    'item_cpm': "required",
                     'item_price': "required",
                     'item_note': "required",
                     'item_images[]': "required"
@@ -62,7 +62,7 @@
                     'item_unit': "{{ __('validation.required', ['attribute' => __('global.unit') ]) }}",
                     'item_package_qty': "{{ __('validation.required', ['attribute' => __('global.quantity') ]) }}",
                     'item_package_unit': "{{ __('validation.required', ['attribute' => __('global.unit') ]) }}",
-                    'item_moq': "{{ __('validation.required', ['attribute' => __('global.moq') ]) }}",
+                    'item_cpm': "{{ __('validation.required', ['attribute' => __('global.cpm') ]) }}",
                     'item_price': "{{ __('validation.required', ['attribute' => __('global.price') ]) }}",
                     'item_note': "{{ __('validation.required', ['attribute' => __('global.note') ]) }}",
                     'item_images[]': "{{ __('validation.required', ['attribute' => __('global.item_images') ]) }}",

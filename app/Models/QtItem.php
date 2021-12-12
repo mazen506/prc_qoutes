@@ -14,7 +14,7 @@ class QtItem extends Model
 						   'package_qty',
 						   'package_unit_id',
 						   'price',
-						   'moq',
+						   'cpm',
 						   'note',
 						   'images'
 						   ];

@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "barryvdh/laravel-snappy": "^0.4.8",
+        "barryvdh/laravel-dompdf": "^0.9.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "lorisleiva/artisan-ui": "^0.3.0",
-        "symfony/polyfill-mbstring": "v1.23.0"
+        "symfony/polyfill-mbstring": "v1.23.0",
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

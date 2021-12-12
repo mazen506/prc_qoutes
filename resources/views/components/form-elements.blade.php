@@ -62,9 +62,9 @@
                     <th class='col-item-image'></th>
                     <th class='col-item-name'>{{ trans('cruds.item.fields.name') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
+                    <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
-                    <th class='align-center'>{{ trans('cruds.item.fields.moq') }}</th>
                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                     <th class='col-item-btn'></th>
                 </tr>
@@ -88,6 +88,10 @@
                             <label name="item_units_names[]" class='form-control-plaintext'>
                         </td>
                         <td class='col-item-small align-center'>
+                                <input type="number" name="item_cpms[]" class="form-control-plaintext align-center" value="{{ old('item_cpms.' . $loop->index, optional($item)->cpm) }}" readonly required>
+                            </td>	
+                            
+                        <td class='col-item-small align-center'>
                             <input type="hidden" name="item_package_qtys[]" class="form-control-plaintext"  readonly required>
                             <input type="hidden" name="item_package_units[]" class="form-control-plaintext"  readonly required>
                             <label name="item_package_units_names[]" class='form-control-plaintext'>
@@ -95,9 +99,7 @@
                         <td class='col-item-small align-center'>
                             <input type="number" name="item_prices[]" class="form-control-plaintext align-center"  readonly required>
                         </td>
-                        <td class='col-item-small align-center'>
-                            <input type="number" name="item_moqs[]" class="form-control-plaintext align-center"  readonly required>
-                        </td>	
+
                         <td class='col-item-note'>
                             <input type="text" name="item_notes[]" class="form-control-plaintext"  readonly required>
                         </td>		
@@ -128,6 +130,9 @@
                                 <label name="item_units_names[]" class='form-control-plaintext'>{{ $units->find(old('item_units.' . $loop->index, optional($item)->unit_id))->name }}</label>
                             </td>
                             <td class='col-item-small align-center'>
+                                <input type="number" name="item_cpms[]" class="form-control-plaintext align-center" value="{{ old('item_cpms.' . $loop->index, optional($item)->cpm) }}" readonly required>
+                            </td>	
+                            <td class='col-item-small align-center'>
                                 <input type="hidden" name="item_package_qtys[]" class="form-control-plaintext" value="{{ old('item_package_qtys.' . $loop->index, optional($item)->package_qty) }}" readonly required>
                                 <input type="hidden" name="item_package_units[]" class="form-control-plaintext" value="{{ old('item_package_units.' . $loop->index, optional($item)->package_unit_id)  }}" readonly required>
                                 <label name="item_package_units_names[]" class='form-control-plaintext'>{{ old('item_package_qtys.' . $loop->index, optional($item)->package_qty) . ' ' . $units->find(old('item_package_units.' . $loop->index, optional($item)->package_unit_id))->name }}</label>
@@ -135,9 +140,7 @@
                             <td class='col-item-small align-center'>
                                 <input type="number" name="item_prices[]" class="form-control-plaintext align-center" value="{{ old('item_prices.' . $loop->index, optional($item)->price) }}" readonly required>
                             </td>
-                            <td class='col-item-small align-center'>
-                                <input type="number" name="item_moqs[]" class="form-control-plaintext align-center" value="{{ old('item_moqs.' . $loop->index, optional($item)->moq) }}" readonly required>
-                            </td>	
+
                             <td class='col-item-note'>
                                 <input type="text" name="item_notes[]" class="form-control-plaintext" value="{{ old('item_notes.' . $loop->index, optional($item)->note) }}" readonly required>
                             </td>		

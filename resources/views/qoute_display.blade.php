@@ -42,16 +42,16 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table-responsive table-striped tbl-qoute-items cust-table" id="items_table">
+                        <table class="table-responsive-sm table-striped tbl-qoute-items cust-table" id="items_table">
                             <thead>
                                 <tr>
                                     <th class='col-item-serial'></th>
                                     <th class='col-item-image align-center'>{{ trans('cruds.item.fields.images') }}</th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
-                                    <th class='align-center'>{{ trans('cruds.item.fields.moq') }}</th>
                                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                                 </tr>
                             </thead>
@@ -75,14 +75,15 @@
                                         {{ $units->find($item->unit_id)->name }}
                                     </td>
                                     <td class='col-item-small align-center'>
+                                        {{ $item->cpm }}
+                                    </td>	
+                                    <td class='col-item-small align-center'>
                                         {{ $item->package_qty . ' ' . $units->find($item->package_unit_id)->name }}
                                     </td>
                                     <td class='col-item-small align-center'>
                                         {{ $item->price+0 . ' ' . $currency }}
                                     </td>
-                                    <td class='col-item-small align-center'>
-                                        {{ $item->moq }}
-                                    </td>	
+
                                     <td class='col-item-note'>
                                         {{ $item->note }}
                                     </td>		
@@ -90,7 +91,6 @@
                          @endforeach
                         </tbody>
                     </table>
-            
                  </div>
 
 

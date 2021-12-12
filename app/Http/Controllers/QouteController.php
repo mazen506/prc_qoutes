@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
 use PDF;
-use Barryvdh\Snappy;
+
 
 
 
@@ -129,7 +129,7 @@ class QouteController extends Controller
       $item_package_qtys = $request->input('item_package_qtys', []);
       $item_package_units = $request->input('item_package_units', []);
       $item_prices = $request->input('item_prices', []);
-      $item_moqs = $request->input('item_moqs', []);
+      $item_cpms = $request->input('item_cpms', []);
       $item_notes = $request->input('item_notes', []);
 			$items = [];
 			for ($item_number=0; $item_number < count($item_names); $item_number++) {
@@ -140,7 +140,7 @@ class QouteController extends Controller
                    'package_qty' => $item_package_qtys[$item_number],
                    'package_unit_id' => $item_package_units[$item_number],
                    'price' => $item_prices[$item_number],
-                   'moq' => $item_moqs[$item_number],
+                   'cpm' => $item_cpms[$item_number],
                    'note' => $item_notes[$item_number],
                    'images' => $item_images_str[$item_number],
                 ]);
@@ -232,7 +232,7 @@ class QouteController extends Controller
           $item_package_qtys = $request->input('item_package_qtys', []);
           $item_package_units = $request->input('item_package_units', []);
           $item_prices = $request->input('item_prices', []);
-          $item_moqs = $request->input('item_moqs', []);
+          $item_cpms = $request->input('item_cpms', []);
           $item_notes = $request->input('item_notes', []);
 
 
@@ -255,7 +255,7 @@ class QouteController extends Controller
                       $item->package_qty = $item_package_qtys[$index];
                       $item->package_unit_id = $item_package_units[$index];
                       $item->price = $item_prices[$index];
-                      $item->moq = $item_moqs[$index];
+                      $item->cpm = $item_cpms[$index];
                       $item->note = $item_notes[$index];
                       $item->images = $item_images_str[$index];
                       array_push($items, $item);
@@ -269,7 +269,7 @@ class QouteController extends Controller
                         'package_qty' => $item_package_qtys[$index],
                         'package_unit_id' => $item_package_units[$index],
                         'price' => $item_prices[$index],
-                        'moq' => $item_moqs[$index],
+                        'cpm' => $item_cpms[$index],
                         'note' => $item_notes[$index],
                         'images' => $item_images_str[$index]
                       ]);
@@ -293,7 +293,7 @@ class QouteController extends Controller
       $vendor = User::find($qoute->user_id);
       $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
       $pdf = PDF::loadView('qoute_display', compact('qoute','units','vendor','currency'));
-      return $pdf->download('qoute_' . $qoute . '.pdf');
+      return $pdf->download('qoute_' . $qoute->id . '.pdf');
     }
 
     /**

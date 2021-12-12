@@ -40,6 +40,7 @@ return [
     'serial'                               => 'الرقم',    
     'date'                                 => 'التاريخ', 
     'create_date'       => 'تاريخ الإنشاء',
+    'cpm'           => 'سي بي إم',
     'qoute_id'  => 'رقم العرض',
     'last_update_time'   => 'وقت أخر تعديل',
     'contact_us'        =>  'إتصل بنا',
