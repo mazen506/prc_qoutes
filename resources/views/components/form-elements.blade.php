@@ -88,9 +88,9 @@
                             <label name="item_units_names[]" class='form-control-plaintext'>
                         </td>
                         <td class='col-item-small align-center'>
-                                <input type="number" name="item_cpms[]" class="form-control-plaintext align-center" value="{{ old('item_cpms.' . $loop->index, optional($item)->cpm) }}" readonly required>
+                                <input type="number" name="item_cpms[]" class="form-control-plaintext align-center" readonly required>
                             </td>	
-                            
+
                         <td class='col-item-small align-center'>
                             <input type="hidden" name="item_package_qtys[]" class="form-control-plaintext"  readonly required>
                             <input type="hidden" name="item_package_units[]" class="form-control-plaintext"  readonly required>
