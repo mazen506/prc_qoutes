@@ -35,7 +35,7 @@ return [
     
     'pdf' => array(
         'enabled' => true,
-        'binary' => '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf',
+        'binary' => 'wkhtmltopdf',
         'timeout' => false,
         'images' => true,
         'options' => [
@@ -48,7 +48,7 @@ return [
     ),
     'image' => array(
         'enabled' => true,
-        'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
+        'binary' => 'wkhtmltoimage',
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
