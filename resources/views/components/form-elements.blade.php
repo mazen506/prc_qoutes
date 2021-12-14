@@ -101,7 +101,7 @@
                         </td>
 
                         <td class='col-item-note'>
-                            <input type="text" name="item_notes[]" class="form-control-plaintext"  readonly required>
+                            <input type="text" name="item_notes[]" class="form-control-plaintext"  readonly >
                         </td>		
                         <td class='col-item-btn align-center'><img src='/storage/images/delete_icon.png' class='icon-action-sm icon-del-item'></td>							
                     </tr>
@@ -142,7 +142,7 @@
                             </td>
 
                             <td class='col-item-note'>
-                                <input type="text" name="item_notes[]" class="form-control-plaintext" value="{{ old('item_notes.' . $loop->index, optional($item)->note) }}" readonly required>
+                                <input type="text" name="item_notes[]" class="form-control-plaintext" value="{{ old('item_notes.' . $loop->index, optional($item)->note) }}" readonly>
                             </td>		
                             <td class='col-item-btn align-center'><img src='/storage/images/delete_icon.png' class='icon-action-sm icon-del-item'></td>							
                         </tr>

@@ -1,13 +1,51 @@
-<x-customer-layout>
-<x-slot name="header">
-        <div class='customer-layout-header'>
-            <div class='layout-logo'>
-                <img src='https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$vendor->logo}}'>
-                <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
-            </div>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <title>{{ config('app.name', 'Wesalix') }}</title>
+
+   
+        <link rel="stylesheet" href="{{ public_path('css/coreui.min.css') }}">
+
+        <!-- Styles -->
+        @if(App::getLocale() == 'en')
+            <link rel="stylesheet" href="{{ public_path('css/custom.css') }}">
+            <link rel="stylesheet" href="{{ public_path('css/bootstrap.min.css') }}">
+        @else
+            <link rel="stylesheet" href="{{ public_path('css/custom_rtl.css') }}">
+            <link rel="stylesheet" href="{{ public_path('css/bootstrap.min.css') }}"> 
+        @endif
+
+
+            </head>
+
+    <body class="font-sans antialiased">
+        <div class="cust-screen">
+
+            <!-- Page Heading -->
+            <header class="bg-white">
+                <div class="cust-header">
+                <div class='customer-layout-header'>
+                    <div class='layout-logo'>
+                    <img value="{{ $vendor->logo }}" src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("https://mazmustaws.s3.us-east-2.amazonaws.com/images/$vendor->logo")))}}'>
+                    <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
+                </div>
         </div>
-</x-slot>
-<div class="container">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main>
+                     <!-- Ajax loader -->
+                     <div id='cust-spinner'>
+                            <img src="{{ asset('/storage/images/spinner.gif') }}">
+                     </div>
+                     <div id="dialog" title="Basic dialog"></div>
+                   
+                     <div class="container">
         <div class='row title'>
                     <h2>{{ __('global.qoute') }}</h2>
         </div>
@@ -42,7 +80,7 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table-responsive table-striped tbl-qoute-items cust-table" id="items_table">
+                        <table class="table-responsive-sm table-striped tbl-qoute-items cust-table" id="items_table">
                             <thead>
                                 <tr>
                                     <th class='col-item-serial'></th>
@@ -66,7 +104,7 @@
                                             $item_image = explode("|", $item_images)[0];
                                         @endphp
                                         <input type=hidden name='item_images_str' value={{$item_images}}>
-                                        <image class='item-image' src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$item_image}}"> 
+                                        <image class='item-image' src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("https://mazmustaws.s3.us-east-2.amazonaws.com/images/$item_image")))}}'> 
                                     </td>
                                     <td class='col-item-name'>
                                         {{ $item->item_name }}
@@ -91,64 +129,24 @@
                          @endforeach
                         </tbody>
                     </table>
-            
                  </div>
 
 
                 </div>
 
-                <x-item-image-viewer />
+                
 </div>
-      
-<x-slot name='vendor_details'>
-            <div class='vendor-details row'>
-            <div class="footer-box col-md-4">
-				            <div id="footer_about_me-3" class="footer-widget widget-footer-about-me about-me-widget clr">
-				                <div class="footer-about-me">
-                					<div class="footer-about-me-avatar clr">
-											<img src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$vendor->logo}}" alt="">
-                					</div><!-- .footer-about-me-avatar -->
 
-									<div class="footer-about-me-text clr">
-                                        <div class="footer-about-me-text clr" style="direction: ltr;">
-                                            {{ $vendor['description_' . app()->getLocale() ] }}
-                                        </div>
-                                    </div>
-				                </div>
-                            </div>
-             </div>
-             <div class="footer-box col-md-4">
-					    <div id="footer_contact_info" class="footer-widget widget-footer-contact-info clr">
-                            <h4 class="widget-title">{{ __('global.contact_us')}}</h4>
-                            <ul class="contact-info-widget default">
-                                <li class="address">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                    <div class="footer-info-wrap">
-                                        <span class="footer-contact-title">{{ __('global.address')}}: </span>
-                                        <span class="footer-contact-text">
-                                            {{ $vendor['address_' . app()->getLocale() ] }}
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="phone">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                    <div class="footer-info-wrap">
-                                        <span class="footer-contact-title">{{ __('global.phone')}}: </span>
-                                        <span class="footer-contact-text">{{ $vendor->phone }}</span>
-                                    </div>
-                                </li>
-                                <li class="email">
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    <div class="footer-info-wrap">
-                                        <span class="footer-contact-title">{{__('global.email')}} :</span>
-                                        <span class="footer-contact-text">
-                                            <a href="mailto:{{$vendor->address}}">{{$vendor->email}}</a>
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>				
-                </div>
-            </div>                
-</x-slot>
-</x-customer-layout>    
+            </main>
+
+            <footer>
+                    
+                    <div class='footer-text'>
+                        Wesalix@2021
+                    </div>
+            </footer>
+        </div>
+    </body>
+  
+
+</html>

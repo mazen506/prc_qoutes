@@ -22,8 +22,8 @@ class CreateQtDtlsTable extends Migration
 			$table->integer('package_qty');
             $table->bigInteger('package_unit_id')->unsigned();
 			$table->decimal('price',8,2);
-			$table->integer('moq');
-			$table->text('note');
+			$table->integer('moq')->nullable();
+			$table->text('note')->nullable();
             $table->timestamps();
 			$table->foreign('qoute_id')
                 ->references('id')

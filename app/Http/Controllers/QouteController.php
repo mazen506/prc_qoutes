@@ -288,12 +288,16 @@ class QouteController extends Controller
     }
 
     public function createPdf(int $qoute){
+
       $qoute = Qoute::with('items')->find($qoute);
       $units = Unit::all();
       $vendor = User::find($qoute->user_id);
       $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
-      $pdf = PDF::loadView('qoute_display', compact('qoute','units','vendor','currency'));
+      //return view('qoute_pdf', compact('qoute','units','vendor','currency'));
+      $pdf = PDF::loadView('qoute_pdf', compact('qoute','units','vendor','currency'));
+      $pdf->setOption('enable-javascript', true);
       return $pdf->download('qoute_' . $qoute->id . '.pdf');
+
     }
 
     /**

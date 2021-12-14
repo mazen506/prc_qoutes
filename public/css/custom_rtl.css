@@ -1,4 +1,13 @@
 
+
+
+/* @font-face {
+    font-family: 'DroidArabicKufiRegular';
+    src: url('/fonts/DroidKufi-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  } */
+  
 body {
     direction:rtl;
     font-family: 'DroidArabicKufiRegular';

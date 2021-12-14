@@ -36,7 +36,7 @@
         
         <div class='form-group col-3'>
             <label for=''>{{ trans('cruds.item.fields.qty') }}</label>
-            <input type="number" id="item_package_qty" name="item_package_qty" value="50" class="form-control"  required>						
+            <input type="number" id="item_package_qty" name="item_package_qty" class="form-control"  required>						
         </div>
         <div class='form-group col-3 col-item-package-unit'>
             <select id="item_package_unit" name="item_package_unit" class="form-control col-sm-10">
@@ -53,16 +53,16 @@
     <div class='form-row'>
         <div class='form-group col-6'>
             <label for=''>{{ trans('cruds.item.fields.price') }}</label>
-            <input type="number" id="item_price" name="item_price" class="form-control" value=50  required>						
+            <input type="number" id="item_price" name="item_price" class="form-control"   required>						
         </div>
         <div class='form-group col-6'>
             <label for=''>{{ trans('cruds.item.fields.cpm') }}</label>
-            <input type="number" id="item_cpm" name="item_cpm" class="form-control" value="500" required>						
+            <input type="number" id="item_cpm" name="item_cpm" class="form-control"  required>						
         </div>
     </div>
     <div class='form-group'>
         <label for=''>{{ trans('cruds.item.fields.note') }}</label>
-        <input type="text" id="item_note" name="item_note" class="form-control" value="سعر الشحن غير مضاف"  required>						
+        <input type="text" id="item_note" name="item_note" class="form-control" value="" >						
     </div>
     <div class='form-group'>
                 <label>{{ __('global.item_images') }}</label>

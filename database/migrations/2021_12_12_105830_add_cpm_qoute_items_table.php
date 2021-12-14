@@ -14,7 +14,7 @@ class AddCpmQouteItemsTable extends Migration
     public function up()
     {
         Schema::table('qt_items', function (Blueprint $table) {
-            $table->decimal('cpm',8,2);
+            $table->decimal('cpm',8,3);
         });
     }
 

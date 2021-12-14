@@ -33,24 +33,29 @@ return [
     |
     */
     
-    'pdf' => [
+    'pdf' => array(
         'enabled' => true,
-        'binary'  => env('WKHTML_PDF_BINARY', 'C:\snappy\wkhtmltopdf\bin\wkhtmltopdf.exe'),
+        'binary' => base_path('vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltopdf'),
+        'timeout' => false,
+        'images' => true,
+        'options' => [
+            'enable-local-file-access' => true,
+            'images' => true,
+            'orientation'   => 'landscape',
+            'encoding'      => 'UTF-8'
+        ],
+        'env' => array(),
+    ),
+    'image' => array(
+        'enabled' => true,
+        'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
         'timeout' => false,
         'options' => [
-            'enable-local-file-access'=> true
-        ],
-        'env'     => [],
-    ],
-    
-    'image' => [
-        'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', 'C:\snappy\wkhtmltopdf\bin\wkhtmltoimage.exe'),
-        'timeout' => false,
-        'options' => [
-            'enable-local-file-access'=> true
-        ],
-        'env'     => [],
-    ],
-
+            'enable-local-file-access' => true,
+            'images' => true,
+            'orientation'   => 'landscape',
+            'encoding'      => 'UTF-8'
+         ],
+        'env' => array(),
+    ), 'env'     => [],
 ];

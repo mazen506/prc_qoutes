@@ -383,11 +383,8 @@ $(document).on('click','.icon-del-item',function(e){
             let row = $(this).closest('tr');
             //Get Item id
             var item_id = $(row).find('input[name^=item_ids]').val();
-            if ($(row).index() != 0)
-                $(row).remove();
-            else 
-                $(row).css('display','none');
-        
+            $(row).remove();
+       
             $('#items_table tbody tr').each(function(index) {
                 $(this).attr('id','item' + index)
                 $(this).children('td:nth-child(1)').html(index+1);
