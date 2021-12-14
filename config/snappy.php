@@ -35,7 +35,7 @@ return [
     
     'pdf' => array(
         'enabled' => true,
-        'binary' => 'wkhtmltopdf',
+        'binary' => 'vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64',
         'timeout' => false,
         'images' => true,
         'options' => [
@@ -48,7 +48,7 @@ return [
     ),
     'image' => array(
         'enabled' => true,
-        'binary' => 'wkhtmltoimage',
+        'binary' => 'vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64',
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
