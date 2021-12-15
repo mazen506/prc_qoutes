@@ -7,6 +7,8 @@
     font-weight: normal;
     font-style: normal;
   } */
+
+ 
   
 body {
     direction:rtl;
@@ -25,6 +27,8 @@ body, html {
     /* display: flex; */
     /* flex-direction: column; */
 }
+
+
 
 .cust-table th, .cust-table td {
     vertical-align: middle;
@@ -492,10 +496,10 @@ a#btn-share-qoute {
 
 
 
-.container .title {
-    justify-content: center;
+.cust_page_title {
     text-decoration: underline;
     font-size:25px;
+    text-align: center;
 }
 
 .container .form-control-plaintext {
@@ -576,9 +580,6 @@ form#frmProfile {
     color:#fff;
 }
 
-.footer-box {
-    padding-left: 20px;
-}
 
 .vendor-details .widget-title {
     padding-bottom: 20px;

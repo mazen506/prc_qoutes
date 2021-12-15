@@ -296,6 +296,8 @@ class QouteController extends Controller
       //return view('qoute_pdf', compact('qoute','units','vendor','currency'));
       $pdf = PDF::loadView('qoute_pdf', compact('qoute','units','vendor','currency'));
       $pdf->setOption('enable-javascript', true);
+      $pdf->setOption('margin-top', 10);
+      $pdf->setOption('margin-bottom', 10);
       return $pdf->download('qoute_' . $qoute->id . '.pdf');
 
     }

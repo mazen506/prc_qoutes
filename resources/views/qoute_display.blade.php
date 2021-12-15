@@ -93,9 +93,16 @@
                     </table>
             
                  </div>
-
-
+                 
                 </div>
+
+                <div class='row-buttons'>
+                    <a href="{{url('/qoute/' . $qoute->id . '/create-pdf')}}" id='btn-share-qoute' class="btn btn-success">
+                        <i class="fa fa-download"></i>
+                        <span class="button-text">{{ __('global.download') }} </span>
+                    </a>
+                </div>
+
 
                 <x-item-image-viewer />
 </div>
