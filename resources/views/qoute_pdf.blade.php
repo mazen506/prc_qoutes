@@ -9,6 +9,7 @@
         
         
         <link rel="stylesheet" href="{{ public_path('css/coreui.min.css') }}">
+        <link rel="stylesheet" href="{{ public_path('css/font-awesome.css') }}">
         
         <!-- Styles -->
         @if(App::getLocale() == 'en')
@@ -21,11 +22,30 @@
 
     <style>
 
-ul.contact-info-widget.default {
+    @font-face {    
+    font-family: 'DroidArabicKufiRegular';
+    src: url(data:font/truetype;charset=utf-8;base64,{{base64_encode(@file_get_contents(public_path('fonts/DroidKufi-Regular.ttf')))}}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+    @font-face {
+    font-family: 'FontAwesome';
+    src: url(data:font/truetype;charset=utf-8;base64,{{base64_encode(@file_get_contents(public_path('fonts/fontawesome-webfont.ttf')))}}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+    ul.contact-info-widget.default {
     padding-left: 0px;
     padding-right: 0px;
 }
   
+        .col-md-6 {
+            display: inline-block;
+            width: 45% !important;
+        }
+        
         .footer-box {
             display: inline-block;
             width: 40% !important;
