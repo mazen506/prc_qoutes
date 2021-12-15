@@ -35,7 +35,7 @@ return [
     
     'pdf' => array(
         'enabled' => true,
-        'binary' => 'vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64',
+        'binary' => '/app/vendor/bin/wkhtmltopdf-amd64',
         'timeout' => false,
         'images' => true,
         'options' => [
