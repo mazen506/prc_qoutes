@@ -49,6 +49,7 @@
 </div>
 
 <br>
+
 <div class="card">
     <div class="card-header">
         {{ trans('global.items') }}
@@ -161,12 +162,12 @@
                                 <input type="number" name="item_qtys[]" class="form-control-plaintext align-center" value="{{ old('item_qtys.' . $loop->index, optional($item)->qty) }}" readonly required>
                             </td>
 
-                            <td class='col-item-small align-center'>
-                                <input type="number" name="item_prices_totals[]" class="form-control-plaintext align-center" value="{{ round(optional($item)->qty*optional($item)->price,3) }}" readonly required>
+                            <td class=''>
+                                <input type="text" name="item_prices_totals[]" class="form-control-plaintext align-center" value="{{ round(optional($item)->package_qty * optional($item)->qty*optional($item)->price,2) }}" readonly>
                             </td>
 
                             <td class='col-item-small align-center'>
-                                <input type="number" name="item_cpms[]" class="form-control-plaintext align-center" value="{{ old('item_cpms.' . $loop->index, optional($item)->cpm) }}" readonly required>
+                                <input type="text" name="item_cpms[]" class="form-control-plaintext align-center" value="{{ old('item_cpms.' . $loop->index, optional($item)->cpm) }}" readonly required>
                             </td>	
 
                             <td class='col-item-small align-center'>

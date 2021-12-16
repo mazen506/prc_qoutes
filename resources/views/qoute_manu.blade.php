@@ -6,6 +6,9 @@
         </h2>
     </x-slot>
 
+@php 
+            $currency = $currencies->find($qoute->currency_id)['code_' . app()->getLocale()];
+@endphp 
 <div class="card card-qoute">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.qoute.title_singular') }}
@@ -23,7 +26,7 @@
                     <input type="text" id="total_price" name="total_price" class="form-control-plaintext align-center" >						
                 </div>
                 <div class='col-sm-3'>
-                    <label for='total_cpm align-center'> {{ __('global.total_cpm')}}</label>                    
+                    <label for='total_cpm'> {{ __('global.total_cpm')}}</label>                    
                     <input type="text" id="total_cpm" name="total_cpm" class="form-control-plaintext align-center" >						
                 </div>
             </div>
@@ -247,10 +250,10 @@ function listItems(data){
             item_package_unit.value = item.package_unit_id;
             item_package_unit_name.innerHTML = item.package_qty + ' ' + getUnitName(item.package_unit_id);
             item_price.value = item.price;
-            item.qty.value = item.qty;
-            item_total_price.value = round(item.price * item.qty,2);
+            item_qty.value = item.qty;
+            item_total_price.value = round(item.price * item.qty * item.package_qty,2);
             item_cpm.value = item.cpm;
-            item_total_price.value = round(item.cpm * item.qty,3);
+            item_total_cpm.value = round(item.cpm * item.qty ,3);
             item_note.value = item.note;
             var item_image = item.images.split('|')[0];
             $('#item' + index).find('td:nth-child(2)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
@@ -267,18 +270,21 @@ function calQouteTotals(){
     var prices_totals = document.getElementsByName('item_prices_totals[]');
     var cpms_totals = document.getElementsByName('item_cpms_totals[]');
     
+    
     var total_price = 0;
     var total_cpm = 0;
     for (var i=0;i<prices_totals.length;i++){
+        console.log(prices_totals[i].value);
         total_price += Number(prices_totals[i].value);
     }
-     
+     console.log('Total Price = ' + total_price);
     for (var i=0;i<cpms_totals.length;i++){
         total_cpm += Number(cpms_totals[i].value);
     }
 
-    $('#total_price').val(total_price);
-    $('#total_cpm').val(total_cpm);
+    total_price = round(total_price,2).toLocaleString();
+    $('#total_price').val(total_price + " " + "{{$currency}}" );
+    $('#total_cpm').val(round(total_cpm,3));
 }
 
 

@@ -544,15 +544,16 @@ $('.lst-del-btn').click(function(e){
 
         function calItemModalTotals() {
             $price= $('#item_price').val();
+            $package = $('#item_package_qty').val();
             $cpm = $('#item_cpm').val();
             $qty = $('#item_qty').val();
 
-            $total_price= round($price * $qty,2);
+            $total_price= round($price * $qty * $package,2);
             $total_cpm = round($cpm * $qty,3);
-            $('#item_total_price').val($total_price);
+            $('#item_total_price').val($total_price.toLocaleString());
             $('#item_total_cpm').val($total_cpm);
-            console.log('Price = ' + $cpm);
         }
+
         function round(number, decimals) {
                 decimals = Math.pow(10,decimals);
                 number = Math.round(number*decimals)/decimals;

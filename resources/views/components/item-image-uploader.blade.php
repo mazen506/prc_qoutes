@@ -35,7 +35,7 @@
         </div>
         
         <div class='form-group col-3'>
-            <label for=''>{{ trans('cruds.item.fields.qty') }}</label>
+            <label for=''>{{ trans('cruds.item.fields.package') }}</label>
             <input type="number" id="item_package_qty" name="item_package_qty" class="form-control"  required>						
         </div>
         <div class='form-group col-3 col-item-package-unit'>
@@ -71,11 +71,11 @@
     <div class='form-row cust-total-container '>
         <div class='col-sm-4'>
                 <label for='item_total_cpm'> {{ __('global.total_price')}}</label>        
-                <input type="text" id="item_total_price" name="item_total_price" class="form-control-plaintext" >						
+                <input type="text" id="item_total_price" name="item_total_price" class="form-control-plaintext align-center" >						
         </div>
         <div class='col-sm-4'>
                 <label for='item_total_cpm'> {{ __('global.total_cpm')}}</label>                    
-                <input type="text" id="item_total_cpm" name="item_total_cpm" class="form-control-plaintext" >						
+                <input type="text" id="item_total_cpm" name="item_total_cpm" class="form-control-plaintext align-center" >						
         </div>
     </div>
     
