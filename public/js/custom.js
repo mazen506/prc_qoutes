@@ -438,6 +438,7 @@ function saveRecord(item){
     var item_package_unit = document.getElementsByName('item_package_units[]')[item];
     var item_package_unit_name = document.getElementsByName('item_package_units_names[]')[item];
     var item_price = document.getElementsByName('item_prices[]')[item];
+    var item_qty = document.getElementsByName('item_qtys[]')[item];
     var item_cpm = document.getElementsByName('item_cpms[]')[item];
     var item_note = document.getElementsByName('item_notes[]')[item];
 
@@ -454,6 +455,7 @@ function saveRecord(item){
     item_package_unit.value = $("#item_package_unit").val();
     item_package_unit_name.innerHTML = $("#item_package_qty").val() + ' ' + $("#item_package_unit :selected").text().trim();
     item_price.value = $("#item_price").val();
+    item_qty.value = $("#item_qty").val();
     item_cpm.value = $("#item_cpm").val();
     item_note.value = $("#item_note").val();
 
@@ -480,6 +482,7 @@ var item_package_qty = document.getElementsByName('item_package_qtys[]')[item];
 var item_package_unit = document.getElementsByName('item_package_units[]')[item];
 var item_price = document.getElementsByName('item_prices[]')[item];
 var item_cpm = document.getElementsByName('item_cpms[]')[item];
+var item_qty = document.getElementsByName('item_qtys[]')[item];
 var item_note = document.getElementsByName('item_notes[]')[item];
 
 
@@ -490,9 +493,10 @@ $('#item_package_qty').val(item_package_qty.value);
 $('#item_package_unit').val(item_package_unit.value);
 $('#item_price').val(item_price.value);
 $('#item_cpm').val(item_cpm.value);
+$('#item_qty').val(item_qty.value);
 $('#item_note').val(item_note.value);
 $('#item_images_str').val(item_images_str.value);
-
+calItemModalTotals();
 //fill Images
 buildImageViewer(item_images_str.value);
 
@@ -531,6 +535,31 @@ $('.lst-del-btn').click(function(e){
         $(this).closest('form').submit();
     }
 });
+
+
+// Calculate pricing
+        $('#item_qty, #item_price, #item_cpm').change(function(){
+            calItemModalTotals()
+        });
+
+        function calItemModalTotals() {
+            $price= $('#item_price').val();
+            $cpm = $('#item_cpm').val();
+            $qty = $('#item_qty').val();
+
+            $total_price= round($price * $qty,2);
+            $total_cpm = round($cpm * $qty,3);
+            $('#item_total_price').val($total_price);
+            $('#item_total_cpm').val($total_cpm);
+            console.log('Price = ' + $cpm);
+        }
+        function round(number, decimals) {
+                decimals = Math.pow(10,decimals);
+                number = Math.round(number*decimals)/decimals;
+                console.log('Number Decimals' + number + ' ' + decimals);
+                return number;
+        }
+
 
 
 /* ---- Confirmation Dialog --------*/

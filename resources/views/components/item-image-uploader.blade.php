@@ -51,19 +51,35 @@
     </div>
     
     <div class='form-row'>
-        <div class='form-group col-6'>
+        <div class='form-group col-4'>
             <label for=''>{{ trans('cruds.item.fields.price') }}</label>
             <input type="number" id="item_price" name="item_price" class="form-control"   required>						
         </div>
-        <div class='form-group col-6'>
+        <div class='form-group col-4'>
             <label for=''>{{ trans('cruds.item.fields.cpm') }}</label>
             <input type="number" id="item_cpm" name="item_cpm" class="form-control"  required>						
+        </div>
+        <div class='form-group col-4'>
+            <label for=''>{{ trans('cruds.item.fields.qty') }}</label>
+            <input type="number" id="item_qty" name="item_qty" class="form-control" value=0  required>						
         </div>
     </div>
     <div class='form-group'>
         <label for=''>{{ trans('cruds.item.fields.note') }}</label>
         <input type="text" id="item_note" name="item_note" class="form-control" value="" >						
     </div>
+    <div class='form-row cust-total-container '>
+        <div class='col-sm-4'>
+                <label for='item_total_cpm'> {{ __('global.total_price')}}</label>        
+                <input type="text" id="item_total_price" name="item_total_price" class="form-control-plaintext" >						
+        </div>
+        <div class='col-sm-4'>
+                <label for='item_total_cpm'> {{ __('global.total_cpm')}}</label>                    
+                <input type="text" id="item_total_cpm" name="item_total_cpm" class="form-control-plaintext" >						
+        </div>
+    </div>
+    
+
     <div class='form-group'>
                 <label>{{ __('global.item_images') }}</label>
                 <label class='lbl-img' for="file_item_images">
@@ -105,3 +121,5 @@
         </div>
     </div>
 </div> <!-- End of Item Details Modal -->
+
+   

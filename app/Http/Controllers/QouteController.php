@@ -130,6 +130,7 @@ class QouteController extends Controller
       $item_package_units = $request->input('item_package_units', []);
       $item_prices = $request->input('item_prices', []);
       $item_cpms = $request->input('item_cpms', []);
+      $item_qtys = $request->input('item_qtys', []);
       $item_notes = $request->input('item_notes', []);
 			$items = [];
 			for ($item_number=0; $item_number < count($item_names); $item_number++) {
@@ -141,6 +142,7 @@ class QouteController extends Controller
                    'package_unit_id' => $item_package_units[$item_number],
                    'price' => $item_prices[$item_number],
                    'cpm' => $item_cpms[$item_number],
+                   'qty' => $item_qtys[$item_number],
                    'note' => $item_notes[$item_number],
                    'images' => $item_images_str[$item_number],
                 ]);
@@ -233,6 +235,7 @@ class QouteController extends Controller
           $item_package_units = $request->input('item_package_units', []);
           $item_prices = $request->input('item_prices', []);
           $item_cpms = $request->input('item_cpms', []);
+          $item_qtys = $request->input('item_qtys', []);
           $item_notes = $request->input('item_notes', []);
 
 
@@ -256,6 +259,7 @@ class QouteController extends Controller
                       $item->package_unit_id = $item_package_units[$index];
                       $item->price = $item_prices[$index];
                       $item->cpm = $item_cpms[$index];
+                      $item->qty = $item_qtys[$index];
                       $item->note = $item_notes[$index];
                       $item->images = $item_images_str[$index];
                       array_push($items, $item);
@@ -270,6 +274,7 @@ class QouteController extends Controller
                         'package_unit_id' => $item_package_units[$index],
                         'price' => $item_prices[$index],
                         'cpm' => $item_cpms[$index],
+                        'qty' => $item_qtys[$index],
                         'note' => $item_notes[$index],
                         'images' => $item_images_str[$index]
                       ]);

@@ -45,7 +45,7 @@
             display: inline-block;
             width: 45% !important;
         }
-        
+
         .footer-box {
             display: inline-block;
             width: 40% !important;
@@ -131,9 +131,12 @@
                                     <th class='col-item-serial'>{{ __('global.serial')}}</th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
-                                    <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
-                                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.package') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
+                                    <th class='align-center'>{{ trans('global.total_price') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
+                                    <th class='align-center'>{{ trans('global.total_cpm') }}</th>
                                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                                 </tr>
                             </thead>
@@ -149,15 +152,29 @@
                                     <td class='col-item-small align-center'>
                                         {{ $units->find($item->unit_id)->name }}
                                     </td>
-                                    <td class='col-item-small align-center'>
-                                        {{ $item->cpm }}
-                                    </td>	
+
                                     <td class='col-item-small align-center'>
                                         {{ $item->package_qty . ' ' . $units->find($item->package_unit_id)->name }}
                                     </td>
                                     <td class='col-item-small align-center'>
                                         {{ $item->price+0 . ' ' . $currency }}
                                     </td>
+
+                                    <td class='col-item-small align-center'>
+                                        {{ $item->qty }}
+                                    </td>	
+
+                                    <td class='col-item-small align-center'>
+                                        {{ round($item->qty * $item->price) . $currency }}
+                                    </td>	
+
+                                    <td class='col-item-small align-center'>
+                                        {{ $item->cpm }}
+                                    </td>	
+
+                                    <td class='col-item-small align-center'>
+                                        {{ round($item->qty*$item->cpm,3) }}
+                                    </td>	
 
                                     <td class='col-item-note'>
                                         {{ $item->note }}
@@ -234,3 +251,4 @@
   
 
 </html>
+

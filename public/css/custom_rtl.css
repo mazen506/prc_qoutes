@@ -34,6 +34,10 @@ body, html {
     vertical-align: middle;
 }
 
+.cust-table th {
+    font-weight: normal;
+}
+
 
 .align-center {
     text-align: center;
@@ -580,7 +584,18 @@ form#frmProfile {
     color:#fff;
 }
 
+.form-row.cust-total-container {
+    justify-content: left;
+    margin-bottom:20px;
+}
 
+.cust-total-container input {
+    border:1px solid #000;
+    background-color: #f7f7f7;
+
+}
+
+.cust
 .vendor-details .widget-title {
     padding-bottom: 20px;
 }

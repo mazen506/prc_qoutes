@@ -85,7 +85,7 @@ return [
 			'moq'             => 'Minimum Qty',
             'moq_helper'      => 'Minimum Quantity',
             'cpm'   => 'CPM',
-			'qty'             => 'Qty',
+			'qty'             => 'Quantity',
             'qty_helper'      => 'Quantity',			
 			'note'             => 'Note',
             'note_helper'      => 'Package',		

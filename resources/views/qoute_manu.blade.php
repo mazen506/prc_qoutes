@@ -17,6 +17,16 @@
             @method('PUT')
            
             <x-form-elements :qoute=$qoute :units=$units :currencies=$currencies />
+            <div class='form-row cust-total-container '>
+                <div class='col-sm-3'>
+                    <label for='total_cpm align-center'> {{ __('global.total_price')}}</label>        
+                    <input type="text" id="total_price" name="total_price" class="form-control-plaintext align-center" >						
+                </div>
+                <div class='col-sm-3'>
+                    <label for='total_cpm align-center'> {{ __('global.total_cpm')}}</label>                    
+                    <input type="text" id="total_cpm" name="total_cpm" class="form-control-plaintext align-center" >						
+                </div>
+            </div>
 
             <div class='row-buttons'>
                 <button id='btn-add-item' class="btn btn-primary">
@@ -43,9 +53,14 @@
                     <i class="fa fa-save"></i>
                     <span class="button-text">{{ __('global.save') }} </span>
                 </button>
-                <a onclick="copyToClipBoard('{{url("/qoute/" . $qoute->id )}}')" id='btn-share-qoute' class="btn btn-success">
+                <!-- <a onclick="copyToClipBoard('{{url("/qoute/" . $qoute->id )}}')" id='btn-share-qoute' class="btn btn-success">
                     <i class="fa fa-share-alt"></i>
                     <span class="button-text">{{ __('global.share') }} </span>
+                </a> -->
+
+                <a href="{{url('/qoute/' . $qoute->id . '/create-pdf')}}" id='btn-share-qoute' class="btn btn-success">
+                        <i class="fa fa-download"></i>
+                        <span class="button-text">{{ __('global.download') }} </span>
                 </a>
 
                 <a id='btn-del-qoute' href="" onclick="event.preventDefault(); delQoute()" class="btn btn-danger">
@@ -91,6 +106,7 @@
                     'item_package_unit': {required:true, min:1},
                     'item_cpm': "required",
                     'item_price': "required",
+                    'item_qty': "required",
                     // 'item_images[]': {required : '#item_images_str:blank'}
                 },
                 messages: {
@@ -100,6 +116,7 @@
                     'item_package_unit': "{{ __('validation.required', ['attribute' => __('global.unit') ]) }}",
                     'item_cpm': "{{ __('validation.required', ['attribute' => __('global.cpm') ]) }}",
                     'item_price': "{{ __('validation.required', ['attribute' => __('global.price') ]) }}",
+                    'item_qty': "{{ __('validation.required', ['attribute' => __('global.qty') ]) }}",
                     // 'item_images[]': "{{ __('validation.required', ['attribute' => __('global.item_images') ]) }}",
                 }
             };
@@ -108,10 +125,12 @@
     $(document).ready(function(){
 
         item_no = $('#items_table tbody tr:visible').length-1;
-        console.log('Load Item_no' + item_no);
+//        console.log('Load Item_no' + item_no);
 
         //Units into javascript variable 
         units = {!! $units->toJson() !!};
+
+        calQouteTotals();
     });
 
 
@@ -213,7 +232,10 @@ function listItems(data){
             var item_package_unit = document.getElementsByName('item_package_units[]')[index];
             var item_package_unit_name = document.getElementsByName('item_package_units_names[]')[index];
             var item_price = document.getElementsByName('item_prices[]')[index];
+            var item_qty = document.getElementsByName('item_qtys[]')[index];
+            var item_total_price = document.getElementsByName('item_prices_totals[]')[index];
             var item_cpm = document.getElementsByName('item_cpms[]')[index];
+            var item_total_cpm = document.getElementsByName('item_cpms_totals[]')[index];
             var item_note = document.getElementsByName('item_notes[]')[index];
 
             item_id.value = item.id;
@@ -225,7 +247,10 @@ function listItems(data){
             item_package_unit.value = item.package_unit_id;
             item_package_unit_name.innerHTML = item.package_qty + ' ' + getUnitName(item.package_unit_id);
             item_price.value = item.price;
+            item.qty.value = item.qty;
+            item_total_price.value = round(item.price * item.qty,2);
             item_cpm.value = item.cpm;
+            item_total_price.value = round(item.cpm * item.qty,3);
             item_note.value = item.note;
             var item_image = item.images.split('|')[0];
             $('#item' + index).find('td:nth-child(2)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
@@ -233,8 +258,27 @@ function listItems(data){
             });
 
             item_no++;
+            calQouteTotals();
             console.log('list items - item No: ' + item_no);
        
+}
+
+function calQouteTotals(){
+    var prices_totals = document.getElementsByName('item_prices_totals[]');
+    var cpms_totals = document.getElementsByName('item_cpms_totals[]');
+    
+    var total_price = 0;
+    var total_cpm = 0;
+    for (var i=0;i<prices_totals.length;i++){
+        total_price += Number(prices_totals[i].value);
+    }
+     
+    for (var i=0;i<cpms_totals.length;i++){
+        total_cpm += Number(cpms_totals[i].value);
+    }
+
+    $('#total_price').val(total_price);
+    $('#total_cpm').val(total_cpm);
 }
 
 
