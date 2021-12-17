@@ -136,10 +136,10 @@
                                 <tr>
                                     <th class='col-item-serial'></th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.package') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
-                                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                                     <th class='align-center'>{{ trans('global.total_price') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
                                     <th class='align-center'>{{ trans('global.total_cpm') }}</th>
@@ -159,6 +159,9 @@
                                         {{ $item->item_name }}
                                     </td>
                                     <td class='col-item-small align-center'>
+                                        {{ $item->qty }}
+                                    </td>	
+                                    <td class='col-item-small align-center'>
                                         {{ $units->find($item->unit_id)->name }}
                                     </td>
                                     <td class='col-item-small align-center'>
@@ -167,9 +170,7 @@
                                     <td class='col-item-small align-center'>
                                         {{ $item->price+0 }}
                                     </td>	
-                                    <td class='col-item-small align-center'>
-                                        {{ $item->qty }}
-                                    </td>	
+
                                     <td class='col-item-small align-center'>
                                         {{ round($item->qty * $item->price * $item->package_qty,2) }}
                                     </td>	
