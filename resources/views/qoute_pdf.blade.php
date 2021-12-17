@@ -2,23 +2,14 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
             <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>{{ config('app.name', 'Wesalix') }}</title>
         
         
-        <link rel="stylesheet" href="{{ public_path('css/coreui.min.css') }}">
-        <link rel="stylesheet" href="{{ public_path('css/font-awesome.css') }}">
-        
-        <!-- Styles -->
-        @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="{{ public_path('css/custom.css') }}">
-            <link rel="stylesheet" href="{{ public_path('css/bootstrap.min.css') }}">
-        @else
-            <link rel="stylesheet" href="{{ public_path('css/custom_rtl.css') }}">
-            <link rel="stylesheet" href="{{ public_path('css/bootstrap.min.css') }}"> 
-        @endif
+
+
 
     <style>
 
@@ -45,6 +36,9 @@
             display: inline-block;
             width: 45% !important;
         }
+        .col-sm-3 {
+            width:25%;
+        }
 
         .footer-box {
             display: inline-block;
@@ -58,14 +52,14 @@
             display: table-row-group !important;
         }   
 
-
         table tr {
             page-break-inside: avoid !important;
         }
 
     </style>
-
+        
     </head>
+
 
     <body class="font-sans antialiased">
         <div class="cust-screen">
@@ -126,9 +120,9 @@
 
                     <div class="card-body">
                         <table class="table-responsive-sm table-striped tbl-qoute-items cust-table" id="items_table">
-                            <thead>
+                            
                                 <tr>
-                                    <th class='col-item-serial'>{{ __('global.serial')}}</th>
+                                    <th class='col-item-serial'></th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.package') }}</th>
@@ -139,9 +133,12 @@
                                     <th class='align-center'>{{ trans('global.total_cpm') }}</th>
                                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                            
     
+                            @php 
+                                $total_price = 0;
+                                $total_cpm = 0;
+                            @endphp
                             @foreach ($qoute->items as $item)
                                 <tr id="item{{ $loop->index }}">
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
@@ -152,37 +149,47 @@
                                     <td class='col-item-small align-center'>
                                         {{ $units->find($item->unit_id)->name }}
                                     </td>
-
                                     <td class='col-item-small align-center'>
                                         {{ $item->package_qty . ' ' . $units->find($item->package_unit_id)->name }}
                                     </td>
                                     <td class='col-item-small align-center'>
-                                        {{ $item->price+0 . ' ' . $currency }}
-                                    </td>
-
+                                        {{ $item->price+0 }}
+                                    </td>	
                                     <td class='col-item-small align-center'>
                                         {{ $item->qty }}
                                     </td>	
-
                                     <td class='col-item-small align-center'>
-                                        {{ round($item->qty * $item->price) . $currency }}
+                                        {{ round($item->qty * $item->price * $item->package_qty,2) }}
                                     </td>	
-
                                     <td class='col-item-small align-center'>
                                         {{ $item->cpm }}
                                     </td>	
 
                                     <td class='col-item-small align-center'>
-                                        {{ round($item->qty*$item->cpm,3) }}
-                                    </td>	
+                                        {{ round($item->cpm * $item->qty,3) }}
+                                    </td>
 
                                     <td class='col-item-note'>
                                         {{ $item->note }}
                                     </td>		
                                 </tr>
+                                @php 
+                                    $total_price +=  round($item->qty * $item->price * $item->package_qty,2);
+                                    $total_cpm += round($item->cpm * $item->qty,3);
+                                @endphp
                          @endforeach
-                        </tbody>
+                        
                     </table>
+                    <div class='form-row cust-total-container '>
+                          <div class='col-sm-3'>
+                             <label for='total_cpm align-center'> {{ __('global.total_price')}}</label>        
+                             <input type="text" id="total_price" name="total_price" value="{{ number_format($total_price,2,'.',',') . ' ' . $currency}}" class="form-control-plaintext align-center" >						
+                           </div>
+                           <div class='col-sm-3'>
+                             <label for='total_cpm'> {{ __('global.total_cpm')}}</label>                    
+                             <input type="text" id="total_cpm" name="total_cpm" value="{{ $total_cpm }}" class="form-control-plaintext align-center" >						
+                           </div>
+                    </div>
                  </div>
 
 

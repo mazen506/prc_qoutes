@@ -62,10 +62,10 @@
                     <th class='col-item-serial'></th>
                     <th class='col-item-image'></th>
                     <th class='col-item-name'>{{ trans('cruds.item.fields.name') }}</th>
+                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.package') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
-                    <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                     <th class='align-center'>{{ trans('global.total_price') }}</th>
                     <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
                     <th class='align-center'>{{ trans('global.total_cpm') }}</th>
@@ -88,6 +88,9 @@
                             <input type="text" name="item_names[]" class="form-control-plaintext"  readonly required>
                         </td>
                         <td class='col-item-small align-center'>
+                            <input type="number" name="item_qtys[]" class="form-control-plaintext align-center"  readonly required>
+                        </td>
+                        <td class='col-item-small align-center'>
                             <input type="hidden" name="item_units[]">
                             <label name="item_units_names[]" class='form-control-plaintext'>
                         </td>
@@ -102,9 +105,7 @@
                             <input type="number" name="item_prices[]" class="form-control-plaintext align-center"  readonly required>
                         </td>
 
-                        <td class='col-item-small align-center'>
-                            <input type="number" name="item_qtys[]" class="form-control-plaintext align-center"  readonly required>
-                        </td>
+
 
                         <td class='col-item-small align-center'>
                             <input type="text" name="item_prices_totals[]" class="form-control-plaintext align-center"  readonly>
@@ -143,6 +144,13 @@
                             <td class='col-item-name'>
                                 <input type="text" name="item_names[]" class="form-control-plaintext lst-item-name" value="{{ old('item_names.' . $loop->index, optional($item)->item_name) }}" readonly required>
                             </td>
+
+                            
+                            <td class='col-item-small align-center'>
+                                <input type="number" name="item_qtys[]" class="form-control-plaintext align-center" value="{{ old('item_qtys.' . $loop->index, optional($item)->qty) }}" readonly required>
+                            </td>
+
+                            
                             <td class='col-item-small align-center'>
                                 <input type="hidden" name="item_units[]" value={{ old('item_units.' . $loop->index, optional($item)->unit_id) }}>
                                 <label name="item_units_names[]" class='form-control-plaintext'>{{ $units->find(old('item_units.' . $loop->index, optional($item)->unit_id))->name }}</label>
@@ -158,9 +166,6 @@
                                 <input type="number" name="item_prices[]" class="form-control-plaintext align-center" value="{{ old('item_prices.' . $loop->index, optional($item)->price) }}" readonly required>
                             </td>
 
-                            <td class='col-item-small align-center'>
-                                <input type="number" name="item_qtys[]" class="form-control-plaintext align-center" value="{{ old('item_qtys.' . $loop->index, optional($item)->qty) }}" readonly required>
-                            </td>
 
                             <td class=''>
                                 <input type="text" name="item_prices_totals[]" class="form-control-plaintext align-center" value="{{ round(optional($item)->package_qty * optional($item)->qty*optional($item)->price,2) }}" readonly>

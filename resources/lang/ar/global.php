@@ -54,6 +54,7 @@ return [
     'qoute_link_copied' => 'تم نسخ رابط العرض',
     'notification'  => 'تنبيه',
     'download'  => 'تحميل',
+    'display' => 'عرض',
     'downloadFile'                         => 'Download file',
     'edit'                                 => 'Edit',
     'emailVerificationSuccess'             => 'User email verified successfully',

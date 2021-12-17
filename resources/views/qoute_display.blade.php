@@ -7,6 +7,7 @@
             </div>
         </div>
 </x-slot>
+
 <div class="container">
         <div class='row title'>
                     <h2>{{ __('global.qoute') }}</h2>
@@ -22,9 +23,9 @@
 
         <div class='form-row'>
             <div class="form-group col-md-6">
-                <label for="date" class="col-form-label">{{ __('global.create_date')}}</label>
+                <label for="date" class="col-form-label">{{ __('global.currency')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control-plaintext" id="id" value="{{$qoute->created_at->format('d.m.Y')}}">
+                    <input type="text" readonly class="form-control-plaintext" id="id" value="{{$currency}}">
                 </div>
             </div>
             <div class="form-group col-md-6">
@@ -48,10 +49,13 @@
                                     <th class='col-item-serial'></th>
                                     <th class='col-item-image align-center'>{{ trans('cruds.item.fields.images') }}</th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
-                                    <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
-                                    <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.package') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.price') }}</th>
+                                    <th class='align-center'>{{ trans('global.total_price') }}</th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.cpm') }}</th>
+                                    <th class='align-center'>{{ trans('global.total_cpm') }}</th>
                                     <th class='col-item-note'>{{ trans('cruds.item.fields.note') }}</th>
                                 </tr>
                             </thead>
@@ -72,36 +76,58 @@
                                         {{ $item->item_name }}
                                     </td>
                                     <td class='col-item-small align-center'>
-                                        {{ $units->find($item->unit_id)->name }}
+                                        {{ $item->qty }}
                                     </td>
                                     <td class='col-item-small align-center'>
-                                        {{ $item->cpm }}
-                                    </td>	
+                                        {{ $units->find($item->unit_id)->name }}
+                                    </td>
                                     <td class='col-item-small align-center'>
                                         {{ $item->package_qty . ' ' . $units->find($item->package_unit_id)->name }}
                                     </td>
                                     <td class='col-item-small align-center'>
-                                        {{ $item->price+0 . ' ' . $currency }}
+                                        {{ $item->price+0 }}
+                                    </td>	
+	
+                                    <td class='col-item-small align-center'>
+                                        {{ number_format(round($item->qty * $item->price * $item->package_qty,2),0,'.',',') }}
+                                    </td>	
+                                    <td class='col-item-small align-center'>
+                                        {{ $item->cpm }}
+                                    </td>	
+
+                                    <td class='col-item-small align-center'>
+                                        {{ round($item->cpm * $item->qty,3) }}
                                     </td>
 
                                     <td class='col-item-note'>
                                         {{ $item->note }}
                                     </td>		
+
                                 </tr>
                          @endforeach
                         </tbody>
                     </table>
             
+                    <!-- <div class='form-row cust-total-container '>
+                          <div class='col-sm-3'>
+                             <label for='total_cpm align-center'> {{ __('global.total_price')}}</label>        
+                             <input type="text" id="total_price" name="total_price" class="form-control-plaintext align-center" >						
+                           </div>
+                           <div class='col-sm-3'>
+                             <label for='total_cpm'> {{ __('global.total_cpm')}}</label>                    
+                             <input type="text" id="total_cpm" name="total_cpm" class="form-control-plaintext align-center" >						
+                           </div>
+                    </div> -->
                  </div>
-                 
+
                 </div>
 
-                <div class='row-buttons'>
+                <!-- <div class='row-buttons'>
                     <a href="{{url('/qoute/' . $qoute->id . '/create-pdf')}}" id='btn-share-qoute' class="btn btn-success">
                         <i class="fa fa-download"></i>
                         <span class="button-text">{{ __('global.download') }} </span>
                     </a>
-                </div>
+                </div> -->
 
 
                 <x-item-image-viewer />
@@ -159,3 +185,5 @@
             </div>                
 </x-slot>
 </x-customer-layout>    
+
+

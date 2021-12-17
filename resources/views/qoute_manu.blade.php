@@ -61,9 +61,9 @@
                     <span class="button-text">{{ __('global.share') }} </span>
                 </a> -->
 
-                <a href="{{url('/qoute/' . $qoute->id . '/create-pdf')}}" id='btn-share-qoute' class="btn btn-success">
-                        <i class="fa fa-download"></i>
-                        <span class="button-text">{{ __('global.download') }} </span>
+                <a href="{{url('/qoute/' . $qoute->id)}}" target="_blank" id='btn-share-qoute' class="btn btn-success">
+                        <i class="fa fa-share"></i>
+                        <span class="button-text">{{ __('global.display') }} </span>
                 </a>
 
                 <a id='btn-del-qoute' href="" onclick="event.preventDefault(); delQoute()" class="btn btn-danger">

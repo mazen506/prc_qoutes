@@ -35,11 +35,12 @@ return [
     
     'pdf' => array(
         'enabled' => true,
-        // 'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf'),
-        'binary' => '/app/vendor/bin/wkhtmltopdf-amd64',
+        'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf'),
+        //'binary' => '/app/vendor/bin/wkhtmltopdf-amd64',
         'timeout' => false,
         'images' => true,
         'options' => [
+            'debug-javascript' => true,
             'enable-local-file-access' => true,
             'images' => true,
             'orientation'   => 'landscape',
@@ -49,8 +50,8 @@ return [
     ),
     'image' => array(
         'enabled' => true,
-        // 'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
-        'binary' => '/app/vendor/bin/wkhtmltoimage-amd64',
+         'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
+        //'binary' => '/app/vendor/bin/wkhtmltoimage-amd64',
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,

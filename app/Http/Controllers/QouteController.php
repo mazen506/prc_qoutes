@@ -170,7 +170,9 @@ class QouteController extends Controller
      */
     public function show(int $qoute)
     {
-		    $qoute = Qoute::with('items')->find($qoute);
+		    $qoute = Qoute::with(['items' => function($query){
+            $query->where('qty', '!=' , 0);
+        }])->find($qoute);
         $units = Unit::all();
         $vendor = User::find($qoute->user_id);
         $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
@@ -303,6 +305,9 @@ class QouteController extends Controller
       $pdf->setOption('enable-javascript', true);
       $pdf->setOption('margin-top', 10);
       $pdf->setOption('margin-bottom', 10);
+      $pdf->setOption('javascript-delay', 50000);
+      $pdf->setOption('enable-smart-shrinking', true);
+      $pdf->setOption('no-stop-slow-scripts', true);
       return $pdf->download('qoute_' . $qoute->id . '.pdf');
 
     }

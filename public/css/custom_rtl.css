@@ -588,6 +588,7 @@ form#frmProfile {
 .form-row.cust-total-container {
     justify-content: left;
     margin-bottom:20px;
+    margin-top: 20px;
 }
 
 .cust-total-container input {
