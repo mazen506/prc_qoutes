@@ -9,14 +9,14 @@
 </x-slot>
 
 <div class="container">
-        <div class='row title'>
+        <div class='cust-page-title align-center'>
                     <h2>{{ __('global.qoute') }}</h2>
         </div>
         <div class='form-row'>
             <div class="form-group col-md-6">
                     <label for="name" class="col-form-label">{{ __('global.qoute_name')}}</label>
                     <div>
-                        <input type="text" readonly class="form-control-plaintext" id="id" value="{{ $qoute->name }}">
+                        <input type="text" readonly class="form-control" id="id" value="{{ $qoute->name }}">
                     </div>
             </div>
         </div>
@@ -25,13 +25,13 @@
             <div class="form-group col-md-6">
                 <label for="date" class="col-form-label">{{ __('global.currency')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control-plaintext" id="id" value="{{$currency}}">
+                    <input type="text" readonly class="form-control" id="id" value="{{$currency}}">
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <label for="note" class="col-form-label">{{ __('global.note')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control-plaintext" id="note" value="{{$qoute->note}}">
+                    <input type="text" readonly class="form-control" id="note" value="{{$qoute->note}}">
                 </div>
             </div>
         </div>
@@ -122,12 +122,12 @@
 
                 </div>
 
-                <!-- <div class='row-buttons'>
+                <div class='row-buttons'>
                     <a href="{{url('/qoute/' . $qoute->id . '/create-pdf')}}" id='btn-share-qoute' class="btn btn-success">
                         <i class="fa fa-download"></i>
                         <span class="button-text">{{ __('global.download') }} </span>
                     </a>
-                </div> -->
+                </div>
 
 
                 <x-item-image-viewer />

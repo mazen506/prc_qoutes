@@ -8,6 +8,17 @@
         <title>{{ config('app.name', 'Wesalix') }}</title>
         
         
+        <link rel="stylesheet" href="{{ public_path('css/coreui.min.css') }}">
+        <link rel="stylesheet" href="{{ public_path('css/font-awesome.css') }}">
+        
+        <!-- Styles -->
+        @if(App::getLocale() == 'en')
+            <link rel="stylesheet" href="{{ public_path('css/custom.css') }}">
+            <link rel="stylesheet" href="{{ public_path('css/bootstrap.min.css') }}">
+        @else
+            <link rel="stylesheet" href="{{ public_path('css/custom_rtl.css') }}">
+            <link rel="stylesheet" href="{{ public_path('css/bootstrap.min.css') }}"> 
+        @endif
 
 
 
@@ -85,29 +96,29 @@
                      <div id="dialog" title="Basic dialog"></div>
                    
                      <div class="container">
-        <div class='row cust-page-title align-center'>
+        <div class='cust-page-title align-center'>
                     <h2>{{ __('global.qoute') }}</h2>
         </div>
         <div class='form-row'>
             <div class="form-group col-md-6">
                     <label for="name" class="col-form-label">{{ __('global.qoute_name')}}</label>
                     <div>
-                        <input type="text" readonly class="form-control-plaintext" id="id" value="{{ $qoute->name }}">
+                        <input type="text" readonly class="form-control" id="id" value="{{ $qoute->name }}">
                     </div>
             </div>
         </div>
 
         <div class='form-row'>
             <div class="form-group col-md-6">
-                <label for="date" class="col-form-label">{{ __('global.create_date')}}</label>
+                <label for="date" class="col-form-label">{{ __('global.currency')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control-plaintext" id="id" value="{{$qoute->created_at->format('d.m.Y')}}">
+                    <input type="text" readonly class="form-control" id="id" value="{{$qoute->currency}}">
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <label for="note" class="col-form-label">{{ __('global.note')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control-plaintext" id="note" value="{{$qoute->note}}">
+                    <input type="text" readonly class="form-control" id="note" value="{{$qoute->note}}">
                 </div>
             </div>
         </div>
@@ -135,10 +146,7 @@
                                 </tr>
                             
     
-                            @php 
-                                $total_price = 0;
-                                $total_cpm = 0;
-                            @endphp
+             
                             @foreach ($qoute->items as $item)
                                 <tr id="item{{ $loop->index }}">
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
@@ -173,23 +181,10 @@
                                         {{ $item->note }}
                                     </td>		
                                 </tr>
-                                @php 
-                                    $total_price +=  round($item->qty * $item->price * $item->package_qty,2);
-                                    $total_cpm += round($item->cpm * $item->qty,3);
-                                @endphp
                          @endforeach
                         
                     </table>
-                    <div class='form-row cust-total-container '>
-                          <div class='col-sm-3'>
-                             <label for='total_cpm align-center'> {{ __('global.total_price')}}</label>        
-                             <input type="text" id="total_price" name="total_price" value="{{ number_format($total_price,2,'.',',') . ' ' . $currency}}" class="form-control-plaintext align-center" >						
-                           </div>
-                           <div class='col-sm-3'>
-                             <label for='total_cpm'> {{ __('global.total_cpm')}}</label>                    
-                             <input type="text" id="total_cpm" name="total_cpm" value="{{ $total_cpm }}" class="form-control-plaintext align-center" >						
-                           </div>
-                    </div>
+      
                  </div>
 
 

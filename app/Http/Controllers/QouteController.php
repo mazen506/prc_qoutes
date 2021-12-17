@@ -296,7 +296,9 @@ class QouteController extends Controller
 
     public function createPdf(int $qoute){
 
-      $qoute = Qoute::with('items')->find($qoute);
+      $qoute = Qoute::with(['items' => function($query){
+        $query->where('qty', '!=' , 0);
+    }])->find($qoute);
       $units = Unit::all();
       $vendor = User::find($qoute->user_id);
       $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
