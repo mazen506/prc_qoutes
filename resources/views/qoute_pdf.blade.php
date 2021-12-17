@@ -66,6 +66,7 @@
         table tr {
             page-break-inside: avoid !important;
         }
+     
 
     </style>
         
@@ -112,7 +113,7 @@
             <div class="form-group col-md-6">
                 <label for="date" class="col-form-label">{{ __('global.currency')}}</label>
                 <div>
-                    <input type="text" readonly class="form-control" id="id" value="{{$qoute->currency}}">
+                    <input type="text" readonly class="form-control" id="id" value="{{ $currency }}">
                 </div>
             </div>
             <div class="form-group col-md-6">
@@ -146,7 +147,10 @@
                                 </tr>
                             
     
-             
+                            @php
+                                $total_price = 0;
+                                $total_cpm = 0;
+                            @endphp
                             @foreach ($qoute->items as $item)
                                 <tr id="item{{ $loop->index }}">
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
@@ -181,10 +185,23 @@
                                         {{ $item->note }}
                                     </td>		
                                 </tr>
+                                @php
+                                          $total_price += round($item->qty * $item->price * $item->package_qty,2);
+                                          $total_cpm += round($item->cpm * $item->qty,3);
+                                @endphp
                          @endforeach
                         
                     </table>
-      
+                    <div class='form-row cust-total-container'>
+                          <div class='col-sm-3'>
+                             <label for='total_cpm align-center'> {{ __('global.total_price')}}</label>        
+                             <input type="text" id="total_price" name="total_price" value="{{ number_format(round($total_price,2),2,'.',',') }}" class="form-control-plaintext align-center" >						
+                           </div>
+                           <div class='col-sm-3'>
+                             <label for='total_cpm'> {{ __('global.total_cpm')}}</label>                    
+                             <input type="text" id="total_cpm" name="total_cpm" class="form-control-plaintext align-center" value="{{$total_cpm}}">						
+                           </div>
+                    </div>
                  </div>
 
 

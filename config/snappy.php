@@ -35,25 +35,27 @@ return [
     
     'pdf' => array(
         'enabled' => true,
-       // 'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf'),
-        'binary' => '/app/vendor/bin/wkhtmltopdf-amd64',
+        //'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf'),
+         'binary' => '/app/vendor/bin/wkhtmltopdf-amd64',
         'timeout' => false,
         'images' => true,
         'options' => [
             'enable-local-file-access' => true,
             'images' => true,
+            'orientation'   => 'landscape',
             'encoding'      => 'UTF-8'
         ],
         'env' => array(),
     ),
     'image' => array(
         'enabled' => true,
-        // 'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
+        //'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
         'binary' => '/app/vendor/bin/wkhtmltoimage-amd64',
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
             'images' => true,
+            'orientation'   => 'landscape',
             'encoding'      => 'UTF-8'
          ],
         'env' => array(),

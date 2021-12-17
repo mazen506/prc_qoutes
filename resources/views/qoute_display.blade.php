@@ -61,6 +61,10 @@
                             </thead>
                             <tbody>
     
+                            @php
+                                $total_price = 0;
+                                $total_cpm = 0;
+                            @endphp
                             @foreach ($qoute->items as $item)
                                 <tr id="item{{ $loop->index }}">
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
@@ -104,20 +108,24 @@
                                     </td>		
 
                                 </tr>
+                                @php
+                                          $total_price += round($item->qty * $item->price * $item->package_qty,2);
+                                          $total_cpm += round($item->cpm * $item->qty,3);
+                                @endphp
                          @endforeach
                         </tbody>
                     </table>
             
-                    <!-- <div class='form-row cust-total-container '>
+                    <div class='form-row cust-total-container '>
                           <div class='col-sm-3'>
                              <label for='total_cpm align-center'> {{ __('global.total_price')}}</label>        
-                             <input type="text" id="total_price" name="total_price" class="form-control-plaintext align-center" >						
+                             <input type="text" id="total_price" name="total_price" value="{{ number_format(round($total_price,2),2,'.',',') }}" class="form-control-plaintext align-center" >						
                            </div>
                            <div class='col-sm-3'>
                              <label for='total_cpm'> {{ __('global.total_cpm')}}</label>                    
-                             <input type="text" id="total_cpm" name="total_cpm" class="form-control-plaintext align-center" >						
+                             <input type="text" id="total_cpm" name="total_cpm" class="form-control-plaintext align-center" value="{{$total_cpm}}">						
                            </div>
-                    </div> -->
+                    </div>
                  </div>
 
                 </div>
