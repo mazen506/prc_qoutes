@@ -307,9 +307,6 @@ class QouteController extends Controller
       $pdf->setOption('enable-javascript', true);
       $pdf->setOption('margin-top', 10);
       $pdf->setOption('margin-bottom', 10);
-      $pdf->setOption('javascript-delay', 50000);
-      $pdf->setOption('enable-smart-shrinking', true);
-      $pdf->setOption('no-stop-slow-scripts', true);
       return $pdf->download('qoute_' . $qoute->id . '.pdf');
 
     }

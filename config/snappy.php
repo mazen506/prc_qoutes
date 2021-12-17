@@ -40,10 +40,8 @@ return [
         'timeout' => false,
         'images' => true,
         'options' => [
-            'debug-javascript' => true,
             'enable-local-file-access' => true,
             'images' => true,
-            'orientation'   => 'landscape',
             'encoding'      => 'UTF-8'
         ],
         'env' => array(),
@@ -56,7 +54,6 @@ return [
         'options' => [
             'enable-local-file-access' => true,
             'images' => true,
-            'orientation'   => 'landscape',
             'encoding'      => 'UTF-8'
          ],
         'env' => array(),
