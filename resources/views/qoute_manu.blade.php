@@ -255,8 +255,11 @@ function listItems(data){
             item_cpm.value = item.cpm;
             item_total_cpm.value = round(item.cpm * item.qty ,3);
             item_note.value = item.note;
-            var item_image = item.images.split('|')[0];
-            $('#item' + index).find('td:nth-child(2)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
+            var item_image;
+            if (item.images)
+            {   item_image = item.images.split('|')[0];
+                $('#item' + index).find('td:nth-child(2)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
+            }
             item_no = index;
             });
 
