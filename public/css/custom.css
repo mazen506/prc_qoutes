@@ -242,6 +242,10 @@ th.col-item-name {
     /* float:left;
     margin-left: 5px; */
 }
+
+.row-buttons .btn {
+    color: #fff;
+  }
 /* ------ */
 
 main {

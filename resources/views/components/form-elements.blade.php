@@ -17,6 +17,8 @@
     <div class="col-sm-6 {{ $errors->has('name') ? 'has-error' : '' }}">
         <label for="name">{{ trans('cruds.qoute.fields.name') }}*</label>
         <input type="text" id="name" name="name" class="form-control" value="{{ old('name', optional($qoute)->name) }}" required>
+        
+        
         {{-- @if($errors->has('name'))
             <em class="invalid-feedback">
                 {{ $errors->first('name') }}
@@ -59,6 +61,7 @@
         <table class="table-responsive table-striped tbl-qoute-items cust-table" id="items_table">
             <thead>
                 <tr>
+                    <th class='align-center'></th>
                     <th class='col-item-serial'></th>
                     <th class='col-item-image'></th>
                     <th class='col-item-name'>{{ trans('cruds.item.fields.name') }}</th>
@@ -77,6 +80,7 @@
               
                 @if (!old('item_names') && (!isset($qoute) || optional($qoute->items)->count() ==0)) 
                     <tr id="item0" style="display:none">
+                        <td><input type='checkbox' name='item_copies[]' class='form-control'></td>
                         <td class='col-item-serial'>1</td>
                         <td class='col-item-image'>
                             <input type=hidden name="item_ids[]" value=0>
@@ -85,7 +89,7 @@
                             <image class='item-image' src=""> 
                         </td>
                         <td class='col-item-name'>
-                            <input type="text" name="item_names[]" class="form-control-plaintext"  readonly required>
+                            <input type="text" name="item_chks[]" class="form-control-plaintext"  readonly required>
                         </td>
                         <td class='col-item-small align-center'>
                             <input type="number" name="item_qtys[]" class="form-control-plaintext align-center"  readonly required>
@@ -128,6 +132,7 @@
                 
                 @foreach (old('item_names', optional(optional($qoute)->items)->count() ? $qoute->items : ['']) as $item)
                         <tr id="item{{ $loop->index }}">
+                            <td><input type='checkbox' name='item_chks[]' class='form-control'></td>
                             <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
                             <td class='col-item-image align-center'>
                                 <input type=hidden name=item_ids[] value={{ (old('item_ids.' . $loop->index) ?? $item->id) ?? '' }}>

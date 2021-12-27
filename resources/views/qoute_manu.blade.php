@@ -15,10 +15,16 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('qoutes.update', [$qoute->id]) }}" id="frmQoute" method="POST" enctype="multipart/form-data">
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        <form action="{{ route('qoutes.update', [$qoute->id]) }}" id="frmQoute" method="PUT" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-           
+
+            <input type="hidden" id="is_copy" name="is_copy">
             <x-form-elements :qoute=$qoute :units=$units :currencies=$currencies />
             <div class='form-row cust-total-container '>
                 <div class='col-sm-3'>
@@ -56,6 +62,13 @@
                     <i class="fa fa-save"></i>
                     <span class="button-text">{{ __('global.save') }} </span>
                 </button>
+
+                <button id='btn-copy-qoute' class="btn btn-warning">
+                    <i class="fa fa-copy"></i>
+                    <span class="button-text">{{ __('global.datatables.copy') }} </span>
+                </button>
+
+
                 <!-- <a onclick="copyToClipBoard('{{url("/qoute/" . $qoute->id )}}')" id='btn-share-qoute' class="btn btn-success">
                     <i class="fa fa-share-alt"></i>
                     <span class="button-text">{{ __('global.share') }} </span>
@@ -148,6 +161,31 @@
         });
         return unit_name;
     }
+
+    $('#btn-copy-qoute').click(function(e){
+        e.preventDefault();
+        $('#is_copy').val(true);
+        var $boxes = $('input[name="item_chks[]"]:unchecked');
+        if ($boxes.length==0)
+        {
+            alert(trans('global.no_items_selected'));
+            return;
+        } else 
+        {
+            showSpinner(true);
+            $boxes.each (function()
+                {
+                    $(this).closest('tr').remove();
+                });
+                
+            $('input[name=_method]').val('POST');
+            $('#frmQoute').attr('action','{{ route("qoutes.store") }}');
+            $('#frmQoute').attr('method','POST');
+            $('#frmQoute').submit();
+        }
+    
+    });
+
 
     $("#frmQoute").validate({
                 rules: {

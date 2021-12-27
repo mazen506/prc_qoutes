@@ -297,7 +297,6 @@ thead.thead-dark {
     display: none;
 }
 
-
 .img-wrap {
     position: relative;
     border: 0;
@@ -413,7 +412,7 @@ thead.thead-dark {
     background: rgba(0, 0, 0, 0.7);
     transition: opacity 0.2s;
     display: none;
-  }
+}
    
   /* (B) CENTER LOADING SPINNER */
   #cust-spinner img {
@@ -421,27 +420,27 @@ thead.thead-dark {
     top: 50%; 
     left: 50%;
     transform: translate(-50%);
-  }
+}
 
+.row-buttons .btn {
+    color: #fff;
+}
 
 /* Dialog */
 .ui-dialog {
     z-index: 10000;
 }
 
-
-  
-
-
 .tbl-qoute-items .form-control {
-    background-color: #fff !important;
-	border:0px;
+    /* background-color: #fff !important;
+	border:0px; */
 }
 
 /********** Profile ************/
 #img-profile-logo {
     width:50px;
-}
+    }
+
 .profile-form {
     margin-right: 50px;
     margin-left: 50px;

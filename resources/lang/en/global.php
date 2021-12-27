@@ -89,6 +89,8 @@ return [
     'youAreLoggedIn'                       => 'You are logged in!',
     'yourAccountNeedsAdminApproval'        => 'Your accounts needs an administrator approval in order to log in',
     'submit'                               => 'Submit',
+    'no_items_selected'         =>  'No items selected!',
+    'qoute_copy_success' => 'Qoute copied successfully!',
     'datatables'                           => [
         'copy'          => 'Copy',
         'csv'           => 'CSV',

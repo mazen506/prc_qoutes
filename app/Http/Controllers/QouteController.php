@@ -113,9 +113,11 @@ class QouteController extends Controller
 	 
       DB::beginTransaction();
 
+      $is_copy = $request->is_copy;
+
 	    try {
 		    $qoute = Qoute::create([
-				  'name' => $request->name,
+				  'name' => ($is_copy==true) ?  ($request->name . ' (نسخة)') : $request->name,
 				  'note' => $request->note ? $request->note : '',
 				  'user_id' => Auth::user()->id,
           'currency_id' => $request->currency,
@@ -123,6 +125,7 @@ class QouteController extends Controller
           'locale'  => app()->getLocale()
 			  ]);
 		
+      $item_chks = $request->input('item_chks', []);
       $item_images_str = $request->input('item_images_str', []);
       $item_names = $request->input('item_names', []);
       $item_units = $request->input('item_units', []);
@@ -135,6 +138,8 @@ class QouteController extends Controller
 			$items = [];
 			for ($item_number=0; $item_number < count($item_names); $item_number++) {
 				if ($item_names[$item_number] != '') {
+          // if ($is_copy && $item_chks[$item_number] == false)
+          //     continue;
 						$items[] =  new QtItem([
                    'item_name' => $item_names[$item_number],
                    'unit_id' => $item_units[$item_number],
@@ -152,7 +157,10 @@ class QouteController extends Controller
 			//dd($items);
 			$qoute->items()->saveMany($items);
 			DB::commit();
-			return redirect()->route('qoutes.edit', $qoute->id );
+      if ($is_copy)
+          return redirect()->route('qoutes.edit', $qoute->id )->with('message', __('global.qoute_copy_success'));
+      else
+			    return redirect()->route('qoutes.edit', $qoute->id );
 
 		}
 		catch (\Exception $e)

@@ -27,6 +27,7 @@ return [
     'image_del_success'                   => 'تم حذف الصورة بنجاح!',
     'execution_error' => 'حدث خطاء أثناء تنفيذ العملية, يرجى المحاولة لاحقاً!',
     'save_success' => 'تم حفظ التعديلات بنجاح!',
+    'qoute_copy_success' => 'تمت عملية نسخ العرض بنجاح!',
     'qoute_must_have_one_item'  => 'العرض يجب أن يحتوي على منتج واحد على الأقل!!',
     'confirmation_box'                      => 'تأكيد',
     'print' => 'طباعة',
@@ -96,8 +97,9 @@ return [
     'youAreLoggedIn'                       => 'You are logged in!',
     'yourAccountNeedsAdminApproval'        => 'Your accounts needs an administrator approval in order to log in',
     'submit'                               => 'Submit',
+    'no_items_selected' => 'لم يتم إختيار اي أصناف!',
     'datatables'                           => [
-        'copy'          => 'Copy',
+        'copy'          => 'نسخ',
         'csv'           => 'CSV',
         'excel'         => 'Excel',
         'pdf'           => 'PDF',
