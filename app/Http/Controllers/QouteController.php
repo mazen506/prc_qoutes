@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ViewExport;
+
 use PDF;
 
 
@@ -300,6 +303,10 @@ class QouteController extends Controller
     			  DB::rollback();
 			      return response()-json(['error' => $e->getMessage()], 500);
 		    }
+    }
+
+    public function exportExcel(int $qoute){
+          return Excel::download(new ViewExport($qoute), 'merHelper.xlsx');
     }
 
     public function createPdf(int $qoute){

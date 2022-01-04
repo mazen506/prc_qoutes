@@ -36,6 +36,7 @@ Route::post('/qoutes/addImage', [QouteController::class, 'addImage'])->name('add
 Route::post('/qoutes/delImage', [QouteController::class, 'delImage'])->name('delImage');
 Route::get('/qoute/{qoute}', [QouteController::class, 'show']);
 Route::get('/qoute/{qoute}/create-pdf', [QouteController::class, 'createPdf']);
+Route::get('/qoute/{qoute}/export-excel', [QouteController::class, 'exportExcel']);
 
 Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
 

@@ -101,7 +101,7 @@ return [
     'datatables'                           => [
         'copy'          => 'نسخ',
         'csv'           => 'CSV',
-        'excel'         => 'Excel',
+        'excel'         => 'إكسل',
         'pdf'           => 'PDF',
         'print'         => 'Print',
         'colvis'        => 'Column visibility',
