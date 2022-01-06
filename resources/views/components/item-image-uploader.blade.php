@@ -1,8 +1,6 @@
 <div class="modal fade" id="itemDtlsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id='frmItemDtls' action="{{route('addImage')}}" name='frmItemDtls' method="post" enctype="multipart/form-data">
-            @csrf
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">{{ __('global.item_details') }}</h4>
@@ -79,20 +77,68 @@
         </div>
     </div>
     
+    <div class='dropzone-container'>
+            <div id="preview-template" style="display: none;">
+                <div class="col h-100 mb-5">
+                    <div class="dz-preview dz-file-preview">
+                        <div class="d-flex justify-content-end dz-close-icon">
+                            <small class="fa fa-times" data-dz-remove></small>
+                    </div>
+                    <div class="dz-details media">
+                        <div class="dz-img">
+                            <img class="img-fluid" data-dz-thumbnail>
+                        </div>
+                        <div class="media-body">
+                            <h6 class="dz-filename">
+                                <span class="dz-title" data-dz-name></span>
+                            </h6>
+                            <div class="dz-size" data-dz-size></div>
+                        </div>
+                    </div>
+                    <div class="dz-progress progress" style="height: 4px;">
+                        <div class="dz-upload progress-bar bg-success" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="dz-success-mark">
+                            <span class="fa fa-check-circle"></span>
+                        </div>
+                        <div class="dz-error-mark">
+                            <span class="fa fa-times-circle"></span>
+                        </div>
+                        <div class="dz-error-message">
+                            <small data-dz-errormessage></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class='form-group'>
+        <div id="dropzone">
+            <form action="{{ route('dropzoneFileUpload') }}" class="dropzone" id="file-upload" enctype="multipart/form-data">
+                @csrf
+                <div class="dz-message">
+                    إسحب الصور هنا للإضافة<br>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    
+    
+    <!-- <div class='form-group'>
                 <label>{{ __('global.item_images') }}</label>
                 <label class='lbl-img' for="file_item_images">
                     <img src="/storage/images/icon_upload_image.png" width=50 height=50 title="{{ __('global.add_images')}}"/>
                 </label>
                 <input type="file" id="file_item_images" name="item_images[]" multiple>
                 <label id="file_item_images-error" class="error"></label>
-    </div>                        
+    </div>                         -->
                 
             
 
     <!-- Coursel -->
-    <div class="container form-row">
+    <!-- <div class="container form-row">
                   <div class="col-md-12">
                     <div class="carousel slide multi-item-carousel" id="theCarousel">
                       <div class="carousel-inner" id="image-viewer">
@@ -108,18 +154,133 @@
                       </a>
                     </div>
                   </div>
-     </div>
+     </div> -->
      <!-- End of Coursel-->
-        
+    
+
     </div>{{-- End of Modal Body --}}
     <div class="modal-footer">
          <input type=button id="btn-item-dtls-save" class="btn btn-primary" value="{{ __('global.save') }}">
          <input type=button  class="btn btn-secondary btn-close" value="{{ __('global.close') }}">
     </div>
-    </form>
     
         </div>
     </div>
+
+
 </div> <!-- End of Item Details Modal -->
+
+
+
+<script>
+    Dropzone.autoDiscover = false;
+
+
+    //     Dropzone.options.myGreatDropzone = { // camelized version of the `id`
+    // paramName: "file", // The name that will be used to transfer the file
+    // maxFilesize: 2, // MB
+    // accept: function(file, done) {
+    //     if (file.name == "justinbieber.jpg") {
+    //         done("Naha, you don't.");
+    //     }
+    //     else { done(); }
+    // },
+    // init: function () { 
+    //             this.on("success", function (file) {
+    //             var responsetext = JSON.parse(file.xhr.responseText);
+    //             console.log(responsetext);});
+    // };
+
+        var dropzone = new Dropzone('#file-upload', {
+            // previewTemplate: document.querySelector('#preview-template').innerHTML,
+            parallelUploads: 3,
+            thumbnailHeight: 100,
+            thumbnailWidth: 100,
+            maxFilesize: 5,
+            filesizeBase: 1500,
+            addRemoveLinks: true,
+            thumbnail: function (file, dataUrl) {
+                if (file.previewElement) {
+                    file.previewElement.classList.remove("dz-file-preview");
+                    var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                    for (var i = 0; i < images.length; i++) {
+                        var thumbnailElement = images[i];
+                        thumbnailElement.alt = file.name;
+                        thumbnailElement.src = dataUrl;
+                    }
+                    setTimeout(function () {
+                    file.previewElement.classList.add("dz-image-preview");
+                    }, 1);
+                }
+            },
+            removedfile: function(file) {
+                    data = JSON.parse(file.xhr.response);
+                    delImage(data.image_name);
+                },
+
+            success: (file) => {
+                    data = JSON.parse(file.xhr.responseText);
+                    buildImageStr(data);
+                }
+        });
+
+        // dropzone.on("success", function(file, response) {
+        //         console.log(response);
+        //         if(response.success == 0){ // Error
+        //               alert(response.error);
+        //         }
+        //     });
+        
+        // var minSteps = 6,
+        //     maxSteps = 60,
+        //     timeBetweenSteps = 100,
+        //     bytesPerStep = 100000;
+
+        // dropzone.uploadFiles = function (files) {
+        //     var self = this;
+
+        //     for (var i = 0; i < files.length; i++) {
+
+        //         var file = files[i];
+        //         totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+        //         for (var step = 0; step < totalSteps; step++) {
+        //             var duration = timeBetweenSteps * (step + 1);
+        //             setTimeout(function (file, totalSteps, step) {
+        //                 return function () {
+        //                     file.upload = {
+        //                         progress: 100 * (step + 1) / totalSteps,
+        //                         total: file.size,
+        //                         bytesSent: (step + 1) * file.size / totalSteps
+        //                     };
+
+        //                     self.emit('uploadprogress', file, file.upload.progress, file.upload
+        //                         .bytesSent);
+        //                     if (file.upload.progress == 100) {
+        //                         file.status = Dropzone.SUCCESS;
+        //                         //self.emit("success", file, file, null);
+        //                         self.emit("complete", file);
+        //                         self.processQueue();
+        //                     }
+        //                 };
+        //             }(file, totalSteps, step), duration);
+        //         }
+        //     }
+        // }
+
+    </script>
+
+    <style>
+        .dropzone {
+            background: #e3e6ff;
+            border-radius: 13px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px dotted #1833FF;
+            margin-top: 50px;
+        }
+
+    </style>
 
    

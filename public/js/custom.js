@@ -12,61 +12,54 @@ function trans(key, replace = {}) {
 
 
 //Delete Image
-$(document).on('click','.btn-del-image',function(e){
-
-    if (confirm(trans('global.delete_confirmation'), e))
-    {
-        
-    
-    // Set up ajax headers
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    
-    //Get Image Name and create form data
-    let image_name = $(this).children('input[type=hidden]:first').val();
-
-    let form_data = new FormData();
-    form_data.append( 'image_name', image_name );
-
-    // Delete Parent element 
-    $(this).parent().remove();
-    $('#item_images_str').val('');
-    
-
-    // Reconstruct images
-    var element_image_list = $("#image-viewer :input[type='hidden']");
-    var image_list = [];
-    element_image_list.each(function(){
-        image_list.push({
-            image_name: $(this).val()
+function delImage(image_name)
+{
+        // Set up ajax headers
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
         });
-    });
+    
+        let form_data = new FormData();
+        form_data.append( 'image_name', image_name );
 
-     buildImageStr(image_list);
+        // Delete Parent element 
+        $(this).parent().remove();
+    
 
-    //Delete image from disk
-    $.ajax({
-        url: '/qoutes/delImage',
-        method: 'post',
-        data: form_data,
-        dataType: 'text json',
-        processData: false,
-        contentType: false,
-        beforeSend: function() {
-            showSpinner(true);
-        },
-        success: function (data) {
-            showSpinner(false);
-        },
-        error: function (data) {
-            showFlashMessage(trans('global.execution_error'));
+        // Reconstruct images
+        var image_list = $('#item_images_str').val().split('|');
+        //.var image_list = [];
+        for(var i=0; i<image_list.length; i++) {
+            if (image_list[i] === image_name)
+                image_list.splice(i,1);
         }
-    });
-}
-});
+
+
+        console.log('Image List ' + image_list);
+        $('#item_images_str').val('');
+        buildImageStr(image_list);
+
+        //Delete image from disk
+        $.ajax({
+            url: '/qoutes/delImage',
+            method: 'post',
+            data: form_data,
+            dataType: 'text json',
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                showSpinner(true);
+            },
+            success: function (data) {
+                showSpinner(false);
+            },
+            error: function (data) {
+                showFlashMessage(trans('global.execution_error'));
+            }
+        });
+};
 
 
 function copyToClipBoard(txt) {
@@ -166,10 +159,10 @@ function showFlashMessage(message)
 
 function buildImageStr(data){
     let item_images_str = $('#item_images_str').val();
-    $.each( data, function( key, val ) {
+    //$.each( data, function( key, val ) {
         // Fill Images String
-        item_images_str = item_images_str.concat( item_images_str == ''  ? '' : '|', val.image_name);
-    });
+        item_images_str = item_images_str.concat( item_images_str == ''  ? '' : '|', data.image_name);
+    //});
     $('#item_images_str').val(item_images_str);
     buildImageViewer(item_images_str);
 }

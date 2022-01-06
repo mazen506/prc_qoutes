@@ -96,8 +96,8 @@ class QouteController extends Controller
           // Delete from public folder
           if ($request->image_name) {
              try{
-                  Storage::disk('s3')->delete('images/' . $request->image_name);
-                  //unlink(storage_path('app/public/item_images/' . $request->image_name));
+                  //Storage::disk('s3')->delete('images/' . $request->image_name);
+                  unlink(storage_path('app\\public\\images\\' . $request->image_name));
                   return true;
              } catch (Throwable $e) {
                   report($e);
@@ -305,6 +305,20 @@ class QouteController extends Controller
 		    }
     }
 
+    //DropZone
+    public  function dropzoneFileUpload(Request $request)  
+    {  
+
+        $image = $request->file('file');
+
+        $imageName = time().rand(1,10000).'.'.$image->extension();
+        $image->move(storage_path('app\\public\\images'),$imageName);  
+
+        return response()->json(['image_name'=>$imageName]);
+
+    }
+
+    // Export functions
     public function exportExcel(int $qoute){
           return Excel::download(new ViewExport($qoute), 'merHelper.xlsx');
     }
