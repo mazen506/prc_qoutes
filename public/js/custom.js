@@ -12,7 +12,7 @@ function trans(key, replace = {}) {
 
 
 //Delete Image
-function delImage(image_name)
+function delImage(file)
 {
         // Set up ajax headers
         $.ajaxSetup({
@@ -21,23 +21,19 @@ function delImage(image_name)
             }
         });
     
+        data = JSON.parse(file.xhr.response);
+        image_name = data.image_name;
+
         let form_data = new FormData();
         form_data.append( 'image_name', image_name );
 
-        // Delete Parent element 
-        $(this).parent().remove();
-    
-
         // Reconstruct images
         var image_list = $('#item_images_str').val().split('|');
-        //.var image_list = [];
         for(var i=0; i<image_list.length; i++) {
             if (image_list[i] === image_name)
                 image_list.splice(i,1);
         }
 
-
-        console.log('Image List ' + image_list);
         $('#item_images_str').val('');
         buildImageStr(image_list);
 
@@ -54,6 +50,9 @@ function delImage(image_name)
             },
             success: function (data) {
                 showSpinner(false);
+                var fileRef;
+                return (fileRef = file.previewElement) != null ?
+                fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
             error: function (data) {
                 showFlashMessage(trans('global.execution_error'));
@@ -164,7 +163,7 @@ function buildImageStr(data){
         item_images_str = item_images_str.concat( item_images_str == ''  ? '' : '|', data.image_name);
     //});
     $('#item_images_str').val(item_images_str);
-    buildImageViewer(item_images_str);
+    //buildImageViewer(item_images_str);
 }
 
 
