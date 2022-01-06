@@ -89,7 +89,6 @@
                 <label id="file_item_images-error" class="error"></label>
     </div>                        
                 
-            
 
     <!-- Coursel -->
     <div class="container form-row">
