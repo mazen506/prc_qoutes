@@ -39,5 +39,6 @@ Route::get('/qoute/{qoute}/create-pdf', [QouteController::class, 'createPdf']);
 Route::get('/qoute/{qoute}/export-excel', [QouteController::class, 'exportExcel']);
 
 Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
+Route::post('/qoutes/file-upload', [QouteController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');
 
 require __DIR__.'/auth.php';

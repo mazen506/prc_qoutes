@@ -137,6 +137,8 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     }
                     
                     imagesavealpha($simg, true);
+                  //  $simg= imagescale ( $simg, 50 , 50);
+
                     $row_number = $row_offset + $loop;
                     $drawing->setImageResource($simg);
                     $drawing->setResizeProportional(false);

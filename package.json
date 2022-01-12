@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",
+        "@types/jquery": "^3.5.12",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",
@@ -21,6 +22,7 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
-        "flag-icon-css": "^3.5.0"
+        "flag-icon-css": "^3.5.0",
+        "j-i-c": "^2.0.2"
     }
 }

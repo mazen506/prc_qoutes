@@ -4039,6 +4039,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.jic = __webpack_require__(/*! j-i-c */ "./node_modules/j-i-c/src/JIC.js");
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -4053,6 +4054,131 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
+/***/ }),
+
+/***/ "./node_modules/j-i-c/src/JIC.js":
+/*!***************************************!*\
+  !*** ./node_modules/j-i-c/src/JIC.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+/*!
+ * JIC JavaScript Library v2.0.2
+ * https://github.com/brunobar79/J-I-C/
+ *
+ * Copyright 2016, Bruno Barbieri
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ *
+ * Date: Tue Jul 11 13:13:03 2016 -0400
+ */
+
+
+
+/**
+ * Create the jic object.
+ * @constructor
+ */
+
+var jic = {
+        /**
+         * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
+         * @param {Image} source_img_obj The source Image Object
+         * @param {Integer} quality The output quality of Image Object
+         * @param {String} output format. Possible values are jpg and png
+         * @return {Image} result_image_obj The compressed Image Object
+         */
+
+        compress: function(source_img_obj, quality, output_format){
+             
+             var mime_type = "image/jpeg";
+             if(typeof output_format !== "undefined" && output_format=="png"){
+                mime_type = "image/png";
+             }
+             
+
+             var cvs = document.createElement('canvas');
+             cvs.width = source_img_obj.naturalWidth;
+             cvs.height = source_img_obj.naturalHeight;
+             var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0);
+             var newImageData = cvs.toDataURL(mime_type, quality/100);
+             var result_image_obj = new Image();
+             result_image_obj.src = newImageData;
+             return result_image_obj;
+        },
+
+        /**
+         * Receives an Image Object and upload it to the server via ajax
+         * @param {Image} compressed_img_obj The Compressed Image Object
+         * @param {String} The server side url to send the POST request
+         * @param {String} file_input_name The name of the input that the server will receive with the file
+         * @param {String} filename The name of the file that will be sent to the server
+         * @param {function} successCallback The callback to trigger when the upload is succesful.
+         * @param {function} (OPTIONAL) errorCallback The callback to trigger when the upload failed.
+	     * @param {function} (OPTIONAL) duringCallback The callback called to be notified about the image's upload progress.
+	     * @param {Object} (OPTIONAL) customHeaders An object representing key-value  properties to inject to the request header.
+         */
+
+        upload: function(compressed_img_obj, upload_url, file_input_name, filename, successCallback, errorCallback, duringCallback, customHeaders){
+
+            //ADD sendAsBinary compatibilty to older browsers
+            if (XMLHttpRequest.prototype.sendAsBinary === undefined) {
+                XMLHttpRequest.prototype.sendAsBinary = function(string) {
+                    var bytes = Array.prototype.map.call(string, function(c) {
+                        return c.charCodeAt(0) & 0xff;
+                    });
+                    this.send(new Uint8Array(bytes).buffer);
+                };
+            }
+
+            var type = "image/jpeg";
+            if(filename.substr(-4).toLowerCase()==".png"){
+                type = "image/png";
+            }
+
+            var data = compressed_img_obj.src;
+            data = data.replace('data:' + type + ';base64,', '');
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', upload_url, true);
+            var boundary = 'someboundary';
+
+            xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+		
+		// Set custom request headers if customHeaders parameter is provided
+		if (customHeaders && typeof customHeaders === "object") {
+			for (var headerKey in customHeaders){
+				xhr.setRequestHeader(headerKey, customHeaders[headerKey]);
+			}
+		}
+		
+		// If a duringCallback function is set as a parameter, call that to notify about the upload progress
+		if (duringCallback && duringCallback instanceof Function) {
+			xhr.upload.onprogress = function (evt) {
+				if (evt.lengthComputable) {  
+					duringCallback ((evt.loaded / evt.total)*100);  
+				}
+			};
+		}
+		
+            xhr.sendAsBinary(['--' + boundary, 'Content-Disposition: form-data; name="' + file_input_name + '"; filename="' + filename + '"', 'Content-Type: ' + type, '', atob(data), '--' + boundary + '--'].join('\r\n'));
+            
+            xhr.onreadystatechange = function() {
+			if (this.readyState == 4){
+				if (this.status == 200) {
+					successCallback(this.responseText);
+				}else if (this.status >= 400) {
+					if (errorCallback &&  errorCallback instanceof Function) {
+						errorCallback(this.responseText);
+					}
+				}
+			}
+            };
+
+
+        }
+};
+
+          module.exports = jic;
 /***/ }),
 
 /***/ "./node_modules/lodash/lodash.js":
@@ -21481,7 +21607,7 @@ process.umask = function() { return 0; };
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"E:\\\\Projects\\\\Tatweer\\\\prcQoutes","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"D:\\\\Projects\\\\Tatweer\\\\prcQoutes","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 
