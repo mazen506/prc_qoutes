@@ -12,7 +12,7 @@
   
 body {
     direction:rtl;
-    font-family: 'DroidArabicKufiRegular';
+    font-family: 'DroidArabicKufiRegular' !important;
     font-weight: normal;
     font-style: normal;
 }

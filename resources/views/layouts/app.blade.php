@@ -19,6 +19,24 @@
         <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/droid-arabic-kufi" type="text/css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
         
+        
+
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @if(App::getLocale() == 'en')
+            <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        @else
+            <link rel="stylesheet" href="{{ asset('css/custom_rtl.css') }}">
+        @endif
+
+        <!-- Scripts -->
+        <script>
+            	    window.translations = {!! Cache::get('translations') !!};
+        </script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -40,21 +58,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}" defer></script>
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-        @else
-            <link rel="stylesheet" href="{{ asset('css/custom_rtl.css') }}">
-        @endif
-
-        <!-- Scripts -->
-        <script>
-            	    window.translations = {!! Cache::get('translations') !!};
-        </script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <div class="cust-screen">
