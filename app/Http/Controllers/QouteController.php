@@ -58,37 +58,17 @@ class QouteController extends Controller
      */
 
     public function addImage(Request $request){
-       // Get the new images
-       // Save them into images folder
-
-       $images = array();
-       try {
-       $validator = $request->validate([
-         //'item_name' => 'required'
-        'item_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' // Only allow .jpg, .bmp and .png file types.
-       ]);
-
-          if ($files=$request->file('item_images')){
-            foreach($files as $file){
-                //$file->store('item_images','public');
-                $path = Storage::disk('s3')->put('images',$file);
-                $image = explode('/', $path)[1];
-                //$path = Storage::disk('s3')->url($path);
-                $images[]= ['image_name' => $image ];
-            }
-        
-        // Testing
-        //$images[] = ['image_name' => '1LqEA14E05s89pjoxwUzbMq6UHoHT8YNLAOzLYbT.jpg'];
-        //$images[] = ['image_name' => 'cAnXNHc7bDwODjW14RpnU4YhzKE6Mc1OImurTzHw.jpg'];
-        //$images[] = ['image_name' => 'ma1ONseX6p2GY1vmXd48rfz7wNwzDrYolr3XsoWJ.jpg'];
-        
-              return response()->json($images);
-            }
+      try {
+            $image = $request->file('file');
+            $path = Storage::disk('s3')->put('images',$image);
+            //$path = Storage::disk('public')->put('images', $image);
+            $image_name = explode('/', $path)[1];
+            return response()->json(['image_name'=>$image_name]);
       }
       catch (\Illuminate\Validation\ValidationException $e)
       {
-        $errors = $e->errors();
-        return response()->json($errors);
+            $errors = $e->errors();
+            return response()->json($errors);
       }
     }
 
@@ -96,8 +76,9 @@ class QouteController extends Controller
           // Delete from public folder
           if ($request->image_name) {
              try{
-                  //Storage::disk('s3')->delete('images/' . $request->image_name);
-                  unlink(storage_path('app\\public\\images\\' . $request->image_name));
+                  //To Be Added: update images field code here
+                   Storage::disk('s3')->delete('images/' . $request->image_name);
+                  //unlink(storage_path('app\\public\\images\\' . $request->image_name));
                   return true;
              } catch (Throwable $e) {
                   report($e);
@@ -305,18 +286,6 @@ class QouteController extends Controller
 		    }
     }
 
-    //DropZone
-    public  function dropzoneFileUpload(Request $request)  
-    {  
-
-        $image = $request->file('file');
-
-        $imageName = time().rand(1,10000).'.'.$image->extension();
-        $image->move(storage_path('app\\public\\images'),$imageName);  
-
-        return response()->json(['image_name'=>$imageName]);
-
-    }
 
     // Export functions
     public function exportExcel(int $qoute){

@@ -10,7 +10,11 @@ function trans(key, replace = {}) {
         return translation;
     }
 
+$('.modal .close, .btn-close').click(function(){
+    $(this).closest('.modal').modal('hide');
+});
 
+   
 //Delete Image
 function delImage(file)
 {
@@ -21,10 +25,8 @@ function delImage(file)
             }
         });
     
-        data = JSON.parse(file.xhr.response);
-        image_name = data.image_name;
-
         let form_data = new FormData();
+        image_name = file.name;
         form_data.append( 'image_name', image_name );
 
         // Reconstruct images
@@ -35,7 +37,7 @@ function delImage(file)
         }
 
         $('#item_images_str').val('');
-        buildImageStr(image_list);
+        
 
         //Delete image from disk
         $.ajax({
@@ -50,9 +52,14 @@ function delImage(file)
             },
             success: function (data) {
                 showSpinner(false);
-                var fileRef;
-                return (fileRef = file.previewElement) != null ?
-                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+
+                //Reconstruct ImageStr
+                item_images_str = image_list.join('|');
+                $('#item_images_str').val(item_images_str);
+
+                // var fileRef;
+                // return (fileRef = file.previewElement) != null ?
+                // fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
             error: function (data) {
                 showFlashMessage(trans('global.execution_error'));
@@ -163,6 +170,7 @@ function buildImageStr(data){
         item_images_str = item_images_str.concat( item_images_str == ''  ? '' : '|', data.image_name);
     //});
     $('#item_images_str').val(item_images_str);
+    console.log('Image String:' + item_images_str);
     //buildImageViewer(item_images_str);
 }
 
@@ -220,6 +228,7 @@ function buildImageViewer(data){
           $('#itemDtlsModal').carousel(data.length-1);
 }
 
+
 function clearModal(item){
     $(item + ' input:text').val('');
     $(item + ' :input[type=hidden]').val('');
@@ -231,58 +240,6 @@ function clearModal(item){
     $('#item_name').focus();
     $('#file_item_images').val('');
 }
-
-$('#btn-save-qoute').click(function(e){
-    e.preventDefault();
-    isNew=false;
-    $('#btn-item-dtls-save').trigger('click');
-});
-/* -------------- Save Item ----------------- */
-$('#btn-item-dtls-save, #btn-save-qoute').click(function(e){
-    //Display Errors
-    
-    if (!$("#frmItemDtls").valid())
-    {   $('#itemDtlsModal .modal-body').scrollTop(0); 
-        $('#itemDtlsModal .clt-alert').css('display','block');
-        return;
-    }
-    else
-        $('#itemDtlsModal .clt-alert').css('display','none');
-        
-
-    //Save Record
-    if (isNew) //New
-    {
-        if (item_no>=1) {
-            $('#item' + (item_no)).html($('#item0').html()).find('td:nth-child(1)').html(item_no+1);
-            //Fill Row items from modal
-            $('#items_table').append('<tr id="item' + (item_no+1) + '"></tr>');
-        } else { //display the first row
-            $('#item0').css("display","table-row");
-        }   
-        currItemIndex = item_no;
-        saveRecord(currItemIndex);
-        item_no++;
-    }
-    else //Edited
-    {
-        //Check if item details form changed
-        if ($('#frmItemDtls').serialize() != frmItemDtlsSnap) //Changed
-        {   console.log('Yes,, it is changed Man!!');
-            var is_edited_flag = document.getElementsByName('is_edited_flags[]')[currItemIndex];
-            is_edited_flag.value = 1;
-            saveRecord(currItemIndex);
-            
-        }
-        else
-        {   $('#itemDtlsModal').modal('hide'); 
-            console.log('Unchanged!!');
-        }
-    }
-    
-});
-
-
 
 
 /***************** Add Item ******************/
@@ -322,9 +279,7 @@ $('#btn-add-item').click(function(e){
     }
     });
 
-    $('.modal .close, .btn-close').click(function(){
-        $(this).closest('.modal').modal('hide');
-    });
+   
 
 
 /********************* Image Viewer ***********************/    
@@ -490,7 +445,8 @@ $('#item_note').val(item_note.value);
 $('#item_images_str').val(item_images_str.value);
 calItemModalTotals();
 //fill Images
-buildImageViewer(item_images_str.value);
+//buildImageViewer(item_images_str.value);
+fillDropZoneImages();
 
 }
 

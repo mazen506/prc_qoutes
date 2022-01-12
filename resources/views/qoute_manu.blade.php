@@ -113,7 +113,7 @@
     var frmItemDtlsSnap;
     var units;
 
-     
+   
     var validation = {
                 rules: {
                     'item_name': "required",
@@ -327,6 +327,58 @@ function calQouteTotals(){
     $('#total_price').val(total_price + " " + "{{$currency}}" );
     $('#total_cpm').val(round(total_cpm,3));
 }
+
+
+$('#btn-save-qoute').click(function(e){
+    e.preventDefault();
+    isNew=false;
+    $('#btn-item-dtls-save').trigger('click');
+});
+/* -------------- Save Item ----------------- */
+$('#btn-item-dtls-save, #btn-save-qoute').click(function(e){
+    //Display Errors
+    console.log('Saving..');
+    if (!$("#frmItemDtls").valid())
+    {   $('#itemDtlsModal .modal-body').scrollTop(0); 
+        $('#itemDtlsModal .clt-alert').css('display','block');
+        return;
+    }
+    else
+        $('#itemDtlsModal .clt-alert').css('display','none');
+        
+
+    //Save Record
+    if (isNew) //New
+    {
+        if (item_no>=1) {
+            $('#item' + (item_no)).html($('#item0').html()).find('td:nth-child(1)').html(item_no+1);
+            //Fill Row items from modal
+            $('#items_table').append('<tr id="item' + (item_no+1) + '"></tr>');
+        } else { //display the first row
+            $('#item0').css("display","table-row");
+        }   
+        currItemIndex = item_no;
+        saveRecord(currItemIndex);
+        item_no++;
+    }
+    else //Edited
+    {
+        //Check if item details form changed
+        if ($('#frmItemDtls').serialize() != frmItemDtlsSnap) //Changed
+        {   console.log('Yes,, it is changed Man!!');
+            var is_edited_flag = document.getElementsByName('is_edited_flags[]')[currItemIndex];
+            is_edited_flag.value = 1;
+            saveRecord(currItemIndex);
+            
+        }
+        else
+        {   $('#itemDtlsModal').modal('hide'); 
+            console.log('Unchanged!!');
+        }
+    }
+    
+});
+
 
 
 

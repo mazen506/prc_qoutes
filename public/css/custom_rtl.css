@@ -176,6 +176,7 @@ select {
     font-size: 25px;
     background-color:#fff;
     padding:5px;
+    margin-right: 15px;
 }
 
 .cust-table tr {
@@ -724,6 +725,25 @@ table.dataTable thead .sorting_desc {
 .select2-results__option {
     padding-left: 0px;
     padding-right: 0px;
+}
+
+
+/* Dropzone */
+
+
+.dz-image {
+    width:unset !important;
+    overflow:none !important;
+}
+
+.dz-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+label.cust-title {
+    padding-right: 15px;
 }
 
 
