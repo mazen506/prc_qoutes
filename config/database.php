@@ -45,12 +45,24 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL', 'mysql://b0442816b21331:3820b3ed@us-cdbr-east-04.cleardb.com/heroku_fe5cd69f57786c7?reconnect=true'),
-            'host' => env('DB_HOST', 'us-cdbr-east-04.cleardb.com'),
+
+            //AWS
+
+            'host' => env('DB_HOST', 'aa1nl7g1lfzu90h.c3i2dwc6kegp.us-east-2.rds.amazonaws.com'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'heroku_fe5cd69f57786c7'),
-            'username' => env('DB_USERNAME', 'b0442816b21331'),
-            'password' => env('DB_PASSWORD', '3820b3ed'),
+            'database' => env('DB_DATABASE', 'shipping_mgr'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'admin1234'),
+
+            //HEROKU
+            // 'url' => env('DATABASE_URL', 'mysql://b0442816b21331:3820b3ed@us-cdbr-east-04.cleardb.com/heroku_fe5cd69f57786c7?reconnect=true'),
+            // 'host' => env('DB_HOST', 'us-cdbr-east-04.cleardb.com'),
+            // 'port' => env('DB_PORT', '3306'),
+            // 'database' => env('DB_DATABASE', 'heroku_fe5cd69f57786c7'),
+            // 'username' => env('DB_USERNAME', 'b0442816b21331'),
+            // 'password' => env('DB_PASSWORD', '3820b3ed'),
+
+            //LOCAL
             // 'url' => env('DATABASE_URL'),
             // 'host' => env('DB_HOST', 'localhost'),
             // 'port' => env('DB_PORT', '3306'),
