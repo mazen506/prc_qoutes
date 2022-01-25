@@ -1,5 +1,5 @@
 Commands:
-Added for testing
+Added for testing1
 php artisan new:model 
 composer new [ProjectName]
 php artisan update
