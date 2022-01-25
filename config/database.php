@@ -48,9 +48,9 @@ return [
 
             //AWS
 
-            'host' => env('DB_HOST', 'aa1nl7g1lfzu90h.c3i2dwc6kegp.us-east-2.rds.amazonaws.com'),
+            'host' => env('DB_HOST', 'shipping-mgr-db.c3i2dwc6kegp.us-east-2.rds.amazonaws.com'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'shipping_mgr'),
+            'database' => env('DB_DATABASE', 'heroku_fe5cd69f57786c7'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', 'admin1234'),
 
