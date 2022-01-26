@@ -160,11 +160,12 @@
         });
 
         function fillDropZoneImages(){
+                dropzone.removeAllFiles();
                 $('.dz-preview').remove();
                 if ($('#item_images_str').val())
                 {
                     images = $('#item_images_str').val().split('|');
-                    console.log('Images: ' + images.length);
+                    //console.log('Images: ' + images.length);
                     for (var i=0; i<images.length; i++) {
                                 console.log('Passed Images: ' + i + ' : ' + images.length);
                                 var file = { name: images[i], size: 12345 };
