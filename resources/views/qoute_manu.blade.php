@@ -153,7 +153,7 @@
     function getUnitName(id){
         var unit_name='';
         $.each( units, function( index, unit ) {
-            console.log('Unit:' + id + ' ' + unit.id);
+            //console.log('Unit:' + id + ' ' + unit.id);
             if (unit.id == id)
             {    unit_name = unit.name;
                  return false;
@@ -222,6 +222,7 @@ $.ajax({
     },
     success: function (data) {
         showSpinner(false);
+        console.log(data);
         listItems(data);
         
         if (isNew)
@@ -260,9 +261,16 @@ function listItems(data){
         
         
         $.each( data['items'], function( index, item ) {
-            if (index != 0)
-                $('#item' + index).html($('#item0').html()).find('td:nth-child(1)').html(index+1);
 
+
+            // Set serial
+            if (index != 0)
+                $('#item' + index).html($('#item0').html()).find('td:nth-child(2)').html(index+1);
+
+            // Clear Images
+            $('#item' + index).find('td:nth-child(3)').find('img:first').attr('src', '');
+
+            // Set Values
             $('#items_table').append('<tr id="item' + (index+1) + '"></tr>');
             var item_id = document.getElementsByName('item_ids[]')[index];
             var item_images_str = document.getElementsByName('item_images_str[]')[index];
@@ -296,14 +304,14 @@ function listItems(data){
             var item_image;
             if (item.images)
             {   item_image = item.images.split('|')[0];
-                $('#item' + index).find('td:nth-child(2)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
+                $('#item' + index).find('td:nth-child(3)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
             }
             item_no = index;
             });
 
             item_no++;
             calQouteTotals();
-            console.log('list items - item No: ' + item_no);
+            //console.log('list items - item No: ' + item_no);
        
 }
 
@@ -315,7 +323,7 @@ function calQouteTotals(){
     var total_price = 0;
     var total_cpm = 0;
     for (var i=0;i<prices_totals.length;i++){
-        console.log(prices_totals[i].value);
+    //    console.log(prices_totals[i].value);
         total_price += Number(prices_totals[i].value);
     }
      console.log('Total Price = ' + total_price);
@@ -368,6 +376,7 @@ $('#btn-item-dtls-save, #btn-save-qoute').click(function(e){
         {   console.log('Yes,, it is changed Man!!');
             var is_edited_flag = document.getElementsByName('is_edited_flags[]')[currItemIndex];
             is_edited_flag.value = 1;
+            console.log('Current Index: ' + currItemIndex);
             saveRecord(currItemIndex);
             
         }

@@ -408,6 +408,7 @@ function saveRecord(item){
 
     //set item image
     var item_image = item_images_str.value.split('|')[0];
+    
     $('#item' + item).find('td:nth-child(3)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
 
     
@@ -505,7 +506,7 @@ $('.lst-del-btn').click(function(e){
         function round(number, decimals) {
                 decimals = Math.pow(10,decimals);
                 number = Math.round(number*decimals)/decimals;
-                console.log('Number Decimals' + number + ' ' + decimals);
+                //console.log('Number Decimals' + number + ' ' + decimals);
                 return number;
         }
 

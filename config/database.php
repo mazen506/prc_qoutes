@@ -48,11 +48,11 @@ return [
 
             //AWS
 
-            'host' => env('DB_HOST', 'shipping-mgr-db.c3i2dwc6kegp.us-east-2.rds.amazonaws.com'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'heroku_fe5cd69f57786c7'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'admin1234'),
+            // 'host' => env('DB_HOST', 'shipping-mgr-db.c3i2dwc6kegp.us-east-2.rds.amazonaws.com'),
+            // 'port' => env('DB_PORT', '3306'),
+            // 'database' => env('DB_DATABASE', 'heroku_fe5cd69f57786c7'),
+            // 'username' => env('DB_USERNAME', 'root'),
+            // 'password' => env('DB_PASSWORD', 'admin1234'),
 
             //HEROKU
             // 'url' => env('DATABASE_URL', 'mysql://b0442816b21331:3820b3ed@us-cdbr-east-04.cleardb.com/heroku_fe5cd69f57786c7?reconnect=true'),
@@ -63,12 +63,12 @@ return [
             // 'password' => env('DB_PASSWORD', '3820b3ed'),
 
             //LOCAL
-            // 'url' => env('DATABASE_URL'),
-            // 'host' => env('DB_HOST', 'localhost'),
-            // 'port' => env('DB_PORT', '3306'),
-            // 'database' => env('DB_DATABASE', 'mer_helper'),
-            // 'username' => env('DB_USERNAME', 'root'),
-            // 'password' => env('DB_PASSWORD', 'admin90'),
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'mer_helper'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'admin90'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_general_ci',
