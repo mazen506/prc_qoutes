@@ -80,7 +80,7 @@
               
                 @if (!old('item_names') && (!isset($qoute) || optional($qoute->items)->count() ==0)) 
                     <tr id="item0" style="display:none">
-                        <td><input type='checkbox' name='item_copies[]' class='form-control'></td>
+                        <td><input type='checkbox' name='item_chks[]' class='form-control'></td>
                         <td class='col-item-serial'>1</td>
                         <td class='col-item-image'>
                             <input type=hidden name="item_ids[]" value=0>
@@ -89,7 +89,7 @@
                             <image class='item-image' src=""> 
                         </td>
                         <td class='col-item-name'>
-                            <input type="text" name="item_chks[]" class="form-control-plaintext"  readonly required>
+                            <input type="text" name="item_names[]" class="form-control-plaintext lst-item-name" readonly required>
                         </td>
                         <td class='col-item-small align-center'>
                             <input type="number" name="item_qtys[]" class="form-control-plaintext align-center"  readonly required>
