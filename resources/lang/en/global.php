@@ -163,6 +163,7 @@ return [
     'current_password'                     => 'Current password',
     'custom_controller_index'              => 'Custom controller index.',
     'customer'                             => 'Customer',
+    'customer_name'                             => 'Customer',
     'customers'                            => 'Customers',
     'deleted_at'                           => 'Deleted at',
     'description'                          => 'Description',

@@ -99,7 +99,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
                 //Set Qoute Name
-                    $event->sheet->setCellValue('C6', __('global.qoute_name') . '/'); 
+                    $event->sheet->setCellValue('C6', __('global.customer_name') . '/'); 
                     $event->sheet->setCellValue('D6', $this->qoute->name); 
 
                     $event->sheet->setCellValue('C7', __('global.currency') . '/'); 
