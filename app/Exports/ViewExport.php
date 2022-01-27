@@ -58,7 +58,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         'background' => ['color' => '#f5f5f5'],
                         'alignment' => ['horizontal' => 'center', 'vertical' => 'center'],
                        ],
-            'B' => [
+            'C' => [
                         'alignment' => ['horizontal' => 'center', 'vertical' => 'center']
                    ],
             'C2' => ['font' => ['bold' => true], ['size' => 30]],
@@ -92,6 +92,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
 
                 //Set sheet caption
                     $event->sheet->mergeCells('D5:H5');
+                    $event->sheet->mergeCells('G10:H10');
                     $event->sheet->setCellValue('D5', __('global.qoute')); 
                     $event->sheet->getDelegate()->getStyle('D5')
                         ->getAlignment()
@@ -175,6 +176,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
             'الكمية',
             'الوحدة',
             'العبوة',
+            '',
             'السعر',
             'إجمالي السعر',
             'سي بي إم',
@@ -194,7 +196,8 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                 $items->item_name,
                 $items->qty,
                 $items->unit,
-                $items->package,
+                $items->package_qty,
+                $items->package_unit,
                 $items->price,
                 $items->total_price,
                 $items->cpm,
@@ -206,7 +209,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
 
     public function title(): string
     {
-    	return 'Qoute 6';
+    	return 'عرض سعر' . $this->qoute;
     }
 
     // public function registerEvents(): array
@@ -254,7 +257,8 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                 'qt_items.item_name',
                 'qt_items.qty',
                 'units.name as unit',
-                DB::raw('concat(qt_items.package_qty," ",package_units.name) as package'),
+                'qt_items.package_qty',
+                'package_units.name as package_unit',
                 DB::raw('qt_items.price+0 as price'),
                 DB::raw('qt_items.qty*qt_items.package_qty*qt_items.price as total_price'),
                 DB::raw('qt_items.qty*qt_items.cpm as total_cpm'),
