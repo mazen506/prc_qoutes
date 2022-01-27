@@ -15,7 +15,7 @@
 
 <div class='form-row'>
     <div class="col-sm-6 {{ $errors->has('name') ? 'has-error' : '' }}">
-        <label for="name">{{ trans('cruds.qoute.fields.name') }}*</label>
+        <label for="name">{{ trans('cruds.qoute.fields.customer') }}*</label>
         <input type="text" id="name" name="name" class="form-control" value="{{ old('name', optional($qoute)->name) }}" required>
         
         

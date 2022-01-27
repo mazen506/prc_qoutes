@@ -105,6 +105,7 @@ return [
             'id_helper'             => '',
             'user'         => 'إسم العميل',
             'name'  => 'إسم العرض',
+            'customer' => 'إسم العميل',
 			'name_helper'  => '',
             'note'        => 'ملاحظات',
             'note_helper' => '',
