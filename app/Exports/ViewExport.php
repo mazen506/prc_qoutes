@@ -112,53 +112,53 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                 $loop = 0;
                 $row_offset = 11;
 
-                foreach($this->items as $item)
-                {
-                    $drawing = new MemoryDrawing();
-                    $drawing->setName('الشعار');
-                    $drawing->setDescription('مكة للتجارة');
+                // foreach($this->items as $item)
+                // {
+                //     $drawing = new MemoryDrawing();
+                //     $drawing->setName('الشعار');
+                //     $drawing->setDescription('مكة للتجارة');
 
-                    if ($item->images == null)
-                        continue;
+                //     if ($item->images == null)
+                //         continue;
 
-                    $img = explode('|', $item->images)[0];
-                    $source = 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' . $img;
-                    $stype = explode('.', $img)[1];
-                    switch($stype) {
-                        case 'gif':
-                        $simg = imagecreatefromgif($source);
-                        break;
-                        case 'jpg':
-                        $simg = imagecreatefromjpeg($source);
-                        break;
-                        case 'png':
-                        $simg = imagecreatefrompng($source);
-                        break;
-                    }
+                //     $img = explode('|', $item->images)[0];
+                //     $source = 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' . $img;
+                //     $stype = explode('.', $img)[1];
+                //     switch($stype) {
+                //         case 'gif':
+                //         $simg = imagecreatefromgif($source);
+                //         break;
+                //         case 'jpg':
+                //         $simg = imagecreatefromjpeg($source);
+                //         break;
+                //         case 'png':
+                //         $simg = imagecreatefrompng($source);
+                //         break;
+                //     }
                     
-                    imagesavealpha($simg, true);
-                  //  $simg= imagescale ( $simg, 50 , 50);
+                //     imagesavealpha($simg, true);
+                //   //  $simg= imagescale ( $simg, 50 , 50);
 
-                    $row_number = $row_offset + $loop;
-                    $drawing->setImageResource($simg);
-                    $drawing->setResizeProportional(false);
-                    $drawing->setWidth(50);
-                    $drawing->setHeight(50);
-                    $drawing->setCoordinates('C' . $row_number);
-                    $drawing->setWorksheet($event->sheet->getDelegate());
-                    $event->sheet->getRowDimension($row_number)->setRowHeight(50);
+                //     $row_number = $row_offset + $loop;
+                //     $drawing->setImageResource($simg);
+                //     $drawing->setResizeProportional(false);
+                //     $drawing->setWidth(50);
+                //     $drawing->setHeight(50);
+                //     $drawing->setCoordinates('C' . $row_number);
+                //     $drawing->setWorksheet($event->sheet->getDelegate());
+                //     $event->sheet->getRowDimension($row_number)->setRowHeight(50);
 
-                    //Align
-                    $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
-                                ->getAlignment()
-                                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-                                ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-                    $drawing->setOffsetX(5);
-                    $drawing->setOffsetY(5);
+                //     //Align
+                //     $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
+                //                 ->getAlignment()
+                //                 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+                //                 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                //     $drawing->setOffsetX(5);
+                //     $drawing->setOffsetY(5);
 
-                    //Remove Background
-                    $loop++;
-                }
+                //     //Remove Background
+                //     $loop++;
+                // }
              },
          ];
     }
