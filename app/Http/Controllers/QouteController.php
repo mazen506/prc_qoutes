@@ -295,18 +295,17 @@ class QouteController extends Controller
     public function createPdf(int $qoute){
 
       $qoute = Qoute::with(['items' => function($query){
-        $query->where('qty', '!=' , 0);
-    }])->find($qoute);
+            $query->where('qty', '!=' , 0);
+      }])->find($qoute);
       $units = Unit::all();
       $vendor = User::find($qoute->user_id);
       $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
-      //return view('qoute_pdf', compact('qoute','units','vendor','currency'));
-      $pdf = PDF::loadView('qoute_pdf', compact('qoute','units','vendor','currency'));
-      $pdf->setOption('enable-javascript', true);
-      $pdf->setOption('margin-top', 10);
-      $pdf->setOption('margin-bottom', 10);
-      return $pdf->download('qoute_' . $qoute->id . '.pdf');
-
+      return view('qoute_pdf', compact('qoute','units','vendor','currency'));
+      // $pdf = PDF::loadView('qoute_pdf', compact('qoute','units','vendor','currency'));
+      // $pdf->setOption('enable-javascript', true);
+      // $pdf->setOption('margin-top', 10);
+      // $pdf->setOption('margin-bottom', 10);
+      // return $pdf->download('qoute_' . $qoute->id . '.pdf');
     }
 
     /**
