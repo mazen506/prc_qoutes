@@ -37,7 +37,7 @@
             	    window.translations = {!! Cache::get('translations') !!};
         </script>
 
-        <script src="/js/app.js" defer></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
