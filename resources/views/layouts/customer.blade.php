@@ -23,14 +23,14 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="/css/app.css">
         @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+            <link rel="stylesheet" href="/css/custom.css">
         @else
-            <link rel="stylesheet" href="{{ asset('css/custom_rtl.css') }}">
+            <link rel="stylesheet" href="/css/custom_rtl.css">
         @endif
 
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="/js/app.js" defer></script>
 
     </head>
     <body class="font-sans antialiased">
@@ -84,6 +84,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/custom.js"></script>
 </html>
