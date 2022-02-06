@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 
@@ -22,14 +22,14 @@
         
         
 
-    <script src="/js/main.js"></script>
-    <script src="/js/custom.js" defer></script>
+    <script src="{{ mix('js/main.js') }}"></script>
+    <script src="{{ mix('js/custom.js') }}" defer></script>
         <!-- Styles -->
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="/css/custom.css">
+            <link rel="stylesheet" href="{{ mix('css/custom.css') }}">
         @else
-            <link rel="stylesheet" href="/css/custom_rtl.css">
+            <link rel="stylesheet" href="{{ mix('css/custom_rtl.css') }}">
         @endif
 
         <!-- Scripts -->
