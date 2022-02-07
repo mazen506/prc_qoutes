@@ -230,7 +230,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setDescription('مكة للتجارة');
         $drawing->setOffsetX(15);
         $drawing->setOffsetY(15);
-        $simg = imagecreatefrompng( $storage_url . '/images/CHTLM0KC5NIhgBb2ZsLuruyzNCUGbz5GLvxDwdTy.png');
+        $simg = imagecreatefrompng( storage_url . '/images/CHTLM0KC5NIhgBb2ZsLuruyzNCUGbz5GLvxDwdTy.png');
         imagesavealpha($simg, true);
         $drawing->setImageResource($simg);
         $drawing->setResizeProportional(false);
