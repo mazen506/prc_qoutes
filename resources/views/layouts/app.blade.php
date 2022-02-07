@@ -22,14 +22,14 @@
         
         
 
-    <script src="{{ mix('/js/main.js') }}"></script>
-    <script src="{{ mix('/js/custom.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('/js/custom.js') }}" defer></script>
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mis('/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
         @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="{{ mix('/css/custom.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
         @else
-            <link rel="stylesheet" href="{{ mix('/css/custom_rtl.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/custom_rtl.css') }}">
         @endif
 
         <!-- Scripts -->
@@ -37,7 +37,7 @@
             	    window.translations = {!! Cache::get('translations') !!};
         </script>
 
-        <script src="{{ mix('/js/app.js') }}" defer></script>
+        <script src="{{ asset('/js/app.js') }}" defer></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
