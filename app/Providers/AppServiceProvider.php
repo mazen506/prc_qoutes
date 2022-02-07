@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,7 +26,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        error_reporting(E_ALL ^ E_NOTICE);
+        
+        View::share('storage_url', 'https://mazmustaws.s3.us-east-2.amazonaws.com');
+        //remove index.php from url
+        // if (Str::endsWith(Arr::get($_SERVER, 'REQUEST_URI', ''), 'index.php')) {
+        //     abort(404);
+        //  }
+        //error_reporting(E_ALL ^ E_NOTICE);
     }
 }

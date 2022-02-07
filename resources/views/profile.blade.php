@@ -52,7 +52,7 @@
                     <label for='profile-logo-file'>{{ __("global.logo") }}</label>
                     <div class='logo-container'>
                         <img src='/storage/images/camera.png' class='logo-container-camera'>
-                        <img src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$user->logo ?? 'img-place-holder.png' }}" id='img-profile-logo'>
+                        <img src="{{ $storage-url }}/images/{{$user->logo ?? 'img-place-holder.png' }}" id='img-profile-logo'>
                     </div>
                 </div>
 

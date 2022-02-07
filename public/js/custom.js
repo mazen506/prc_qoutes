@@ -267,7 +267,7 @@ function buildImageViewer(data){
                         $('#image-viewer').append( "<div class='carousel-item img-wrap'>");
             
             $('#image-viewer').children(':last-child').append("<span class='btn-del-image'><img src='/storage/images/delete_icon.png'><input type=hidden value='" + data[key] + "'></span>" + 
-            "<img src='https://mazmustaws.s3.us-east-2.amazonaws.com/images/" + data[key] + "'></div>");
+            "<img src='" + window.storage_url + "/images/" + data[key] + "'></div>");
           });
 
           //Display the last image
@@ -345,7 +345,7 @@ $('.item-image').click(function(){
             else
                     $('#item-images-viewer').append( "<div class='carousel-item'>");
 
-            $('#item-images-viewer').children(':last-child').append("<img src='https://mazmustaws.s3.us-east-2.amazonaws.com/images/" + item_images[key] + "'>"); 
+            $('#item-images-viewer').children(':last-child').append("<img src='" + window.storage_url + "/images/" + item_images[key] + "'>"); 
             $('#item-images-viewer').append("</div>");
         }
     }
@@ -457,7 +457,7 @@ function saveRecord(item){
     //set item image
     var item_image = item_images_str.value.split('|')[0];
     
-    $('#item' + item).find('td:nth-child(3)').find('img:first').attr('src', 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + item_image);
+    $('#item' + item).find('td:nth-child(3)').find('img:first').attr('src', window.storage_url  + '/images/' + item_image);
 
     
     if (!units) //New
@@ -510,7 +510,7 @@ function previewImages(item_images){
         else
                 $('#items-image-viewer').append( "<div class='carousel-item'>");
 
-        $('#items-image-viewer').append("<img src='https://mazmustaws.s3.us-east-2.amazonaws.com/images/" + val.image_name + "'>"); 
+        $('#items-image-viewer').append("<img src='" + window.storage_url + "/images/" + val.image_name + "'>"); 
         $('#items-image-viewer').append("<div>");
     };
 }

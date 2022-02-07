@@ -126,7 +126,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         continue;
 
                     $img = explode('|', $item->images)[0];
-                    $source = 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' . $img;
+                    $source = storage-url + '/images/' . $img;
                     $stype = explode('.', $img)[1];
                     switch($stype) {
                         case 'gif':
@@ -230,7 +230,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setDescription('مكة للتجارة');
         $drawing->setOffsetX(15);
         $drawing->setOffsetY(15);
-        $simg = imagecreatefrompng('https://mazmustaws.s3.us-east-2.amazonaws.com/images/CHTLM0KC5NIhgBb2ZsLuruyzNCUGbz5GLvxDwdTy.png');
+        $simg = imagecreatefrompng( $storage_url . '/images/CHTLM0KC5NIhgBb2ZsLuruyzNCUGbz5GLvxDwdTy.png');
         imagesavealpha($simg, true);
         $drawing->setImageResource($simg);
         $drawing->setResizeProportional(false);

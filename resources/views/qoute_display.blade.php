@@ -2,7 +2,7 @@
 <x-slot name="header">
         <div class='customer-layout-header'>
             <div class='layout-logo'>
-                <img src='https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$vendor->logo}}'>
+                <img src='{{ storage_url }}/images/{{$vendor->logo}}'>
                 <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
             </div>
         </div>
@@ -74,7 +74,7 @@
                                             $item_image = explode("|", $item_images)[0];
                                         @endphp
                                         <input type=hidden name='item_images_str' value={{$item_images}}>
-                                        <image class='item-image' src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$item_image}}"> 
+                                        <image class='item-image' src="{{ storage_url }}/images/{{$item_image}}"> 
                                     </td>
                                     <td class='col-item-name'>
                                         {{ $item->item_name }}
@@ -151,7 +151,7 @@
 				            <div id="footer_about_me-3" class="footer-widget widget-footer-about-me about-me-widget clr">
 				                <div class="footer-about-me">
                 					<div class="footer-about-me-avatar clr">
-											<img src="https://mazmustaws.s3.us-east-2.amazonaws.com/images/{{$vendor->logo}}" alt="">
+											<img src="{{ storage_url }}/images/{{$vendor->logo}}" alt="">
                 					</div><!-- .footer-about-me-avatar -->
 
 									<div class="footer-about-me-text clr">

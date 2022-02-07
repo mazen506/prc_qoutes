@@ -170,7 +170,7 @@
                                 console.log('Passed Images: ' + i + ' : ' + images.length);
                                 var file = { name: images[i], size: 12345 };
                                 dropzone.options.addedfile.call(dropzone, file);
-                                dropzone.options.thumbnail.call(dropzone, file, 'https://mazmustaws.s3.us-east-2.amazonaws.com/images/' + file.name);
+                                dropzone.options.thumbnail.call(dropzone, file, window.storage_url + '/images/' + file.name);
                                 dropzone.emit('complete', file);
                     }
                 }

@@ -11,15 +11,15 @@
 
         <!-- Styles -->
       
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
         @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="/css/custom.css">
+            <link rel="stylesheet" href="{{ asset ('/css/custom.css') }}">
         @else
-            <link rel="stylesheet" href="/css/custom_rtl.css">
+            <link rel="stylesheet" href="{{ asset('/css/custom_rtl.css') }} ">
         @endif
 
         <!-- Scripts -->
-        <script src="/js/app.js" defer></script>
+        <script src="{{ asset('/js/app.js') }}" defer></script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
