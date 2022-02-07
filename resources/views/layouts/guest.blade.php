@@ -20,6 +20,9 @@
 
         <!-- Scripts -->
         <script src="{{ asset('/js/app.js') }}" defer></script>
+        <script>
+            window.storage_url = "{{ $storage_url }}";
+        </script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

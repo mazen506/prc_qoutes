@@ -31,6 +31,9 @@
         @endif
 
         <script src="{{ asset('/js/app.js') }}" defer></script>
+        <script>
+            window.storage_url = "{{ $storage_url }}";
+        </script>
 
     </head>
     <body class="font-sans antialiased">
