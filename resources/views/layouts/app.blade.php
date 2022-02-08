@@ -36,7 +36,7 @@
         <script>
             	    window.translations = {!! Cache::get('translations') !!};
                     window.storage_url = "{{ $storage_url }}";
-                    //console.log('Storage Url: ' + window.storage_url);
+                    console.log('Storage Url: ' + window.storage_url);
         </script>
 
         <script src="{{ asset('/js/app.js') }}" defer></script>

@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         
-        View::share('storage_url', 'https://mazmustaws.s3.us-east-2.amazonaws.com');
+        //View::share('storage_url', 'https://mazmustaws.s3.us-east-2.amazonaws.com');
         //remove index.php from url
         // if (Str::endsWith(Arr::get($_SERVER, 'REQUEST_URI', ''), 'index.php')) {
         //     abort(404);
