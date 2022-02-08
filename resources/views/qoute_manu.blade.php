@@ -304,7 +304,7 @@ function listItems(data){
             var item_image;
             if (item.images)
             {   item_image = item.images.split('|')[0];
-                $('#item' + index).find('td:nth-child(3)').find('img:first').attr('src', storage-url + '/images/' + item_image);
+                $('#item' + index).find('td:nth-child(3)').find('img:first').attr('src', window.storage_url + '/images/' + item_image);
             }
             item_no = index;
             });

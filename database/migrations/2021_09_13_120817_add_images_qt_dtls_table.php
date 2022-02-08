@@ -14,7 +14,7 @@ class AddImagesQtDtlsTable extends Migration
     public function up()
     {
         Schema::table('qt_items', function (Blueprint $table) {
-            $table->string("images");
+            $table->string("images")->nullable();
         });
     }
 

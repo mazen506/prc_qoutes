@@ -20,8 +20,7 @@
         <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/droid-arabic-kufi" type="text/css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
         
-        
-
+       
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('/js/custom.js') }}" defer></script>
         <!-- Styles -->

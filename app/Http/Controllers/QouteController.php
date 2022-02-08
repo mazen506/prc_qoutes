@@ -60,8 +60,8 @@ class QouteController extends Controller
     public function addImage(Request $request){
       try {
             $image = $request->file('file');
-            $path = Storage::disk('s3')->put('images',$image);
-            //$path = Storage::disk('public')->put('images', $image);
+            //$path = Storage::disk('s3')->put('images',$image);
+            $path = Storage::disk('public')->put('images', $image);
             $image_name = explode('/', $path)[1];
             return response()->json(['image_name'=>$image_name]);
       }
@@ -77,12 +77,13 @@ class QouteController extends Controller
           if ($request->image_name) {
              try{
                   //To Be Added: update images field code here
-                   Storage::disk('s3')->delete('images/' . $request->image_name);
+                  //Storage::disk('s3')->delete('images/' . $request->image_name);
+                  Storage::disk('public')->delete('images/' . $request->image_name);
                   //unlink(storage_path('app\\public\\images\\' . $request->image_name));
                   return true;
              } catch (Throwable $e) {
                   report($e);
-                  return false;
+                  return true;
              }
           }
     }
