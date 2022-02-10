@@ -81,7 +81,7 @@
                 <div class="cust-header">
                 <div class='customer-layout-header'>
                     <div class='layout-logo'>
-                    <img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("http://localhost:8000/storage/user_images/$vendor->logo")))}}'>
+                    <img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("storage/user_images/$vendor->logo")))}}'>
                     <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
                 </div>
         </div>
@@ -219,7 +219,7 @@
 				            <div id="footer_about_me-3" class="footer-widget widget-footer-about-me about-me-widget clr">
 				                <div class="footer-about-me">
                 					<div class="footer-about-me-avatar clr">
-											<img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("$storage_url/user_images/$vendor->logo")))}}'>
+											<img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("storage/user_images/$vendor->logo")))}}'>
                 					</div><!-- .footer-about-me-avatar -->
 
 									<div class="footer-about-me-text clr">
