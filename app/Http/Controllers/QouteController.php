@@ -61,7 +61,7 @@ class QouteController extends Controller
       try {
             $image = $request->file('file');
             //$path = Storage::disk('s3')->put('images',$image);
-            $path = Storage::disk('public')->put('images', $image);
+            $path = Storage::disk('public')->put('user_images', $image);
             //dd($path);
             $image_name = explode('/', $path)[1];
             return response()->json(['image_name'=>$image_name]);
@@ -79,7 +79,7 @@ class QouteController extends Controller
              try{
                   //To Be Added: update images field code here
                   //Storage::disk('s3')->delete('images/' . $request->image_name);
-                  Storage::disk('public')->delete('images/' . $request->image_name);
+                  Storage::disk('public')->delete('user_images/' . $request->image_name);
                   //unlink(storage_path('app\\public\\images\\' . $request->image_name));
                   return true;
              } catch (Throwable $e) {
@@ -112,7 +112,7 @@ class QouteController extends Controller
 			  ]);
 		
       $item_chks = $request->input('item_chks', []);
-      $item_images_str = $request->input('item_images_str', []);
+      $user_images_str = $request->input('user_images_str', []);
       $item_names = $request->input('item_names', []);
       $item_units = $request->input('item_units', []);
       $item_package_qtys = $request->input('item_package_qtys', []);
@@ -122,7 +122,7 @@ class QouteController extends Controller
       $item_qtys = $request->input('item_qtys', []);
       $item_notes = $request->input('item_notes', []);
 			$items = [];
-      
+
 			for ($item_number=0; $item_number < count($item_names); $item_number++) {
 				if ($item_names[$item_number] != '') {
           // if ($is_copy && $item_chks[$item_number] == false)
@@ -136,7 +136,7 @@ class QouteController extends Controller
                    'cpm' => $item_cpms[$item_number],
                    'qty' => $item_qtys[$item_number],
                    'note' => $item_notes[$item_number],
-                   'images' => $item_images_str[$item_number],
+                   'images' => $user_images_str[$item_number],
                 ]);
 				}
 			}
@@ -226,7 +226,7 @@ class QouteController extends Controller
           $item_ids = $request->input('item_ids', []);
           $is_edited_flags = $request->input('is_edited_flags', []);
           $item_names = $request->input('item_names', []);
-          $item_images_str = $request->input('item_images_str', []);
+          $user_images_str = $request->input('user_images_str', []);
           $item_units = $request->input('item_units', []);
           $item_package_qtys = $request->input('item_package_qtys', []);
           $item_package_units = $request->input('item_package_units', []);
@@ -258,7 +258,7 @@ class QouteController extends Controller
                       $item->cpm = $item_cpms[$index];
                       $item->qty = $item_qtys[$index];
                       $item->note = $item_notes[$index];
-                      $item->images = $item_images_str[$index];
+                      $item->images = $user_images_str[$index];
                       array_push($items, $item);
                   }
                     
@@ -273,7 +273,7 @@ class QouteController extends Controller
                         'cpm' => $item_cpms[$index],
                         'qty' => $item_qtys[$index],
                         'note' => $item_notes[$index],
-                        'images' => $item_images_str[$index]
+                        'images' => $user_images_str[$index]
                       ]);
                       array_push($items,$item);
                 }

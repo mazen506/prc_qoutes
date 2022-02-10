@@ -2,7 +2,7 @@
 <x-slot name="header">
         <div class='customer-layout-header'>
             <div class='layout-logo'>
-                <img src='{{ $storage_url }}/images/{{$vendor->logo}}'>
+                <img src='{{ $storage_url }}/user_images/{{$vendor->logo}}'>
                 <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
             </div>
         </div>
@@ -70,11 +70,11 @@
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
                                     <td class='col-item-image align-center'>
                                         @php 
-                                            $item_images = $item->images;
-                                            $item_image = explode("|", $item_images)[0];
+                                            $images = $item->images;
+                                            $item_image = explode("|", $images)[0];
                                         @endphp
-                                        <input type=hidden name='item_images_str' value={{$item_images}}>
-                                        <image class='item-image' src="{{ $storage_url }}/images/{{$item_image}}"> 
+                                        <input type=hidden name='user_images_str' value={{$images}}>
+                                        <image class='item-image' src="{{ $storage_url }}/user_images/{{$item_image}}"> 
                                     </td>
                                     <td class='col-item-name'>
                                         {{ $item->item_name }}
@@ -151,7 +151,7 @@
 				            <div id="footer_about_me-3" class="footer-widget widget-footer-about-me about-me-widget clr">
 				                <div class="footer-about-me">
                 					<div class="footer-about-me-avatar clr">
-											<img src="{{ $storage_url }}/images/{{$vendor->logo}}" alt="">
+											<img src="{{ $storage_url }}/user_images/{{$vendor->logo}}" alt="">
                 					</div><!-- .footer-about-me-avatar -->
 
 									<div class="footer-about-me-text clr">

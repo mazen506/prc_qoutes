@@ -148,7 +148,7 @@ th.col-item-name {
 
     
 }
-.file_item_images {
+.file_user_images {
     visibility: hidden;
 }
 .cust-menu {
@@ -305,7 +305,7 @@ thead.thead-dark {
     font-size: 0;
 }
 
-#file_item_images {
+#file_user_images {
  display: none;
 }
 

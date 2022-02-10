@@ -8,7 +8,7 @@ return [
     'item_details'                          => 'Item Details',
     'item_name'                           	   => 'Item Name',
     'qoute_name'                           	   => 'Qoute Name',    
-    'item_images'                           	   => 'Item Images',
+    'user_images'                           	   => 'Item Images',
     'images'    => 'Images',
     'package'                           	   => 'Package',
     'unit'                           	   => 'Unit',

@@ -85,7 +85,7 @@
                         <td class='col-item-image'>
                             <input type=hidden name="item_ids[]" value=0>
                             <input type=hidden name="is_edited_flags[]">
-                            <input type=hidden name='item_images_str[]'>
+                            <input type=hidden name='user_images_str[]'>
                             <image class='item-image' src=""> 
                         </td>
                         <td class='col-item-name'>
@@ -139,11 +139,11 @@
                                 <input type=hidden name="is_edited_flags[]" value=0>
                                 @if (!empty($item))
                                     @php 
-                                        $item_images = old('item_images_str.' . $loop->index,  optional($item)->images);
-                                        $item_image = explode("|", $item_images)[0];
+                                        $user_images = old('user_images_str.' . $loop->index,  optional($item)->images);
+                                        $item_image = explode("|", $user_images)[0];
                                     @endphp
-                                    <input type=hidden name='item_images_str[]' value={{$item_images}}>
-                                    <image class='item-image' src="{{ $storage_url }}/images/{{$item_image}}"> 
+                                    <input type=hidden name='user_images_str[]' value={{$user_images}}>
+                                    <image class='item-image' src="{{ $storage_url }}/user_images/{{$item_image}}"> 
                                 @endif
                             </td>
                             <td class='col-item-name'>

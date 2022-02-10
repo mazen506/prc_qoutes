@@ -1,7 +1,7 @@
 /node_modules
 /public/hot
-/public/storage/item_images
-/storage/app/public/item_images
+/public/storage/user_images
+/storage/app/public/user_images
 /storage/*.key
 /config/database.php
 /vendor

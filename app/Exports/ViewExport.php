@@ -31,7 +31,7 @@ use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 
 
 class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustomStartCell,
-                            WithDrawings,WithTitle,WithEvents,WithStyles,ShouldAutoSize
+                            WithTitle,WithEvents,WithStyles,ShouldAutoSize
 {
     use Exportable;
     protected $qoute;
@@ -74,6 +74,22 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         return [
             AfterSheet::class    => function(AfterSheet $event) {
    
+                //Set the logo 
+                $drawing = new MemoryDrawing();
+        $drawing->setName('الشعار');
+        $drawing->setDescription('مكة للتجارة');
+        $drawing->setOffsetX(15);
+        $drawing->setOffsetY(15);
+        $simg = imagecreatefrompng( env('STORAGE_URL') . '/user_images/' . $this->vendor->logo );
+        imagesavealpha($simg, true);
+        $drawing->setImageResource($simg);
+        $drawing->setResizeProportional(false);
+        $drawing->setWidth(80);
+        $drawing->setHeight(80);
+        // $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
+        // $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
+        $drawing->setCoordinates('B1');
+
                 //Right To left
                 $event->getDelegate()->setRightToLeft(true);
 //                $event->sheet->getDelegate()->getRowDimension('3')->setRowHeight(50);
@@ -126,7 +142,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         continue;
 
                     $img = explode('|', $item->images)[0];
-                    $source = config('global.storage_url') . '/images/' . $img;
+                    $source = env('STORAGE_URL') . '/user_images/' . $img;
                     $stype = explode('.', $img)[1];
                     switch($stype) {
                         case 'gif':
@@ -222,26 +238,13 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
     //     ];
     // }
 
-    public function drawings()
-    {
+    // public function drawings()
+    // {
 
-        $drawing = new MemoryDrawing();
-        $drawing->setName('الشعار');
-        $drawing->setDescription('مكة للتجارة');
-        $drawing->setOffsetX(15);
-        $drawing->setOffsetY(15);
-        $simg = imagecreatefrompng( config('global.storage_url') . '/images/icon_lang_ar.jpg');
-        imagesavealpha($simg, true);
-        $drawing->setImageResource($simg);
-        $drawing->setResizeProportional(false);
-        $drawing->setWidth(80);
-        $drawing->setHeight(80);
-        // $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
-        // $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
-        $drawing->setCoordinates('B1');
         
-        return $drawing;
-    }
+        
+    //     return $drawing;
+    // }
     public function collection()
     {
         DB::statement(DB::raw('set @rownum=0'));

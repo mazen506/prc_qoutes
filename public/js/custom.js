@@ -30,13 +30,13 @@ function delImage(file)
         form_data.append( 'image_name', image_name );
 
         // Reconstruct images
-        var image_list = $('#item_images_str').val().split('|');
+        var image_list = $('#user_images_str').val().split('|');
         for(var i=0; i<image_list.length; i++) {
             if (image_list[i] === image_name)
                 image_list.splice(i,1);
         }
 
-        $('#item_images_str').val('');
+        $('#user_images_str').val('');
         
 
         //Delete image from disk
@@ -54,8 +54,8 @@ function delImage(file)
                 showSpinner(false);
 
                 //Reconstruct ImageStr
-                item_images_str = image_list.join('|');
-                $('#item_images_str').val(item_images_str);
+                user_images_str = image_list.join('|');
+                $('#user_images_str').val(user_images_str);
 
                 // var fileRef;
                 // return (fileRef = file.previewElement) != null ?
@@ -167,7 +167,7 @@ function copyToClipBoard(txt) {
     
 
     /**************** Upload Item Images ******************/ 
-    $("#file_item_images").on('change', function(e) {
+    $("#file_user_images").on('change', function(e) {
 
         $.ajaxSetup({
             headers: {
@@ -211,14 +211,14 @@ function showFlashMessage(message)
 }
 
 function buildImageStr(data){
-    let item_images_str = $('#item_images_str').val();
+    let user_images_str = $('#user_images_str').val();
     //$.each( data, function( key, val ) {
         // Fill Images String
-        item_images_str = item_images_str.concat( item_images_str == ''  ? '' : '|', data.image_name);
+        user_images_str = user_images_str.concat( user_images_str == ''  ? '' : '|', data.image_name);
     //});
-    $('#item_images_str').val(item_images_str);
-    console.log('Image String:' + item_images_str);
-    //buildImageViewer(item_images_str);
+    $('#user_images_str').val(user_images_str);
+    console.log('Image String:' + user_images_str);
+    //buildImageViewer(user_images_str);
 }
 
 
@@ -245,7 +245,7 @@ function buildImageViewer(data){
             
         //     $('#image-viewer').children(':last-child').children(':first-child').append("<div class='img-wrap col-sm-4'>" + 
         //     "<span class='btn-del-image'>&times;<input type=hidden value='" + data[key] + "'></span>" + 
-        //     "<img src='/storage/item_images/" + data[key] + "'></div>");
+        //     "<img src='/storage/user_images/" + data[key] + "'></div>");
         //     let keyex = key + 1;
             
         //     if (keyex%3 === 0)  // Close the div                                             
@@ -266,8 +266,8 @@ function buildImageViewer(data){
                 else
                         $('#image-viewer').append( "<div class='carousel-item img-wrap'>");
             
-            $('#image-viewer').children(':last-child').append("<span class='btn-del-image'><img src='/storage/images/delete_icon.png'><input type=hidden value='" + data[key] + "'></span>" + 
-            "<img src='" + window.storage_url + "/images/" + data[key] + "'></div>");
+            $('#image-viewer').children(':last-child').append("<span class='btn-del-image'><img src='/storage/user_images/delete_icon.png'><input type=hidden value='" + data[key] + "'></span>" + 
+            "<img src='" + window.storage_url + "user_images/" + data[key] + "'></div>");
           });
 
           //Display the last image
@@ -285,7 +285,7 @@ function clearModal(item){
     $('.carousel-control-prev, .carousel-control-next').css('display','none');
     $('#itemDtlsModal .modal-body').scrollTop(0); 
     $('#item_name').focus();
-    $('#file_item_images').val('');
+    $('#file_user_images').val('');
     if (dropzone)
     {   //console.log('passed clearing;');
         //dropzone.removeAllFiles();
@@ -340,19 +340,19 @@ $('#btn-add-item').click(function(e){
 
 $('.item-image').click(function(){
     $('#item-images-viewer').empty();
-    var item_images = $(this).prev().val().split("|");
+    var user_images = $(this).prev().val().split("|");
 
-    if (item_images.length>0)
+    if (user_images.length>0)
     {
         $('#itemImagesModal').modal('show');
-        for(var key = 0 ; key<item_images.length; key++)
+        for(var key = 0 ; key<user_images.length; key++)
         {   
             if (key == 0) 
                     $('#item-images-viewer').append( "<div class='carousel-item active'>");
             else
                     $('#item-images-viewer').append( "<div class='carousel-item'>");
 
-            $('#item-images-viewer').children(':last-child').append("<img src='" + window.storage_url + "/images/" + item_images[key] + "'>"); 
+            $('#item-images-viewer').children(':last-child').append("<img src='" + window.storage_url + "/user_images/" + user_images[key] + "'>"); 
             $('#item-images-viewer').append("</div>");
         }
     }
@@ -432,7 +432,7 @@ function saveRecord(item){
     showSpinner(true);
 // Get item fields
     var item_id = document.getElementsByName('item_ids[]')[item];
-    var item_images_str = document.getElementsByName('item_images_str[]')[item];
+    var user_images_str = document.getElementsByName('user_images_str[]')[item];
     var item_name = document.getElementsByName('item_names[]')[item];
     var item_unit = document.getElementsByName('item_units[]')[item];
     var item_unit_name = document.getElementsByName('item_units_names[]')[item];
@@ -449,7 +449,7 @@ function saveRecord(item){
     if (isNew) //New
         item_id.value = 0; // New Record
 
-    item_images_str.value = $("#item_images_str").val();
+    user_images_str.value = $("#user_images_str").val();
     item_name.value = $("#item_name").val();
     item_unit.value = $("#item_unit").val();
     item_unit_name.innerHTML = $("#item_unit :selected").text().trim();
@@ -462,9 +462,9 @@ function saveRecord(item){
     item_note.value = $("#item_note").val();
 
     //set item image
-    var item_image = item_images_str.value.split('|')[0];
+    var item_image = user_images_str.value.split('|')[0];
     
-    $('#item' + item).find('td:nth-child(3)').find('img:first').attr('src', window.storage_url  + '/images/' + item_image);
+    $('#item' + item).find('td:nth-child(3)').find('img:first').attr('src', window.storage_url  + '/user_images/' + item_image);
 
     
     if (!units) //New
@@ -480,7 +480,7 @@ function fillItemModal(item){
 
 
 var item_id = document.getElementsByName('item_ids[]')[item];
-var item_images_str = document.getElementsByName('item_images_str[]')[item];
+var user_images_str = document.getElementsByName('user_images_str[]')[item];
 var item_name = document.getElementsByName('item_names[]')[item];
 var item_unit = document.getElementsByName('item_units[]')[item];
 var item_package_qty = document.getElementsByName('item_package_qtys[]')[item];
@@ -500,29 +500,29 @@ $('#item_price').val(item_price.value);
 $('#item_cpm').val(item_cpm.value);
 $('#item_qty').val(item_qty.value);
 $('#item_note').val(item_note.value);
-$('#item_images_str').val(item_images_str.value);
+$('#user_images_str').val(user_images_str.value);
 
 console.log('Filling Images..');
 fillDropZoneImages();
 calItemModalTotals();
 //fill Images
-//buildImageViewer(item_images_str.value);
+//buildImageViewer(user_images_str.value);
 
 
 }
 
 
-function previewImages(item_images){
+function previewImages(user_images){
     $('#item-images-viewer').empty();
-    var item_images = item_images.split("|");
+    var user_images = user_images.split("|");
 
-    for(var key = 0; key<item_images.length; key++)
+    for(var key = 0; key<user_images.length; key++)
     {   if (key == 0) 
                 $('#items-image-viewer').append( "<div class='carousel-item active'>");
         else
                 $('#items-image-viewer').append( "<div class='carousel-item'>");
 
-        $('#items-image-viewer').append("<img src='" + window.storage_url + "/images/" + val.image_name + "'>"); 
+        $('#items-image-viewer').append("<img src='" + window.storage_url + "/user_images/" + val.image_name + "'>"); 
         $('#items-image-viewer').append("<div>");
     };
 }

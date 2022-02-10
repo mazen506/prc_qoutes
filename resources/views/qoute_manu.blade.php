@@ -123,7 +123,7 @@
                     'item_cpm': "required",
                     'item_price': "required",
                     'item_qty': "required",
-                    // 'item_images[]': {required : '#item_images_str:blank'}
+                    // 'user_images[]': {required : '#user_images_str:blank'}
                 },
                 messages: {
                     'item_name': "{{ __('validation.required', ['attribute' => __('global.item_name') ]) }}",
@@ -133,7 +133,7 @@
                     'item_cpm': "{{ __('validation.required', ['attribute' => __('global.cpm') ]) }}",
                     'item_price': "{{ __('validation.required', ['attribute' => __('global.price') ]) }}",
                     'item_qty': "{{ __('validation.required', ['attribute' => __('global.qty') ]) }}",
-                    // 'item_images[]': "{{ __('validation.required', ['attribute' => __('global.item_images') ]) }}",
+                    // 'user_images[]': "{{ __('validation.required', ['attribute' => __('global.user_images') ]) }}",
                 }
             };
 
@@ -273,7 +273,7 @@ function listItems(data){
             // Set Values
             $('#items_table').append('<tr id="item' + (index+1) + '"></tr>');
             var item_id = document.getElementsByName('item_ids[]')[index];
-            var item_images_str = document.getElementsByName('item_images_str[]')[index];
+            var user_images_str = document.getElementsByName('user_images_str[]')[index];
             var item_name = document.getElementsByName('item_names[]')[index];
             var item_unit = document.getElementsByName('item_units[]')[index];
             var item_unit_name = document.getElementsByName('item_units_names[]')[index];
@@ -288,7 +288,7 @@ function listItems(data){
             var item_note = document.getElementsByName('item_notes[]')[index];
 
             item_id.value = item.id;
-            item_images_str.value = item.images;
+            user_images_str.value = item.images;
             item_name.value = item.item_name;
             item_unit.value = item.unit_id;
             item_unit_name.innerHTML = getUnitName(item.unit_id);
@@ -304,7 +304,7 @@ function listItems(data){
             var item_image;
             if (item.images)
             {   item_image = item.images.split('|')[0];
-                $('#item' + index).find('td:nth-child(3)').find('img:first').attr('src', window.storage_url + '/images/' + item_image);
+                $('#item' + index).find('td:nth-child(3)').find('img:first').attr('src', window.storage_url + '/user_images/' + item_image);
             }
             item_no = index;
             });

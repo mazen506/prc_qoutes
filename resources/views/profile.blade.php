@@ -52,7 +52,7 @@
                     <label for='profile-logo-file'>{{ __("global.logo") }}</label>
                     <div class='logo-container'>
                         <img src='/storage/images/camera.png' class='logo-container-camera'>
-                        <img src="{{ $storage_url }}/images/{{$user->logo ?? 'img-place-holder.png' }}" id='img-profile-logo'>
+                        <img src="{{ $storage_url }}/user_images/{{$user->logo ?? 'img-place-holder.png' }}" id='img-profile-logo'>
                     </div>
                 </div>
 

@@ -17,7 +17,7 @@
                     <div class='form-group'>
                         <label for=''>{{ trans('cruds.item.fields.name') }}</label>
                         <input type="text" id="item_name" name="item_name" value="مساطر" class="form-control col-sm-10"  required>
-                        <input type="hidden" id="item_images_str" name="item_images_str" value="164146902656.jpg|1641450814.jpg">
+                        <input type="hidden" id="user_images_str" name="user_images_str" value="164146902656.jpg|1641450814.jpg">
                     </div>
     
                     <div class='form-row'>
@@ -165,17 +165,17 @@
                 isClearingDropzone = true;
                 $('.dz-preview').remove();
                 dropzone.removeAllFiles();
-                console.log('Filling Images function: ' + $('#item_images_str').val());
-                if ($('#item_images_str').val())
+                console.log('Filling Images function: ' + $('#user_images_str').val());
+                if ($('#user_images_str').val())
                 {
                     console.log('Filling Images Loop');
-                    images = $('#item_images_str').val().split('|');
+                    images = $('#user_images_str').val().split('|');
                     //console.log('Images: ' + images.length);
                     for (var i=0; i<images.length; i++) {
                                 console.log('Passed Images: ' + i + ' : ' + images.length);
                                 var file = { name: images[i], size: 12345 };
                                 dropzone.options.addedfile.call(dropzone, file);
-                                dropzone.options.thumbnail.call(dropzone, file, window.storage_url + '/images/' + file.name);
+                                dropzone.options.thumbnail.call(dropzone, file, window.storage_url + '/user_images/' + file.name);
                                 dropzone.emit('complete', file);
                     }
                 }

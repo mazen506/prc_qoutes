@@ -54,7 +54,7 @@
                     'item_package_unit': {required:true, min:1},
                     'item_cpm': "required",
                     'item_price': "required",
-                    // 'item_images[]': "required"
+                    // 'user_images[]': "required"
                 },
                 messages: {
                     'item_name': "{{ __('validation.required', ['attribute' => __('global.item_name') ]) }}",
@@ -63,7 +63,7 @@
                     'item_package_unit': "{{ __('validation.required', ['attribute' => __('global.unit') ]) }}",
                     'item_cpm': "{{ __('validation.required', ['attribute' => __('global.cpm') ]) }}",
                     'item_price': "{{ __('validation.required', ['attribute' => __('global.price') ]) }}",
-                    // 'item_images[]': "{{ __('validation.required', ['attribute' => __('global.item_images') ]) }}",
+                    // 'user_images[]': "{{ __('validation.required', ['attribute' => __('global.user_images') ]) }}",
                 }
             };
 

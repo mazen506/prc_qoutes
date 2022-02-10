@@ -18,7 +18,7 @@
     <div class='form-group'>
         <label for='' class='col-sm-2'>{{ trans('cruds.item.fields.name') }}</label>
         <input type="text" id="item_name" name="item_name" value="مساطر" class="form-control col-sm-10"  required>
-        <input type="hidden" id="item_images_str" name="item_images_str">
+        <input type="hidden" id="user_images_str" name="user_images_str">
     </div>
     
     <div class='form-row'>
@@ -66,11 +66,11 @@
     </div>
     <div class='form-group'>
                 <label>صور المنتج</label>
-                <label class='lbl-img' for="file_item_images">
+                <label class='lbl-img' for="file_user_images">
                     <img src="/storage/images/icon_upload_image.png" width=50 height=50 title="{{ __('global.add_images')}}"/>
                 </label>
-                <input type="file" id="file_item_images" name="item_images[]" multiple>
-                <label id="file_item_images-error" class="error"></label>
+                <input type="file" id="file_user_images" name="user_images[]" multiple>
+                <label id="file_user_images-error" class="error"></label>
     </div>                        
                 
             

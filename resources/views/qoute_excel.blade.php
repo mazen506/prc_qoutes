@@ -79,10 +79,10 @@
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
                                     <td class='col-item-image align-center'>
                                         @php 
-                                            $item_images = $item->images;
-                                            $item_image = explode("|", $item_images)[0];
+                                            $user_images = $item->images;
+                                            $item_image = explode("|", $user_images)[0];
                                         @endphp
-                                        <input type=hidden name='item_images_str' value={{$item_images}}>
+                                        <input type=hidden name='user_images_str' value={{$user_images}}>
                                         
                                     </td>
                                     <td class='col-item-name'>
