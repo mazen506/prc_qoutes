@@ -74,7 +74,7 @@
                     <span class="button-text">{{ __('global.share') }} </span>
                 </a> -->
 
-                <a href="{{url('/qoute/' . $qoute->id)}}" target="_blank" id='btn-share-qoute' class="btn btn-success">
+                <a href="{{url('/qoute/' . $qoute->id . '/ac/' . $qoute->access_code)}}" target="_blank" id='btn-share-qoute' class="btn btn-success">
                         <i class="fa fa-share"></i>
                         <span class="button-text">{{ __('global.display') }} </span>
                 </a>

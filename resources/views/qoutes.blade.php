@@ -46,7 +46,7 @@
 						<td class='align-center'>
 						
                            
-								<a onclick="copyToClipBoard('{{url("/qoute/" . $qoute->id )}}')" class='icon-action-sm'>
+								<a onclick="copyToClipBoard('{{url("/qoute/" . $qoute->id . "/ac/" . $qoute->access_code )}}')" class='icon-action-sm'>
 										<i class="fa fa-share-alt"></i>
 								</a>
 								<a href="{{ route('qoutes.edit', $qoute->id) }}" class='icon-action-sm'>
