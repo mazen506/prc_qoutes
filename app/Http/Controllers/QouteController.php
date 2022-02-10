@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ViewExport;
+use Illuminate\Support\Str;
 
 use PDF;
 
@@ -108,7 +109,8 @@ class QouteController extends Controller
 				  'user_id' => Auth::user()->id,
           'currency_id' => $request->currency,
 				  'curr_vr_id' => 0,
-          'locale'  => app()->getLocale()
+          'locale'  => app()->getLocale(),
+          'access_code' => Str::random(10)
 			  ]);
 		
       $item_chks = $request->input('item_chks', []);
@@ -163,11 +165,17 @@ class QouteController extends Controller
      * @param  \App\Models\Qoute  $qoute
      * @return \Illuminate\Http\Response
      */
-    public function show(int $qoute)
+    public function show(int $qoute, string $access_code)
     {
 		    $qoute = Qoute::with(['items' => function($query){
             $query->where('qty', '!=' , 0);
-        }])->find($qoute);
+        }])->where('id', $qoute)
+           ->where('access_code', $access_code)
+           ->first();
+        
+        if (!$qoute)
+           return abort(404);
+
         $units = Unit::all();
         $vendor = User::find($qoute->user_id);
         $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];
