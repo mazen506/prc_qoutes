@@ -288,7 +288,7 @@ function clearModal(item){
     $('#file_user_images').val('');
     if (dropzone)
     {   //console.log('passed clearing;');
-        //dropzone.removeAllFiles();
+        dropzone.removeAllFiles();
         $('.dz-preview').remove();
 
     }

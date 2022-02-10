@@ -116,7 +116,7 @@
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
         },
         parallelUploads: 1,
-        maxFiles: 1,
+        maxFiles: 4,
         thumbnailHeight: 75,
         thumbnailWidth: 75,
        
@@ -163,9 +163,9 @@
 
         function fillDropZoneImages(){
                 isClearingDropzone = true;
-                $('.dz-preview').remove();
                 dropzone.removeAllFiles();
-                console.log('Filling Images function: ' + $('#user_images_str').val());
+                $('.dz-preview').remove();
+                //console.log('Filling Images function: ' + $('#user_images_str').val());
                 if ($('#user_images_str').val())
                 {
                     console.log('Filling Images Loop');
