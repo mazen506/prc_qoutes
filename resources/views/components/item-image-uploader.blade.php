@@ -102,6 +102,7 @@
 
 <script>
 
+    var isClearingDropzone=false;
     Dropzone.autoDiscover = false;
     //Dropzone.options.fileDropzone = {   
         var dropzone = new Dropzone('#image-upload', {
@@ -111,9 +112,9 @@
         autoProcessQueue:false,
         acceptedFiles: ".jpeg,.jpg,.png,.gif",
         maxFilesize: 4,
-        // headers: {
-        //     'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        // },
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
         parallelUploads: 1,
         maxFiles: 1,
         thumbnailHeight: 75,
@@ -133,8 +134,9 @@
                 });
 
                 this.on('removedfile', function(file){
-                    console.log(file);
-                    delImage(file);
+                    //console.log(file);
+                    if (!isClearingDropzone)
+                        delImage(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -160,10 +162,13 @@
         });
 
         function fillDropZoneImages(){
-                dropzone.removeAllFiles();
+                isClearingDropzone = true;
                 $('.dz-preview').remove();
+                dropzone.removeAllFiles();
+                console.log('Filling Images function: ' + $('#item_images_str').val());
                 if ($('#item_images_str').val())
                 {
+                    console.log('Filling Images Loop');
                     images = $('#item_images_str').val().split('|');
                     //console.log('Images: ' + images.length);
                     for (var i=0; i<images.length; i++) {
@@ -174,6 +179,7 @@
                                 dropzone.emit('complete', file);
                     }
                 }
+                isClearingDropzone = false;
         }
 
         function base64ToFile(dataURI, origFile) {

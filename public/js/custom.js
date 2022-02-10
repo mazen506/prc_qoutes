@@ -286,6 +286,13 @@ function clearModal(item){
     $('#itemDtlsModal .modal-body').scrollTop(0); 
     $('#item_name').focus();
     $('#file_item_images').val('');
+    if (dropzone)
+    {   //console.log('passed clearing;');
+        //dropzone.removeAllFiles();
+        $('.dz-preview').remove();
+
+    }
+    
 }
 
 
@@ -470,6 +477,8 @@ function saveRecord(item){
 
 function fillItemModal(item){
 
+
+
 var item_id = document.getElementsByName('item_ids[]')[item];
 var item_images_str = document.getElementsByName('item_images_str[]')[item];
 var item_name = document.getElementsByName('item_names[]')[item];
@@ -492,10 +501,13 @@ $('#item_cpm').val(item_cpm.value);
 $('#item_qty').val(item_qty.value);
 $('#item_note').val(item_note.value);
 $('#item_images_str').val(item_images_str.value);
+
+console.log('Filling Images..');
+fillDropZoneImages();
 calItemModalTotals();
 //fill Images
 //buildImageViewer(item_images_str.value);
-fillDropZoneImages();
+
 
 }
 

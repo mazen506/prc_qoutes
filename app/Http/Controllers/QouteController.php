@@ -62,6 +62,7 @@ class QouteController extends Controller
             $image = $request->file('file');
             //$path = Storage::disk('s3')->put('images',$image);
             $path = Storage::disk('public')->put('images', $image);
+            //dd($path);
             $image_name = explode('/', $path)[1];
             return response()->json(['image_name'=>$image_name]);
       }
@@ -121,6 +122,7 @@ class QouteController extends Controller
       $item_qtys = $request->input('item_qtys', []);
       $item_notes = $request->input('item_notes', []);
 			$items = [];
+      
 			for ($item_number=0; $item_number < count($item_names); $item_number++) {
 				if ($item_names[$item_number] != '') {
           // if ($is_copy && $item_chks[$item_number] == false)
