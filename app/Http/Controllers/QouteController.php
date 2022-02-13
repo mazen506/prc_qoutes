@@ -51,6 +51,8 @@ class QouteController extends Controller
         return view('qoute_new',compact('units','currencies'));
     }
 
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -218,7 +220,7 @@ class QouteController extends Controller
     {
       $request->validate([
 	    	'name' => 'required',
-        'currency' => 'required',
+        'currency' => 'required'
 	    ]);
 
         DB::beginTransaction();

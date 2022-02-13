@@ -222,7 +222,7 @@ $.ajax({
     },
     success: function (data) {
         showSpinner(false);
-        console.log(data);
+        //console.log(data);
         listItems(data);
         
         if (isNew)
@@ -256,7 +256,8 @@ function initNewItem(){
 
 function listItems(data){
         //Remove All records except for 1,2
-        console.log(data);
+
+        console.log('Saving items' . data);
         $('#items_table tr:gt(1)').remove();
         
         
@@ -339,8 +340,7 @@ function calQouteTotals(){
 
 $('#btn-save-qoute').click(function(e){
     e.preventDefault();
-    isNew=false;
-    $('#btn-item-dtls-save').trigger('click');
+    saveForm(false);
 });
 /* -------------- Save Item ----------------- */
 

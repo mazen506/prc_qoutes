@@ -67,11 +67,9 @@
             page-break-inside: avoid !important;
         }
      
-
     </style>
         
     </head>
-
 
     <body class="font-sans antialiased">
         <div class="cust-screen">
@@ -81,7 +79,7 @@
                 <div class="cust-header">
                 <div class='customer-layout-header'>
                     <div class='layout-logo'>
-                    <img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("storage/user_images/$vendor->logo")))}}'>
+                    <img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("/storage/user_images/$vendor->logo")))}}'>
                     <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
                 </div>
         </div>

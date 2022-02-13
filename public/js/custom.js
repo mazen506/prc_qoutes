@@ -120,7 +120,7 @@ function copyToClipBoard(txt) {
     });
 
 
-    $('#btn-item-dtls-save, #btn-save-qoute').click(function(e){
+    $('#btn-item-dtls-save').click(function(e){
         //Display Errors
         console.log('Saving..');
         if (!$("#frmItemDtls").valid())

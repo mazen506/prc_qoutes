@@ -21,6 +21,10 @@ Route::get('/', function () {
     return Redirect::to('login');
 });
 
+Route::get('/checkpassword', function(){
+    return Hash::check('Test@123', '$2y$10$Lgsd4UexYHOb0Nh6g0SU2ecdlNArYWBO.dH/J5yykmwclIK14xYtu');
+});
+
 
 Route::get('/settings', function () {
     return Redirect::to('/qoutes');

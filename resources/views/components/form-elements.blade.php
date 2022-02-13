@@ -43,7 +43,7 @@
 <div class='form-row'>
    <div class="col {{ $errors->has('note') ? 'has-error' : '' }}">
         <label for="note">{{ trans('cruds.qoute.fields.note') }}</label>
-        <input type="text" id="note" name="note" class="form-control" value="{{ old('note', optional($qoute)->name) }}">
+        <input type="text" id="note" name="note" class="form-control" value="{{ old('note', optional($qoute)->note) }}">
         <p class="helper-block">
             {{ trans('cruds.qoute.fields.note_helper') }}
         </p>
