@@ -442,6 +442,10 @@ thead.thead-dark {
     width:50px;
     }
 
+.logo-img {
+        width:100px;
+}    
+
 .profile-form {
     margin-right: 50px;
     margin-left: 50px;
