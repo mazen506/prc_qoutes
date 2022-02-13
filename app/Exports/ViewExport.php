@@ -39,9 +39,9 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
     protected $currency;
     protected $vendor;
 
-    public function __construct(int $qoute) 
+    public function __construct(Qoute $qoute) 
     {
-        $this->qoute = Qoute::find($qoute);
+        $this->qoute = $qoute;
     }
 
     public function startCell(): string

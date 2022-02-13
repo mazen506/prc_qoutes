@@ -72,7 +72,7 @@ return [
             'id'                => 'رقم المنتج',
             'id_helper'         => '',
             'unit'                => 'الوحدة',            
-            'image'                => 'الصور',
+            'image'                => 'الصورة',
             'image_helper'         => '',
             'images'    => 'الصور',
             'item_name' => 'إسم المنتج',

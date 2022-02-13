@@ -131,11 +131,11 @@
                 </div>
 
                 <div class='row-buttons'>
-                    <a href="{{url('/qoute/' . $qoute->id . '/create-pdf')}}"  class="btn btn-success">
+                    <a href="{{url('/qoute/' . $qoute->id . '/ac/' . $qoute->access_code . '/create-pdf')}}"  class="btn btn-success">
                         <i class="fa fa-download"></i>
                         <span class="button-text">{{ __('global.download') }} </span>
                     </a>
-                    <a href="{{url('/qoute/' . $qoute->id . '/export-excel')}}"  class="btn btn-success">
+                    <a href="{{url('/qoute/' . $qoute->id . '/ac/' . $qoute->access_code .  '/export-excel')}}"  class="btn btn-success">
                         <i class="fa fa-file-excel-o"></i>
                         <span class="button-text">{{ __('global.datatables.excel') }} </span>
                     </a>

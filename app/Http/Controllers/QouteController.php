@@ -301,15 +301,29 @@ class QouteController extends Controller
 
 
     // Export functions
-    public function exportExcel(int $qoute){
+    public function exportExcel(int $qoute, string $access_code){
+      $qoute = Qoute::with(['items' => function($query){
+        $query->where('qty', '!=' , 0);
+    }])->where('id', $qoute)
+       ->where('access_code', $access_code)
+       ->first();
+    
+      if (!$qoute)
+        return abort(404);
           return Excel::download(new ViewExport($qoute), 'merHelper.xlsx');
     }
 
-    public function createPdf(int $qoute){
+    public function createPdf(int $qoute, string $access_code){
 
       $qoute = Qoute::with(['items' => function($query){
-            $query->where('qty', '!=' , 0);
-      }])->find($qoute);
+        $query->where('qty', '!=' , 0);
+    }])->where('id', $qoute)
+       ->where('access_code', $access_code)
+       ->first();
+    
+      if (!$qoute)
+        return abort(404);
+
       $units = Unit::all();
       $vendor = User::find($qoute->user_id);
       $currency = Currency::find($qoute->currency_id)['code_' . app()->getLocale()];

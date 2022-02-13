@@ -39,8 +39,8 @@ Route::resource('qoutes', QouteController::class)->middleware(['auth']);
 Route::post('/qoutes/addImage', [QouteController::class, 'addImage'])->name('addImage');
 Route::post('/qoutes/delImage', [QouteController::class, 'delImage'])->name('delImage');
 Route::get('/qoute/{qoute}/ac/{access_code}', [QouteController::class, 'show']);
-Route::get('/qoute/{qoute}/create-pdf', [QouteController::class, 'createPdf']);
-Route::get('/qoute/{qoute}/export-excel', [QouteController::class, 'exportExcel']);
+Route::get('/qoute/{qoute}/ac/{access_code}/create-pdf', [QouteController::class, 'createPdf']);
+Route::get('/qoute/{qoute}/ac/{access_code}/export-excel', [QouteController::class, 'exportExcel']);
 
 Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
 Route::post('/qoutes/file-upload', [QouteController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');

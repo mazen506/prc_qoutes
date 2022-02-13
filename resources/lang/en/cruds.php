@@ -74,7 +74,7 @@ return [
             'images'    => 'Images',
             'item_name' => 'Item Name',
             'unit'                => 'Unit',            
-            'image'                => 'Images',
+            'image'                => 'Image',
             'image_helper'         => '',
             'name'              => 'Name',
             'name_helper'       => '',

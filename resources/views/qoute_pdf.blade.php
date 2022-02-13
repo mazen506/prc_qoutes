@@ -26,14 +26,14 @@
 
     @font-face {    
     font-family: 'DroidArabicKufiRegular';
-    src: url(data:font/truetype;charset=utf-8;base64,{{base64_encode(@file_get_contents(public_path('fonts/DroidKufi-Regular.ttf')))}}) format('truetype');
+    src: url(data:font/truetype;charset=utf-8;base64,{{base64_encode(@file_get_contents('fonts/DroidKufi-Regular.ttf'))}}) format('truetype');
     font-weight: normal;
     font-style: normal;
     }
 
     @font-face {
     font-family: 'FontAwesome';
-    src: url(data:font/truetype;charset=utf-8;base64,{{base64_encode(@file_get_contents(public_path('fonts/fontawesome-webfont.ttf')))}}) format('truetype');
+    src: url(data:font/truetype;charset=utf-8;base64,{{base64_encode(@file_get_contents('fonts/fontawesome-webfont.ttf'))}}) format('truetype');
     font-weight: normal;
     font-style: normal;
     }
@@ -67,6 +67,7 @@
             page-break-inside: avoid !important;
         }
      
+
     </style>
         
     </head>
@@ -79,7 +80,7 @@
                 <div class="cust-header">
                 <div class='customer-layout-header'>
                     <div class='layout-logo'>
-                    <img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("/storage/user_images/$vendor->logo")))}}'>
+                    <img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents("storage/user_images/$vendor->logo"))}}'>
                     <label> {{$vendor['title_' . app()->getLocale() ]}} </label>
                 </div>
         </div>
@@ -88,12 +89,6 @@
 
             <!-- Page Content -->
             <main>
-                     <!-- Ajax loader -->
-                     <div id='cust-spinner'>
-                            <img src="{{ public_path('/storage/images/spinner.gif') }}">
-                     </div>
-                     <div id="dialog" title="Basic dialog"></div>
-                   
                      <div class="container">
         <div class='cust-page-title align-center'>
                     <h2>{{ __('global.qoute') }}</h2>
@@ -133,6 +128,7 @@
                             
                                 <tr>
                                     <th class='col-item-serial'></th>
+                                    <th class='align-center'>{{ trans('cruds.item.fields.image') }}</th>
                                     <th class='col-item-name'>{{ trans('cruds.item.fields.item_name') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.qty') }}</th>
                                     <th class='align-center'>{{ trans('cruds.item.fields.unit') }}</th>
@@ -152,7 +148,12 @@
                             @foreach ($qoute->items as $item)
                                 <tr id="item{{ $loop->index }}">
                                     <td class='col-item-serial align-center'>{{ $loop->index+1 }}</td>
-
+                                    <td>
+                                            @php
+                                                $item_image = explode("|", $item->images)[0];
+                                            @endphp
+                                            <img class='item-image' src='data:image/jpeg;base64,{{base64_encode(@file_get_contents("storage/user_images/$item_image"))}}'>
+                                    </td>
                                     <td class='col-item-name'>
                                         {{ $item->item_name }}
                                     </td>
@@ -217,7 +218,7 @@
 				            <div id="footer_about_me-3" class="footer-widget widget-footer-about-me about-me-widget clr">
 				                <div class="footer-about-me">
                 					<div class="footer-about-me-avatar clr">
-											<img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents(url("storage/user_images/$vendor->logo")))}}'>
+											<img src='data:image/jpeg;base64,{{base64_encode(@file_get_contents("storage/user_images/$vendor->logo"))}}'>
                 					</div><!-- .footer-about-me-avatar -->
 
 									<div class="footer-about-me-text clr">
