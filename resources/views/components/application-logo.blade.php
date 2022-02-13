@@ -1,1 +1,1 @@
-<img src='/storage/images/logo_wesalix.png' width=60>
+<img src='/storage/user_images/{{ Auth::user()->logo }}' width=60>
