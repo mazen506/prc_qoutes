@@ -89,7 +89,7 @@ class ProfileController extends Controller
 
             //Delete previous logo
             if (!empty($new_logo) && Storage::disk('public')->exists('user_images/' . $previous_logo))
-                Storage::disk('s3')->delete('user_images/' . $previous_logo);
+                Storage::disk('public')->delete('user_images/' . $previous_logo);
             return response(200);
         }
         catch (\Illuminate\Validation\ValidationException $e)

@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/checkpassword', function(){
-    return Hash::check('Test@123', '$2y$10$Lgsd4UexYHOb0Nh6g0SU2ecdlNArYWBO.dH/J5yykmwclIK14xYtu');
+    return Hash::check('Test@1234', '$2a$12$V1n5vOiiU9SN3CRu1U8XCevwBCamansVKLO03yjacWrttg5J.yWKi');
 });
 
 
