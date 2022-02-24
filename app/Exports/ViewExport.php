@@ -81,7 +81,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setOffsetX(15);
         $drawing->setOffsetY(15);
         $img = $this->vendor->logo;
-        $source = 'storage/user_images/' . $img ;
+        $source = 'https://aldobaipress.com/storage/user_images/' . $img ;
         $stype = explode('.', $img)[1];
         switch($stype) {
             case 'gif':
