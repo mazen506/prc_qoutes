@@ -37,7 +37,7 @@ return [
         'enabled' => true,
         // 'binary' =>  "C:\Progra~1\wkhtmltopdf\bin\wkhtmltopdf.exe",
         // 'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf'),
-         'binary' => base_path('vendor\bin\wkhtmltopdf-amd64'),
+         'binary' => base_path('vendor/bin/wkhtmltopdf-amd64'),
         'timeout' => false,
         'images' => true,
         'options' => [
@@ -52,7 +52,7 @@ return [
         'enabled' => true,
         // 'binary' => "C:\Progra~1\wkhtmltopdf\bin\wkhtmltoimage.exe",
         // 'binary' => 'vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage',
-        'binary' => base_path('vendor\bin\wkhtmltoimage-amd64'),
+        'binary' => base_path('vendor/bin/wkhtmltoimage-amd64'),
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
