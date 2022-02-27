@@ -184,7 +184,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     $drawing->setCoordinates('C' . $row_number);
                     $drawing->setWorksheet($event->sheet->getDelegate());
                     $event->sheet->getRowDimension($row_number)->setRowHeight(50);
-                    dd($source);
+                    
                     //Align
                     $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
                                 ->getAlignment()
@@ -193,6 +193,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     $drawing->setOffsetX(5);
                     $drawing->setOffsetY(5);
                     imagedestroy($simg);
+                    dd($source);
                     //Remove Background
                     $loop++;
                 }
