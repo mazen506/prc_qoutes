@@ -193,10 +193,11 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     $drawing->setOffsetX(5);
                     $drawing->setOffsetY(5);
                     imagedestroy($simg);
-                    dd($source);
+                    
                     //Remove Background
                     $loop++;
                 }
+                dd("What's wrong then!!");
              },
          ];
     }
