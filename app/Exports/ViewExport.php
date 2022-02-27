@@ -38,10 +38,12 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
     protected $items;
     protected $currency;
     protected $vendor;
+    private $storage_url;
 
     public function __construct(Qoute $qoute) 
     {
         $this->qoute = $qoute;
+        $this->storage_url = env('STORAGE_URL');
     }
 
     public function startCell(): string
@@ -81,7 +83,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setOffsetX(15);
         $drawing->setOffsetY(15);
         $img = $this->vendor->logo;
-        $source = 'storage/user_images/' . $img ;
+        $source = $this->storage_url . '/user_images/' . $img ;
         $stype = explode('.', $img)[1];
         switch($stype) {
             case 'gif':
@@ -148,53 +150,53 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                 $loop = 0;
                 $row_offset = 11;
                 ini_set('memory_limit', '512M');
-                // foreach($this->items as $item)
-                // {
-                //     $drawing = new MemoryDrawing();
-                //     $drawing->setName('الشعار');
-                //     $drawing->setDescription('مكة للتجارة');
+                foreach($this->items as $item)
+                {
+                    $drawing = new MemoryDrawing();
+                    $drawing->setName('الشعار');
+                    $drawing->setDescription('مكة للتجارة');
 
-                //     if ($item->images == null)
-                //         continue;
+                    if ($item->images == null)
+                        continue;
 
-                //     $img = explode('|', $item->images)[0];
-                //     $source =  'storage/user_images/' . $img;
-                //     $stype = explode('.', $img)[1];
-                //     switch($stype) {
-                //         case 'gif':
-                //         $simg = imagecreatefromgif($source);
-                //         break;
-                //         case 'jpg':
-                //         $simg = imagecreatefromjpeg($source);
-                //         break;
-                //         case 'png':
-                //         $simg = imagecreatefrompng($source);
-                //         break;
-                //     }
+                    $img = explode('|', $item->images)[0];
+                    $source =  $this->storage_url . '/user_images/' . $img;
+                    $stype = explode('.', $img)[1];
+                    switch($stype) {
+                        case 'gif':
+                        $simg = imagecreatefromgif($source);
+                        break;
+                        case 'jpg':
+                        $simg = imagecreatefromjpeg($source);
+                        break;
+                        case 'png':
+                        $simg = imagecreatefrompng($source);
+                        break;
+                    }
                     
-                //     imagesavealpha($simg, true);
-                //   //  $simg= imagescale ( $simg, 50 , 50);
+                    imagesavealpha($simg, true);
+                  //  $simg= imagescale ( $simg, 50 , 50);
 
-                //     $row_number = $row_offset + $loop;
-                //     $drawing->setImageResource($simg);
-                //     $drawing->setResizeProportional(false);
-                //     $drawing->setWidth(50);
-                //     $drawing->setHeight(50);
-                //     $drawing->setCoordinates('C' . $row_number);
-                //     $drawing->setWorksheet($event->sheet->getDelegate());
-                //     $event->sheet->getRowDimension($row_number)->setRowHeight(50);
+                    $row_number = $row_offset + $loop;
+                    $drawing->setImageResource($simg);
+                    $drawing->setResizeProportional(false);
+                    $drawing->setWidth(50);
+                    $drawing->setHeight(50);
+                    $drawing->setCoordinates('C' . $row_number);
+                    $drawing->setWorksheet($event->sheet->getDelegate());
+                    $event->sheet->getRowDimension($row_number)->setRowHeight(50);
 
-                //     //Align
-                //     $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
-                //                 ->getAlignment()
-                //                 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-                //                 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-                //     $drawing->setOffsetX(5);
-                //     $drawing->setOffsetY(5);
-                //     imagedestroy($simg);
-                //     //Remove Background
-                //     $loop++;
-                // }
+                    //Align
+                    $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
+                                ->getAlignment()
+                                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+                                ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                    $drawing->setOffsetX(5);
+                    $drawing->setOffsetY(5);
+                    imagedestroy($simg);
+                    //Remove Background
+                    $loop++;
+                }
              },
          ];
     }
