@@ -160,7 +160,6 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     $img = explode('|', $item->images)[0];
                     $source =  'storage/user_images/' . $img;
                     $stype = explode('.', $img)[1];
-                    dd($stype);
                     switch($stype) {
                         case 'gif':
                         $simg = imagecreatefromgif($source);
@@ -172,6 +171,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         $simg = imagecreatefrompng($source);
                         break;
                     }
+                    dd($source);
                     
                     imagesavealpha($simg, true);
                   //  $simg= imagescale ( $simg, 50 , 50);
