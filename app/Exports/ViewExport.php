@@ -74,7 +74,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         return [
             AfterSheet::class    => function(AfterSheet $event) {
    
-                //Set the logo 
+        //########### SET THE LOGO ###############//
         $drawing = new MemoryDrawing();
         $drawing->setName('الشعار');
         $drawing->setDescription('مكة للتجارة');
@@ -104,8 +104,46 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
         $drawing->setCoordinates('B1');
         //imagedestroy($simg);
+        //##############################################//
 
-        //########### Display Images #############//
+        //################ SET DECORATION #################//
+             //Right To left
+             $event->getDelegate()->setRightToLeft(true);
+             //                $event->sheet->getDelegate()->getRowDimension('3')->setRowHeight(50);
+                             
+             
+                             //Set Logo Description
+                                 $event->sheet->setCellValue('C2', $this->vendor['title_' . app()->getLocale() ]); 
+                                 $event->sheet->mergeCells('C2:F4');
+             
+                                 $event->sheet->getDelegate()->getStyle('C2')
+                                 ->getAlignment()
+                                 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+                                 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+             
+                                 
+             
+                             //Set sheet caption
+                                 $event->sheet->mergeCells('D5:H5');
+                                 $event->sheet->mergeCells('G10:H10');
+                                 $event->sheet->setCellValue('D5', __('global.qoute')); 
+                                 $event->sheet->getDelegate()->getStyle('D5')
+                                     ->getAlignment()
+                                     ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+             
+                             //Set Qoute Name
+                                 $event->sheet->setCellValue('C6', __('global.customer_name') . '/'); 
+                                 $event->sheet->setCellValue('D6', $this->qoute->name); 
+             
+                                 $event->sheet->setCellValue('C7', __('global.currency') . '/'); 
+                                 $event->sheet->setCellValue('D7', $this->currency); 
+             
+                                 $event->sheet->setCellValue('C8', __('global.note') . '/');
+                                 $event->sheet->setCellValue('D8', $this->qoute->note); 
+
+                //##############################################################//                                 
+
+                //########### Display Images #############//
                         $loop = 0;
                         $row_offset = 11;
                         ini_set('memory_limit', '512M');
@@ -156,52 +194,9 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                             //Remove Background
                             $loop++;
                         }
-        //########### End of Display Images #############//
+              //########### End of Display Images #############//
 
-
-
-        //Right To left
-                $event->getDelegate()->setRightToLeft(true);
-//                $event->sheet->getDelegate()->getRowDimension('3')->setRowHeight(50);
-                
-
-                //Set Logo Description
-                    $event->sheet->setCellValue('C2', $this->vendor['title_' . app()->getLocale() ]); 
-                    $event->sheet->mergeCells('C2:F4');
-
-                    $event->sheet->getDelegate()->getStyle('C2')
-                    ->getAlignment()
-                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-                    ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-
-                    
-
-                //Set sheet caption
-                    $event->sheet->mergeCells('D5:H5');
-                    $event->sheet->mergeCells('G10:H10');
-                    $event->sheet->setCellValue('D5', __('global.qoute')); 
-                    $event->sheet->getDelegate()->getStyle('D5')
-                        ->getAlignment()
-                        ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-
-                //Set Qoute Name
-                    $event->sheet->setCellValue('C6', __('global.customer_name') . '/'); 
-                    $event->sheet->setCellValue('D6', $this->qoute->name); 
-
-                    $event->sheet->setCellValue('C7', __('global.currency') . '/'); 
-                    $event->sheet->setCellValue('D7', $this->currency); 
-
-                    $event->sheet->setCellValue('C8', __('global.note') . '/');
-                    $event->sheet->setCellValue('D8', $this->qoute->note); 
-
-                //Set Qoute Details
-
-                // Images
-
-                // Set Header Decoration
-
-
-             },
+            },
          ];
     }
 
