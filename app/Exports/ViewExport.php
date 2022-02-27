@@ -108,12 +108,10 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         //########### Display Images #############//
                         $loop = 0;
                         $row_offset = 11;
-                        ini_set('memory_limit', '512M');
+                        //ini_set('memory_limit', '512M');
                         foreach($this->items as $item)
                         {
                             $drawing = new MemoryDrawing();
-                            $drawing->setName('الشعار');
-                            $drawing->setDescription('مكة للتجارة');
         
                             if ($item->images == null)
                                 continue;
