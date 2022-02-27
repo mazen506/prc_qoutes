@@ -132,25 +132,25 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                             }
                             
                             
-                            imagesavealpha($simg, true);
+                         //   imagesavealpha($simg, true);
                           //  $simg= imagescale ( $simg, 50 , 50);
         
                             $row_number = $row_offset + $loop;
-                            $drawing->setImageResource($simg);
-                            $drawing->setResizeProportional(false);
-                            $drawing->setWidth(50);
-                            $drawing->setHeight(50);
-                            $drawing->setCoordinates('C' . $row_number);
-                            $drawing->setWorksheet($event->sheet->getDelegate());
-                            $event->sheet->getRowDimension($row_number)->setRowHeight(50);
+                            // $drawing->setImageResource($simg);
+                            // $drawing->setResizeProportional(false);
+                            // $drawing->setWidth(50);
+                            // $drawing->setHeight(50);
+                            // $drawing->setCoordinates('C' . $row_number);
+                            // $drawing->setWorksheet($event->sheet->getDelegate());
+                            // $event->sheet->getRowDimension($row_number)->setRowHeight(50);
                             
-                            //Align
-                            $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
-                                        ->getAlignment()
-                                        ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-                                        ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-                            $drawing->setOffsetX(5);
-                            $drawing->setOffsetY(5);
+                            // //Align
+                            // $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
+                            //             ->getAlignment()
+                            //             ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+                            //             ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                            // $drawing->setOffsetX(5);
+                            // $drawing->setOffsetY(5);
                             imagedestroy($simg);
                             
                             //Remove Background
