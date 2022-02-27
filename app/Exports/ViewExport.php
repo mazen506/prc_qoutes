@@ -119,13 +119,12 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                             $img = explode('|', $item->images)[0];
                             $source =  'storage/user_images/' . $img;
                             $stype = explode('.', $img)[1];
-                            dd($stype);
                             switch($stype) {
                                 case 'gif':
                                 $simg = imagecreatefromgif($source);
                                 break;
                                 case 'jpg':
-                                dd("It's png?!!");
+                                dd("It's jpg?!!");
                                 $simg = imagecreatefromjpeg($source);
                                 break;
                                 case 'png':
