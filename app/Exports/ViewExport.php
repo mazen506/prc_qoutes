@@ -124,11 +124,9 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                                 $simg = imagecreatefromgif($source);
                                 break;
                                 case 'jpg':
-                                dd("It's jpg?!!");
                                 $simg = imagecreatefromjpeg($source);
                                 break;
                                 case 'png':
-                                dd('Why png?!!');
                                 $simg = imagecreatefrompng($source);
                                 break;
                             }
@@ -139,7 +137,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         
                             $row_number = $row_offset + $loop;
                              $drawing->setImageResource($simg);
-                            // $drawing->setResizeProportional(false);
+                             $drawing->setResizeProportional(false);
                             // $drawing->setWidth(50);
                             // $drawing->setHeight(50);
                             // $drawing->setCoordinates('C' . $row_number);
