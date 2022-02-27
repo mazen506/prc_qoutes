@@ -38,12 +38,10 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
     protected $items;
     protected $currency;
     protected $vendor;
-    private $storage_url;
 
     public function __construct(Qoute $qoute) 
     {
         $this->qoute = $qoute;
-        $this->storage_url = env('STORAGE_URL');
     }
 
     public function startCell(): string
@@ -83,7 +81,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setOffsetX(15);
         $drawing->setOffsetY(15);
         $img = $this->vendor->logo;
-        $source = $this->storage_url . '/user_images/' . $img ;
+        $source = 'storage/user_images/' . $img ;
         $stype = explode('.', $img)[1];
         switch($stype) {
             case 'gif':
@@ -160,7 +158,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         continue;
 
                     $img = explode('|', $item->images)[0];
-                    $source =  $this->storage_url . '/user_images/' . $img;
+                    $source =  'storage/user_images/' . $img;
                     $stype = explode('.', $img)[1];
                     switch($stype) {
                         case 'gif':
