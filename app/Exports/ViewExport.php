@@ -197,7 +197,6 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     //Remove Background
                     $loop++;
                 }
-                dd("What's wrong then!!");
              },
          ];
     }
