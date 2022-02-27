@@ -310,7 +310,7 @@ class QouteController extends Controller
     
       if (!$qoute)
         return abort(404);
-          return Excel::download(new ViewExport($qoute), 'merHelper.xlsx');
+          return Excel::download(new ViewExport($qoute), 'Qoute' . $qoute . '.xlsx');
     }
 
     public function createPdf(int $qoute, string $access_code){
