@@ -124,9 +124,11 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                                 $simg = imagecreatefromgif($source);
                                 break;
                                 case 'jpg':
+                                dd("It's png?!!");
                                 $simg = imagecreatefromjpeg($source);
                                 break;
                                 case 'png':
+                                dd('Why png?!!');
                                 $simg = imagecreatefrompng($source);
                                 break;
                             }
