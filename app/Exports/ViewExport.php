@@ -75,34 +75,34 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
             AfterSheet::class    => function(AfterSheet $event) {
    
                 //Set the logo 
-        $drawing = new MemoryDrawing();
-        $drawing->setName('الشعار');
-        $drawing->setDescription('مكة للتجارة');
-        $drawing->setOffsetX(15);
-        $drawing->setOffsetY(15);
-        $img = $this->vendor->logo;
-        $source = 'storage/user_images/' . $img ;
-        $stype = explode('.', $img)[1];
-        switch($stype) {
-            case 'gif':
-            $simg = imagecreatefromgif($source);
-            break;
-            case 'jpg':
-            $simg = imagecreatefromjpeg($source);
-            break;
-            case 'png':
-            $simg = imagecreatefrompng($source);
-            break;
-        }
-        imagesavealpha($simg, true);
-        $drawing->setImageResource($simg);
-        $drawing->setResizeProportional(false);
-        $drawing->setWidth(80);
-        $drawing->setHeight(80);
-        $drawing->setWorksheet($event->sheet->getDelegate());
-        // $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
-        // $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
-        $drawing->setCoordinates('B1');
+        // $drawing = new MemoryDrawing();
+        // $drawing->setName('الشعار');
+        // $drawing->setDescription('مكة للتجارة');
+        // $drawing->setOffsetX(15);
+        // $drawing->setOffsetY(15);
+        // $img = $this->vendor->logo;
+        // $source = 'storage/user_images/' . $img ;
+        // $stype = explode('.', $img)[1];
+        // switch($stype) {
+        //     case 'gif':
+        //     $simg = imagecreatefromgif($source);
+        //     break;
+        //     case 'jpg':
+        //     $simg = imagecreatefromjpeg($source);
+        //     break;
+        //     case 'png':
+        //     $simg = imagecreatefrompng($source);
+        //     break;
+        // }
+        // imagesavealpha($simg, true);
+        // $drawing->setImageResource($simg);
+        // $drawing->setResizeProportional(false);
+        // $drawing->setWidth(80);
+        // $drawing->setHeight(80);
+        // $drawing->setWorksheet($event->sheet->getDelegate());
+        // // $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
+        // // $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
+        // $drawing->setCoordinates('B1');
 
 
 
