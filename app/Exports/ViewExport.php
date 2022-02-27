@@ -101,8 +101,8 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
         $drawing->setWidth(80);
         $drawing->setHeight(80);
         $drawing->setWorksheet($event->sheet->getDelegate());
-        // $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
-        // $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
+        $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
+        $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
         $drawing->setCoordinates('B1');
         imagedestroy($simg);
 
