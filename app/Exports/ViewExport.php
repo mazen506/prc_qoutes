@@ -171,7 +171,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                         $simg = imagecreatefrompng($source);
                         break;
                     }
-                    dd($source);
+                    
                     
                     imagesavealpha($simg, true);
                   //  $simg= imagescale ( $simg, 50 , 50);
@@ -184,7 +184,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                     $drawing->setCoordinates('C' . $row_number);
                     $drawing->setWorksheet($event->sheet->getDelegate());
                     $event->sheet->getRowDimension($row_number)->setRowHeight(50);
-
+                    dd($source);
                     //Align
                     $event->sheet->getStyle('B' . $row_number . ':' . 'L' . $row_number)
                                 ->getAlignment()
