@@ -159,6 +159,7 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
 
                     $img = explode('|', $item->images)[0];
                     $source =  'storage/user_images/' . $img;
+                    dd($source);
                     $stype = explode('.', $img)[1];
                     switch($stype) {
                         case 'gif':
