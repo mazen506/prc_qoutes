@@ -136,12 +136,12 @@ class ViewExport implements FromCollection, WithMapping, WithHeadings,WithCustom
                           //  $simg= imagescale ( $simg, 50 , 50);
         
                             $row_number = $row_offset + $loop;
-                            // $drawing->setImageResource($simg);
+                             $drawing->setImageResource($simg);
                             // $drawing->setResizeProportional(false);
                             // $drawing->setWidth(50);
                             // $drawing->setHeight(50);
                             // $drawing->setCoordinates('C' . $row_number);
-                            // $drawing->setWorksheet($event->sheet->getDelegate());
+                             $drawing->setWorksheet($event->sheet->getDelegate());
                             // $event->sheet->getRowDimension($row_number)->setRowHeight(50);
                             
                             // //Align
